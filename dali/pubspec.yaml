@@ -86,6 +86,7 @@ flutter:
           style: italic
         - asset: fonts/Roboto-Bold.ttf
           weight: 700
+          
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

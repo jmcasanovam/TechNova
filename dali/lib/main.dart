@@ -1,3 +1,4 @@
+import 'package:dali/screen/inicioAlumnoScreen.dart';
 import 'package:dali/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF44034)),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: InicioAlumnoScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
