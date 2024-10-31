@@ -1,4 +1,5 @@
 import 'package:dali/screen/inicioAlumnoScreen.dart';
+import 'package:dali/screen/menuAlumnoScreen.dart';
 import 'package:dali/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const SplashScreen(),
-      home: InicioAlumnoScreen(),
+      home: const InicioAlumnoScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

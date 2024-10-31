@@ -26,9 +26,11 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
         body: Padding(
-            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+            padding: EdgeInsets.all(screenWidth * 0.01),
             child: Column(
               children: [
                 //Primera fila: Panda, Texto
@@ -167,12 +169,13 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
   }
 }
 
-void cerrarSesion(BuildContext context) {
-  // Navigator.of(context).pushReplacementNamed('/login');
-}
 
 class BotonMenu extends StatelessWidget {
   const BotonMenu({super.key});
+
+  void abrirMenu(BuildContext context) {
+    // Navigator.of(context).pushNamed('/menuAlumno');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +193,7 @@ class BotonMenu extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.04,
               height: MediaQuery.of(context).size.width * 0.04,
             ),
-            onPressed: () => cerrarSesion(context),
+            onPressed: () => abrirMenu(context),
           ),
           const Text('MENÚ',
               style: TextStyle(
