@@ -27,6 +27,7 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
         body: Padding(
@@ -38,19 +39,19 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(_iconoPerfil,
-                        width: MediaQuery.of(context).size.width * 0.096,
-                        height: MediaQuery.of(context).size.width *
+                        width: screenWidth * 0.096,
+                        height: screenHeight *
                             0.096), // Icono de perfil
-                    const Text('Agenda',
+                    Text('Agenda',
                         style: TextStyle(
-                          fontSize: 128,
+                          fontSize: screenWidth * 0.08,
                           fontWeight: FontWeight.bold,
                         )),
 
                     const BotonMenu()
                   ],
                 ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+                SizedBox(height: screenHeight * 0.01),
                 //Segunda fila: Botones de opciones
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,26 +62,24 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                         accederTarea(context);
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.width * 0.35,
+                        width: screenWidth * 0.9,
+                        height: screenHeight * 0.7,
                         decoration: BoxDecoration(
                           color: const Color.fromRGBO(176, 211, 255, 1),
-                          borderRadius: BorderRadius.circular(63),
+                          borderRadius: BorderRadius.circular(screenWidth * 0.07),
                         ),
                         child: Column(
                           children: [
-                            const Text("Hoy",
+                            Text("Hoy",
                                 style: TextStyle(
-                                    fontSize: 64,
+                                    fontSize: screenWidth * 0.05,
                                     color: Colors.red,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Roboto')),
+                            SizedBox(height: screenWidth* 0.01),
                             SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.01),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: MediaQuery.of(context).size.width * 0.2,
+                              width: screenWidth * 0.9,
+                              height: screenHeight * 0.5,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -90,13 +89,13 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                                     children: [
                                       //Flecha para la izquierda
                                         SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.1,
+                                          width: screenWidth * 0.1,
                                           child: IconButton(
                                           icon: Image.asset(
                                             'images/flecha-izquierda.png',
                                             fit: BoxFit.cover,
                                           ),
-                                          iconSize: MediaQuery.of(context).size.width * 0.1,
+                                          iconSize: screenWidth * 0.1,
                                           onPressed: () {
                                             tareaAnterior();
                                           },
@@ -109,19 +108,13 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                                               color: const Color.fromRGBO(
                                                   5, 153, 159, 1),
                                               borderRadius:
-                                                  BorderRadius.circular(63),
+                                                  BorderRadius.circular(screenWidth * 0.02),
                                             ),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.15,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.15, // Ensure the container is square
+                                            width: screenWidth * 0.2,
+                                            height: screenHeight * 0.3,
                                             child: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(63),
+                                                  BorderRadius.circular(screenWidth * 0.07),
                                               child: Image.asset(
                                                 _tarea.imagen,
                                                 fit: BoxFit
@@ -131,8 +124,8 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                                           ),
                                           Text(
                                             _tarea.nombre,
-                                            style: const TextStyle(
-                                              fontSize: 64,
+                                            style: TextStyle(
+                                              fontSize: screenWidth * 0.05,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'Roboto',
                                             ),
