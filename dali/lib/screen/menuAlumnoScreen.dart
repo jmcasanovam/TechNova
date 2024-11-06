@@ -12,7 +12,7 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
   bool _tareaComedor = false;
   
   void volverAtras(BuildContext context) {
-    // Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
   @override

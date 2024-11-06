@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const SplashScreen(),
-      home: const MenuAlumnoScreen(),
+      home: const InicioAlumnoScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

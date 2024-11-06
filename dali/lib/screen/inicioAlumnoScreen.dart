@@ -1,3 +1,4 @@
+import 'package:dali/screen/menuAlumnoScreen.dart';
 import 'package:dali/tarea.dart';
 import 'package:flutter/material.dart';
 
@@ -167,7 +168,10 @@ class BotonMenu extends StatelessWidget {
   const BotonMenu({super.key});
 
   void abrirMenu(BuildContext context) {
-    // Navigator.of(context).pushNamed('/menuAlumno');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MenuAlumnoScreen()),
+    );
   }
 
   @override
