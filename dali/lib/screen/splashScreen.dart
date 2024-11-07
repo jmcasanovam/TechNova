@@ -1,3 +1,4 @@
+import 'package:dali/screen/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -15,15 +16,16 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Simulamos una carga de 2 segundos antes de ir a la pantalla principal
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    //   Future.delayed(Duration(seconds: 2), () {
-    //     Navigator.of(context).pushReplacement(
-    //       MaterialPageRoute(builder: 
-    //       (context) => SignInScreen()
-    //       ),
-    //     );
-    //   });
-    // });
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: 
+          (context) => LoginScreen()
+          ),
+        );
+      });
+    });
   }
 
   @override

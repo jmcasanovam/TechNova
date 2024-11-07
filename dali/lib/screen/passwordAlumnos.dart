@@ -1,3 +1,4 @@
+import 'package:dali/screen/inicioAlumnoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,7 +12,11 @@ class PasswordAlumnos extends StatefulWidget {
 }
 
 class _PasswordAlumnosState extends State<PasswordAlumnos> {
-  List<String> enteredShapes = ['', '', '']; // Lista para las formas seleccionadas
+  List<String> enteredShapes = [
+    '',
+    '',
+    ''
+  ]; // Lista para las formas seleccionadas
 
   // Método para agregar una forma en la primera casilla vacía
   void addShape(String shape) {
@@ -42,7 +47,6 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           // Imagen del perfil
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -55,7 +59,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
 
           //Bloque de botones
           Padding(
-            padding: EdgeInsets.only(top: screenHeight*0.1),
+            padding: EdgeInsets.only(top: screenHeight * 0.1),
             child: Column(
               children: [
                 // Botones de formas
@@ -90,7 +94,12 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(3, (index) {
                     return Container(
-                      margin: EdgeInsets.only(left: screenWidth * 0.02, right: screenWidth * 0.02, top: screenHeight * 0.04, bottom: screenHeight * 0.04, ),
+                      margin: EdgeInsets.only(
+                        left: screenWidth * 0.02,
+                        right: screenWidth * 0.02,
+                        top: screenHeight * 0.04,
+                        bottom: screenHeight * 0.04,
+                      ),
                       width: screenWidth * 0.15,
                       height: screenHeight * 0.30,
                       decoration: BoxDecoration(
@@ -129,43 +138,54 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                     ),
                     ElevatedButton(
                         style: FilledButton.styleFrom(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                        backgroundColor: Colors.red,
-                        minimumSize: Size(screenWidth * 0.2, screenHeight * 0.2),
-                        maximumSize: Size(screenWidth * 0.2, screenHeight * 0.2), 
-                      ),
-                      onPressed: () {
-                        // Aquí puedes implementar la lógica de validación de la contraseña
-                      },
-                      child: SizedBox(
-                        width: screenWidth * 0.16,
-                        child : const FittedBox(
-                          child: Text(
-                            "CONFIRMAR",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white),
-                            ),
-                        )
-                      )
-                    ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          backgroundColor: Colors.red,
+                          minimumSize:
+                              Size(screenWidth * 0.2, screenHeight * 0.2),
+                          maximumSize:
+                              Size(screenWidth * 0.2, screenHeight * 0.2),
+                        ),
+                        onPressed: () {
+                          // Aquí se debe validar la contraseña
+                          // Si es correcta, se debe navegar a la siguiente pantalla
+                          // En caso contrario, se debe mostrar un mensaje de error
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const InicioAlumnoScreen()),
+                          );
+                        },
+                        child: SizedBox(
+                            width: screenWidth * 0.16,
+                            child: const FittedBox(
+                              child: Text(
+                                "CONFIRMAR",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ))),
                   ],
                 )
-      
-                
               ],
             ),
           ),
 
           //Boton de cerrar sesion
           Padding(
-            padding: EdgeInsets.only(right: screenWidth *0.05, top: screenHeight*0.02),
+            padding: EdgeInsets.only(
+                right: screenWidth * 0.05, top: screenHeight * 0.02),
             child: IconButton(
-              icon: Image.asset('images/boton-de-encendido-apagado.png', color: Colors.red, width: screenWidth * 0.05,), 
+              icon: Image.asset(
+                'images/boton-de-encendido-apagado.png',
+                color: Colors.red,
+                width: screenWidth * 0.05,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-          )   
+          )
         ],
       ),
     );
@@ -187,7 +207,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
     }
   }
 
-  Color _colorIcono(String shape){
+  Color _colorIcono(String shape) {
     switch (shape) {
       case 'circle':
         return Colors.red;
@@ -209,7 +229,8 @@ class ShapeButton extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-  ShapeButton({required this.icon, required this.color, required this.onPressed});
+  ShapeButton(
+      {required this.icon, required this.color, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
