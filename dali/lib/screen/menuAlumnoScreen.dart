@@ -66,7 +66,7 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                         _tareaComedor = !_tareaComedor;
                         });
                       }),
-                      SizedBox(height: screenWidth * 0.02),
+                      SizedBox(height: screenWidth * 0.01),
                       _crearBoton(context, 'Comedor', 'images/comedor.png', () {
                         
                       }),
