@@ -1,11 +1,11 @@
 import 'package:dali/screen/inicioAlumnoScreen.dart';
+import 'package:dali/widget/botonCerrarSesion.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class PasswordAlumnos extends StatefulWidget {
   final String image; // Ruta de la imagen seleccionada
 
-  PasswordAlumnos({required this.image});
+  const PasswordAlumnos({super.key, required this.image});
 
   @override
   _PasswordAlumnosState createState() => _PasswordAlumnosState();
@@ -49,7 +49,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
         children: [
           // Imagen del perfil
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(screenWidth * 0.01),
             child: Image.asset(
               widget.image,
               width: screenWidth * 0.1,
@@ -153,7 +153,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const InicioAlumnoScreen()),
+                                builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
                           );
                         },
                         child: SizedBox(
@@ -175,16 +175,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
           Padding(
             padding: EdgeInsets.only(
                 right: screenWidth * 0.05, top: screenHeight * 0.02),
-            child: IconButton(
-              icon: Image.asset(
-                'images/boton-de-encendido-apagado.png',
-                color: Colors.red,
-                width: screenWidth * 0.05,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+                child: const FittedBox(child: BotonCerrarSesion()),
           )
         ],
       ),

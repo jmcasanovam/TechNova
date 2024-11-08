@@ -3,14 +3,15 @@ import 'package:dali/tarea.dart';
 import 'package:flutter/material.dart';
 
 class InicioAlumnoScreen extends StatefulWidget {
-  const InicioAlumnoScreen({super.key});
+  String _iconoPerfil;
+  InicioAlumnoScreen({super.key, required String iconoPerfil}) : _iconoPerfil = iconoPerfil;
 
   @override
   State<InicioAlumnoScreen> createState() => _InicioAlumnoScreenState();
 }
 
 class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
-  final String _iconoPerfil = "images/panda.png";
+  // final String _iconoPerfil = "images/panda.png";
   final Tarea _tarea = Tarea('¡Pongamos el microondas!', 'images/comedor.png');
 
   void accederTarea(BuildContext context) {
@@ -39,10 +40,10 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(_iconoPerfil,
-                        width: screenWidth * 0.096,
+                    Image.asset(widget._iconoPerfil,
+                        width: screenWidth * 0.1,
                         height: screenHeight *
-                            0.096), // Icono de perfil
+                            0.2), // Icono de perfil
                     Text('Agenda',
                         style: TextStyle(
                           fontSize: screenWidth * 0.08,
@@ -189,6 +190,7 @@ class BotonMenu extends StatelessWidget {
               image: const AssetImage('images/menu.png'),
               width: MediaQuery.of(context).size.width * 0.04,
               height: MediaQuery.of(context).size.width * 0.04,
+              color: Colors.white,
             ),
             onPressed: () => abrirMenu(context),
           ),
@@ -197,6 +199,7 @@ class BotonMenu extends StatelessWidget {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
+                color: Colors.white
               )),
         ],
       ),

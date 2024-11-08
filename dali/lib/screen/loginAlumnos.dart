@@ -1,3 +1,4 @@
+import 'package:dali/widget/botonCerrarSesion.dart';
 import 'package:flutter/material.dart';
 // import 'loginScreen.dart';
 import 'passwordAlumnos.dart';
@@ -45,16 +46,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
           // Icono de cerrar sesión
           Padding(
             padding: EdgeInsets.only(right: screenWidth *0.05, top: screenHeight*0.02),
-            child: IconButton(
-              icon: Image.asset('images/boton-de-encendido-apagado.png', color: Colors.red,), 
-              onPressed: () {
-                Navigator.pop(context);
-                // Navigator.push(
-                  // context,
-                  // MaterialPageRoute(builder: (context) => LoginScreen()),
-                // );
-              },
-            ),
+            child: const BotonCerrarSesion()
           )          
         ],
         backgroundColor: Colors.transparent,
@@ -93,7 +85,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                         children: [
                           FilledButton(
                             style: FilledButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side:BorderSide(color: Colors.black, width: 5)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(screenWidth * 0.02), side:BorderSide(color: Colors.black, width: screenWidth * 0.001)),
                               backgroundColor: Colors.transparent,
                               minimumSize: Size(screenWidth * 0.7/4, screenHeight * 0.6/2),
                               maximumSize: Size(screenWidth * 0.7/4, screenHeight * 0.6/2),
@@ -124,7 +116,11 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                                   child: Text(
                                     imagesData[itemIndex]['name']!,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: screenHeight * 0.05,
+                                      fontFamily: 'OpenSans',
+                                      ),
                                     ),
                                 )
                               )
