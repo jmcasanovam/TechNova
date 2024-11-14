@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
-      // home: const InicioAlumnoScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

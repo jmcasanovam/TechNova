@@ -1,11 +1,13 @@
+import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/inicioAlumnoScreen.dart';
 import 'package:dali/widget/botonCerrarSesion.dart';
 import 'package:flutter/material.dart';
 
 class PasswordAlumnos extends StatefulWidget {
   final String image; // Ruta de la imagen seleccionada
+  final String username;
 
-  const PasswordAlumnos({super.key, required this.image});
+  const PasswordAlumnos({super.key, required this.image, required this.username});
 
   @override
   _PasswordAlumnosState createState() => _PasswordAlumnosState();
@@ -146,15 +148,23 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                           maximumSize:
                               Size(screenWidth * 0.2, screenHeight * 0.2),
                         ),
-                        onPressed: () {
-                          // Aquí se debe validar la contraseña
-                          // Si es correcta, se debe navegar a la siguiente pantalla
-                          // En caso contrario, se debe mostrar un mensaje de error
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
-                          );
+                        onPressed: () async {
+                          int result = await login(widget.username, enteredShapes.join());
+
+                          if (result == 200) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
+                            );
+                          } else {
+                            // Handle login failure (e.g., show an error message)
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
+                            );
+
+                            clearShapes();
+                          }
                         },
                         child: SizedBox(
                             width: screenWidth * 0.16,

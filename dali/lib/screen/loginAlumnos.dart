@@ -97,6 +97,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                                 MaterialPageRoute(
                                   builder: (context) => PasswordAlumnos(
                                     image: imagesData[itemIndex]['image']!,
+                                    username: imagesData[itemIndex]['name']!,
                                     // name: imagesData[itemIndex]['name']!,
                                   ),
                                 ),
