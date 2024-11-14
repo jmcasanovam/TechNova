@@ -1,5 +1,6 @@
 import 'package:dali/screen/menuAlumnoScreen.dart';
-import 'package:dali/tarea.dart';
+import 'package:dali/models/tarea.dart';
+import 'package:dali/screen/presentacionTarea.dart';
 import 'package:flutter/material.dart';
 
 class InicioAlumnoScreen extends StatefulWidget {
@@ -11,19 +12,43 @@ class InicioAlumnoScreen extends StatefulWidget {
 }
 
 class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
-  // final String _iconoPerfil = "images/panda.png";
-  final Tarea _tarea = Tarea('¡Pongamos el microondas!', 'images/comedor.png');
+  final List<Tarea> _tareas = [
+    Tarea('¡Pongamos el microondas!', 'images/microondas.png'),
+    Tarea('¡Pongamos el microondas2!', 'images/comedor.png'),
+  ];
+  
+  int _tareaActual = 0;
+
 
   void accederTarea(BuildContext context) {
-    // Navigator.of(context).pushNamed('/tarea');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PresentacionTarea()),
+    );
   }
 
   void tareaAnterior() {
-    // _tarea = Tarea('¡Pongamos el microondas!', 'images/comedor.png');
+    setState(() {
+      if (_tareaActual > 0) {
+      _tareaActual--;
+    }
+    else {
+      _tareaActual = _tareas.length - 1;
+    }
+    });
+    
+
   }
 
   void tareaSiguiente() {
-    // _tarea = Tarea('¡Pongamos el microondas!', 'images/comedor.png');
+    setState(() {
+      if (_tareaActual < _tareas.length - 1) {
+      _tareaActual++;
+    }
+    else {
+      _tareaActual = 0;
+    }
+    });
   }
 
   @override
@@ -118,14 +143,14 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(screenWidth * 0.07),
                                               child: Image.asset(
-                                                _tarea.imagen,
+                                                _tareas.elementAt(_tareaActual).imagen,
                                                 fit: BoxFit
                                                     .cover, // Ensure the image fits the container
                                               ),
                                             ),
                                           ),
                                           Text(
-                                            _tarea.nombre,
+                                            _tareas.elementAt(_tareaActual).nombre,
                                             style: TextStyle(
                                               fontSize: screenWidth * 0.05,
                                               fontWeight: FontWeight.bold,
