@@ -51,26 +51,30 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                 Center(
                   child: Column(
                     children: [
-                      if (!_tareaComedor)
-                      Padding(
-                        padding: EdgeInsets.only(top: screenWidth * 0.1),
-                        child: _crearBoton(context, 'Historial', 'images/historial.png', () {
-                        setState(() {
-                          _tareaComedor = !_tareaComedor;
-                        });
-                        }),
-                      )
-                      else ...[
-                      _crearBoton(context, 'Historial', 'images/historial.png', () {
-                        setState(() {
-                        _tareaComedor = !_tareaComedor;
-                        });
-                      }),
-                      SizedBox(height: screenWidth * 0.01),
-                      _crearBoton(context, 'Comedor', 'images/comedor.png', () {
+                      // if (!_tareaComedor)
+                      // Padding(
+                      //   padding: EdgeInsets.only(top: screenWidth * 0.1),
+                      //   child: _crearBoton(context, 'Historial', 'images/historial.png', () {
+                      //   setState(() {
+                      //     _tareaComedor = !_tareaComedor;
+                      //   });
+                      //   }),
+                      // )
+                      // else ...[
+                      // _crearBoton(context, 'Historial', 'images/historial.png', () {
+                      //   setState(() {
+                      //   _tareaComedor = !_tareaComedor;
+                      //   });
+                      // }),
+                      // SizedBox(height: screenWidth * 0.01),
+                      // _crearBoton(context, 'Comedor', 'images/comedor.png', () {
                         
+                      // }),
+                      // ],
+                      _crearBoton(context, 'Historial', 'images/historial.png', () {
+                        Navigator.pushNamed(context, '/historial');
                       }),
-                      ],
+                      
                     ],
                   )
                 )
