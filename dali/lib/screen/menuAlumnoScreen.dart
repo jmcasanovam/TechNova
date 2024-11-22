@@ -1,3 +1,4 @@
+import 'package:dali/screen/historialAlumno.dart';
 import 'package:dali/widget/botonCerrarSesion.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class MenuAlumnoScreen extends StatefulWidget {
 
 class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
   bool _tareaComedor = false;
-  
+
   void volverAtras(BuildContext context) {
     Navigator.of(context).pop();
   }
@@ -45,77 +46,78 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      // 
+                      //
                       const BotonCerrarSesion(),
                     ]),
                 Center(
-                  child: Column(
-                    children: [
-                      // if (!_tareaComedor)
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: screenWidth * 0.1),
-                      //   child: _crearBoton(context, 'Historial', 'images/historial.png', () {
-                      //   setState(() {
-                      //     _tareaComedor = !_tareaComedor;
-                      //   });
-                      //   }),
-                      // )
-                      // else ...[
-                      // _crearBoton(context, 'Historial', 'images/historial.png', () {
-                      //   setState(() {
-                      //   _tareaComedor = !_tareaComedor;
-                      //   });
-                      // }),
-                      // SizedBox(height: screenWidth * 0.01),
-                      // _crearBoton(context, 'Comedor', 'images/comedor.png', () {
-                        
-                      // }),
-                      // ],
-                      _crearBoton(context, 'Historial', 'images/historial.png', () {
-                        Navigator.pushNamed(context, '/historial');
-                      }),
-                      
-                    ],
-                  )
-                )
+                    child: Column(
+                  children: [
+                    // if (!_tareaComedor)
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: screenWidth * 0.1),
+                    //   child: _crearBoton(context, 'Historial', 'images/historial.png', () {
+                    //   setState(() {
+                    //     _tareaComedor = !_tareaComedor;
+                    //   });
+                    //   }),
+                    // )
+                    // else ...[
+                    // _crearBoton(context, 'Historial', 'images/historial.png', () {
+                    //   setState(() {
+                    //   _tareaComedor = !_tareaComedor;
+                    //   });
+                    // }),
+                    // SizedBox(height: screenWidth * 0.01),
+                    // _crearBoton(context, 'Comedor', 'images/comedor.png', () {
+
+                    // }),
+                    // ],
+                    _crearBoton(context, 'Historial', 'images/historial.png',
+                        () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Historial()));
+                    }),
+                  ],
+                ))
               ],
             )));
   }
 
-  Widget _crearBoton(BuildContext context, String texto, String iconoRuta, VoidCallback onPressed){
+  Widget _crearBoton(BuildContext context, String texto, String iconoRuta,
+      VoidCallback onPressed) {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: screenWidth * 0.18,
-        padding: EdgeInsets.all(screenWidth * 0.02),
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(20),
-        ),
-
-        child: Column(
-          children: [
-            Image.asset(
-              iconoRuta,
-              width: screenWidth * 0.1,
-              height: screenWidth * 0.1,
-              fit: BoxFit.cover,
-            ),
-            // SizedBox(height: screenWidth * 0.02),
-            Text(
-              texto,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: screenWidth * 0.03,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Roboto',
+          width: screenWidth * 0.18,
+          padding: EdgeInsets.all(screenWidth * 0.02),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Image.asset(
+                iconoRuta,
+                width: screenWidth * 0.1,
+                height: screenWidth * 0.1,
+                fit: BoxFit.cover,
               ),
-            ),
-          ],
-        )
-      ),
+              // SizedBox(height: screenWidth * 0.02),
+              Text(
+                texto,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: screenWidth * 0.03,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

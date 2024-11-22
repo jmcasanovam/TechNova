@@ -1,4 +1,4 @@
-import 'package:dali/models/tarea.dart';
+import 'package:dali/models/tareaAsignada.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,8 +15,22 @@ class _HistorialState extends State<Historial> {
     Navigator.of(context).pop();
   }
 
-  final Tarea _tarea = Tarea('¡Pongamos el microondas!', 'images/comedor.png');
-  final Tarea _tarea2 = Tarea ('Vamos a lavarnos las manos', 'images/feliz.png');
+  List<List<TareaAsignada>> paginarTareas(List<TareaAsignada> tareas, int tamanioPagina) {
+    List<List<TareaAsignada>> paginas = [];
+    for (int i = 0; i < tareas.length; i += tamanioPagina) {
+      paginas.add(tareas.sublist(i, i + tamanioPagina > tareas.length ? tareas.length : i + tamanioPagina));
+    }
+    return paginas;
+  }
+
+  List<List<TareaAsignada>> dias = [[
+    TareaAsignada('¡Pongamos el microondas!', 'images/comedor.png', ),
+    TareaAsignada ('Vamos a lavarnos las manos', 'images/feliz.png')],
+  [TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'), TareaAsignada ('Vamos a lavarnos las manos', 'images/feliz.png'), TareaAsignada('Tomar comandas', 'images/comedor.png')]];
+  int dia_actual = 0;
+  int dias_totales = 2;
+
+  int pagina_actual = 0; //página dentro del día
 
   @override
   void initState() {
@@ -65,7 +79,7 @@ class _HistorialState extends State<Historial> {
                       },
                       child: Container(
                         width: screenWidth * 0.9,
-                        //height: screenHeight * 0.7,
+                        height: screenHeight * 0.68,
                         decoration: BoxDecoration(
                           color: const Color.fromRGBO(176, 211, 255, 1),
                           borderRadius: BorderRadius.circular(screenWidth * 0.07),
@@ -75,7 +89,7 @@ class _HistorialState extends State<Historial> {
                             SizedBox(height: screenWidth* 0.01),
                             SizedBox(
                               width: screenWidth * 0.9,
-                              height: screenHeight * 0.7,
+                              height: screenHeight * 0.65,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -95,6 +109,14 @@ class _HistorialState extends State<Historial> {
                                           ),
                                           iconSize: screenWidth * 0.1,
                                           onPressed: () {
+                                            setState(() {
+                                              if (pagina_actual > 0) {
+                                                pagina_actual--; // Navegar a la página anterior
+                                              } else {
+                                                dia_actual = (dia_actual - 1 + dias_totales) % dias_totales; // Navegar al día anterior
+                                                pagina_actual = paginarTareas(dias[dia_actual], 3).length - 1; // Ir a la última página del nuevo día
+                                              }
+                                            });
                                           },
                                           ),
                                         ),
@@ -108,13 +130,14 @@ class _HistorialState extends State<Historial> {
                                             width: screenWidth * 0.6,
                                             child: Column(
                                               children: [ 
+                                                SizedBox(height: screenHeight*0.01,),
                                                 Row(
                                                   children: [
                                                     SizedBox(
                                                       width: screenWidth*0.05,
                                                     ),
                                                     Text(
-                                                      "HOY",
+                                                      dia_actual == 0 ? "HOY" : "AYER",
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: screenWidth * 0.03,
@@ -123,133 +146,42 @@ class _HistorialState extends State<Historial> {
                                                     ),
                                                   ],
                                                 ),
-                                                Row(//un Row + SizedBox por cada tarea mostrada en ESE día
-                                                  children: [
-                                                    SizedBox(
-                                                      width: screenWidth*0.05,
-                                                    ),
-                                                    ClipRRect(
-                                                      borderRadius: BorderRadius.circular(screenWidth * 0.07),
-                                                      child: Image.asset(
-                                                        _tarea.imagen,
-                                                        fit: BoxFit.cover,
-                                                        width: screenWidth * 0.1, // Ajusta el ancho de la imagen
-                                                        height: screenHeight * 0.1, // Ajusta la altura de la imagen
+                                                
+                                                for (var tarea in paginarTareas(dias[dia_actual], 3)[pagina_actual])
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(width: screenWidth * 0.05),
+                                                          ClipRRect(
+                                                            borderRadius: BorderRadius.circular(screenWidth * 0.07),
+                                                            child: Image.asset(
+                                                              tarea.imagen,
+                                                              width: screenWidth * 0.1,
+                                                              height: screenHeight * 0.1,
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: screenWidth * 0.02),
+                                                          Expanded(
+                                                            child: Text(
+                                                              tarea.nombre,
+                                                              style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: screenWidth * 0.03,
+                                                              ),
+                                                              maxLines: 3,
+                                                              overflow: TextOverflow.ellipsis,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                    SizedBox(width: screenWidth * 0.02), // Espacio entre la imagen y el texto
-                                                    Expanded( // Para que el texto ocupe el resto del espacio
-                                                      child: Text(
-                                                        _tarea.nombre,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: screenWidth * 0.03,
-                                                        ),
-                                                        maxLines: 3, // Limita el texto a 3 líneas, si es necesario
-                                                        overflow: TextOverflow.ellipsis, // Puntos suspensivos si el texto es largo
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: screenHeight*0.05,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: screenWidth*0.05,
-                                                    ),
-                                                    ClipRRect(
-                                                      borderRadius: BorderRadius.circular(screenWidth * 0.07),
-                                                      child: Image.asset(
-                                                        _tarea2.imagen,
-                                                        fit: BoxFit.cover,
-                                                        width: screenWidth * 0.1, // Ajusta el ancho de la imagen
-                                                        height: screenHeight * 0.1, // Ajusta la altura de la imagen
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: screenWidth * 0.02), // Espacio entre la imagen y el texto
-                                                    Expanded( // Para que el texto ocupe el resto del espacio
-                                                      child: Text(
-                                                        _tarea2.nombre,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: screenWidth * 0.03,
-                                                        ),
-                                                        maxLines: 3, // Limita el texto a 3 líneas, si es necesario
-                                                        overflow: TextOverflow.ellipsis, // Puntos suspensivos si el texto es largo
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: screenHeight*0.05,
-                                                ),
+                                                      SizedBox(height: screenHeight * 0.05),
+                                                    ],
+                                                  ),
                                               ],
                                             )
 
-                                          ),
-                                          SizedBox(
-                                            height: screenHeight*0.01,
-                                          ),                                         
-                                          Container( //Espacio del día (si no cabe, continúa en la siguiente página)
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(5, 153, 159, 1),
-                                              borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                                            ),
-                                            width: screenWidth * 0.6,
-                                            child: Column(
-                                              children: [ 
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: screenWidth*0.05,
-                                                    ),
-                                                    Text(
-                                                      "MAÑANA",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: screenWidth * 0.03,
-                                                        fontWeight: FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(//un Row + SizedBox por cada tarea mostrada en ESE día
-                                                  children: [
-                                                    SizedBox(
-                                                      width: screenWidth*0.05,
-                                                    ),
-                                                    ClipRRect(
-                                                      borderRadius: BorderRadius.circular(screenWidth * 0.07),
-                                                      child: Image.asset(
-                                                        _tarea.imagen,
-                                                        fit: BoxFit.cover,
-                                                        width: screenWidth * 0.1, // Ajusta el ancho de la imagen
-                                                        height: screenHeight * 0.1, // Ajusta la altura de la imagen
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: screenWidth * 0.02), // Espacio entre la imagen y el texto
-                                                    Expanded( // Para que el texto ocupe el resto del espacio
-                                                      child: Text(
-                                                        _tarea.nombre,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: screenWidth * 0.03,
-                                                        ),
-                                                        maxLines: 3, // Limita el texto a 3 líneas, si es necesario
-                                                        overflow: TextOverflow.ellipsis, // Puntos suspensivos si el texto es largo
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: screenHeight*0.05,
-                                                ),
-                                              ],
-                                            )
-
-                                          ),
+                                          ),                                
                                         ],
                                       ),
                                       //Flecha para la derecha
@@ -262,7 +194,15 @@ class _HistorialState extends State<Historial> {
                                           ),
                                           iconSize: MediaQuery.of(context).size.width * 0.1,
                                           onPressed: () {
-                                            
+                                            setState(() {
+                                              List<List<TareaAsignada>> paginas = paginarTareas(dias[dia_actual], 3);
+                                              if (pagina_actual < paginas.length - 1) {
+                                                pagina_actual++; // Navegar a la siguiente página
+                                              } else {
+                                                dia_actual = (dia_actual + 1) % dias_totales; // Navegar al siguiente día
+                                                pagina_actual = 0; // Ir a la primera página del nuevo día
+                                              }
+                                            });
                                           },
                                           ),
                                         ),

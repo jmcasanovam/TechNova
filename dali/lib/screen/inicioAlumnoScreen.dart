@@ -1,5 +1,6 @@
+import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/menuAlumnoScreen.dart';
-import 'package:dali/models/tarea.dart';
+import 'package:dali/models/tareaAsignada.dart';
 import 'package:dali/screen/presentacionTarea.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +13,21 @@ class InicioAlumnoScreen extends StatefulWidget {
 }
 
 class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
-  final List<Tarea> _tareas = [
-    Tarea('¡Pongamos el microondas!', 'images/microondas.png'),
-    Tarea('¡Pongamos el microondas2!', 'images/comedor.png'),
+  List<TareaAsignada> _tareas = [
+    TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png', 'video', 1),
+    TareaAsignada('¡Pongamos el microondas2!', 'images/comedor.png', 'video', 2),
   ];
   
   int _tareaActual = 0;
+
+  
+  // onInitState() async{
+  //   super.initState();
+  //   setState(() async{
+  //     List<TareaAsignada> aux = await obtenerTareas("alumno1");
+  //     _tareas = aux;
+  //   });
+  // }
 
 
   void accederTarea(BuildContext context) {

@@ -7,7 +7,8 @@ class PasswordAlumnos extends StatefulWidget {
   final String image; // Ruta de la imagen seleccionada
   final String username;
 
-  const PasswordAlumnos({super.key, required this.image, required this.username});
+  const PasswordAlumnos(
+      {super.key, required this.image, required this.username});
 
   @override
   _PasswordAlumnosState createState() => _PasswordAlumnosState();
@@ -149,22 +150,29 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                               Size(screenWidth * 0.2, screenHeight * 0.2),
                         ),
                         onPressed: () async {
-                          int result = await login(widget.username, enteredShapes.join());
+                          // int result = await login(widget.username, enteredShapes.join());
 
-                          if (result == 200) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
-                            );
-                          } else {
-                            // Handle login failure (e.g., show an error message)
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
-                            );
+                          // if (result == 200) {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
+                          //   );
+                          // } else {
+                          //   // Handle login failure (e.g., show an error message)
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
+                          //   );
 
-                            clearShapes();
-                          }
+                          //   clearShapes();
+                          // }
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    InicioAlumnoScreen(iconoPerfil: widget.image))
+                          );
                         },
                         child: SizedBox(
                             width: screenWidth * 0.16,
@@ -185,7 +193,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
           Padding(
             padding: EdgeInsets.only(
                 right: screenWidth * 0.05, top: screenHeight * 0.02),
-                child: const FittedBox(child: BotonCerrarSesion()),
+            child: const FittedBox(child: BotonCerrarSesion()),
           )
         ],
       ),

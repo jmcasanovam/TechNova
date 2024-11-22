@@ -1,4 +1,4 @@
-import 'package:dali/models/tarea.dart';
+import 'package:dali/models/tareaAsignada.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,7 +15,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
     Navigator.of(context).pop();
   }
 
-  final Tarea _tarea = Tarea('¡Pongamos el microondas!', 'images/comedor.png');
+  final TareaAsignada _tarea = TareaAsignada('¡Pongamos el microondas!', 'images/comedor.png', 'video', 1);
 
   int paso_actual = 0;
   int pasos_total = 2;
