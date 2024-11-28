@@ -25,10 +25,10 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
     {'image': 'images/panda.png', 'name': 'EDU'},
     {'image': 'images/cocodrilo.png', 'name': 'MANU'},
     {'image': 'images/cisne.png', 'name': 'MARTA'},
-    {'image': 'images/hámster.png', 'name': 'JORGE'},
+    {'image': 'images/hamster.png', 'name': 'JORGE'},
     {'image': 'images/gorila.png', 'name': 'LAURA'},
-    {'image': 'images/hipopótamo.png', 'name': 'CELIA'},
-    {'image': 'images/murciélago.png', 'name': 'MARTÍN'},
+    {'image': 'images/hipopotamo.png', 'name': 'CELIA'},
+    {'image': 'images/murcielago.png', 'name': 'MARTÍN'},
     {'image': 'images/perro.png', 'name': 'PAULA'},
   ];
 

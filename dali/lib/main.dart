@@ -1,3 +1,5 @@
+import 'package:dali/screen/adminAsignarTareas.dart';
+import 'package:dali/screen/adminUsuarios.dart';
 import 'package:dali/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
+      routes: {
+        '/adminUsuarios': (context) => AdminUsuarios(),
+        '/adminAsignarTarea': (context) => AdminAsignarTareas(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }

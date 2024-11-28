@@ -1,3 +1,4 @@
+import 'package:dali/screen/loginProfesor.dart';
 import 'package:flutter/material.dart';
 import 'loginAlumnos.dart';
 
@@ -97,7 +98,12 @@ class LoginScreen extends StatelessWidget {
                     width: screenWidth * 0.21,
                     height: screenHeight * 0.15,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginProfesor()),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
