@@ -1,4 +1,5 @@
 import 'package:dali/controlers/controladores.dart';
+import 'package:dali/screen/comandasAlumno.dart';
 import 'package:dali/screen/menuAlumnoScreen.dart';
 import 'package:dali/models/tareaAsignada.dart';
 import 'package:dali/screen/presentacionTarea.dart';
@@ -16,6 +17,7 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
   List<TareaAsignada> _tareas = [
     TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png', 'video', 1),
     TareaAsignada('¡Pongamos el microondas2!', 'images/comedor.png', 'video', 2),
+    TareaAsignada('¡Toca anotar los menús!', 'images/menu_comedor.png', 'menu', 3),
   ];
   
   int _tareaActual = 0;
@@ -31,10 +33,18 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
 
 
   void accederTarea(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const PresentacionTarea()),
-    );
+    if(_tareas.elementAt(_tareaActual).formato == 'menu'){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ComandasAlumno()),
+      );
+    }
+    else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const PresentacionTarea()),
+      );
+    }
   }
 
   void tareaAnterior() {

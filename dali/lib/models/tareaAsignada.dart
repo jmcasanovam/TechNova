@@ -20,6 +20,8 @@ class TareaAsignada {
 
   String get nombre => _nombre;
   String get imagen => _imagen;
+  bool get completada => _completada;
+  String get formato => _formato;
 
 
    
