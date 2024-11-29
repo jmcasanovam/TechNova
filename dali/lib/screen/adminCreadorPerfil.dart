@@ -11,7 +11,7 @@ import '../widget/barraMenu.dart';
 
   class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
     String tipoSeleccionado = 'Alumno';
-    List<String> formatos = ['Texto', 'Video', 'Imagen', 'Pictograma'];
+    List<String> formatos = ['Texto', 'Video', 'Imagen', 'Pictograma', 'Audio'];
     List<String> preferenciasNotificacion = ['Nada', 'Audio', 'Texto'];
     List<String> opcionesContrasena = ['Cuadrado', 'Triángulo', 'Círculo', 'Cruz'];
     bool oculto = true;

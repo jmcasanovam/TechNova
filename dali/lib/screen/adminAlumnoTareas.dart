@@ -22,7 +22,8 @@ class AdminAlumnoTareas extends StatelessWidget {
         "formato": "Video",
         "fechaAsignacion": "2024-11-01",
         "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "images/panda.png", // URL temporal
+        "fechaCompletada": "2024-11-15",
+        "fotoResultado": 'images/logoapp_general.png', // URL temporal
         "valoracion": "Buen trabajo",
       },
       {
@@ -30,7 +31,8 @@ class AdminAlumnoTareas extends StatelessWidget {
         "formato": "Pictograma",
         "fechaAsignacion": "2024-11-05",
         "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
+        "fechaCompletada": "2024-11-15",
+        "fotoResultado": 'images/logoapp_general.png',
         "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
       },
       {
@@ -38,112 +40,9 @@ class AdminAlumnoTareas extends StatelessWidget {
         "formato": "Video",
         "fechaAsignacion": "2024-11-01",
         "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
+        "fechaCompletada": "2024-11-15",
+        "fotoResultado": 'images/logoapp_general.png', // URL temporal
         "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
-      },
-      {
-        "completada": true,
-        "formato": "Video",
-        "fechaAsignacion": "2024-11-01",
-        "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
-        "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
-      },
-      {
-        "completada": true,
-        "formato": "Video",
-        "fechaAsignacion": "2024-11-01",
-        "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
-        "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
-      },
-      {
-        "completada": true,
-        "formato": "Video",
-        "fechaAsignacion": "2024-11-01",
-        "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
-        "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
-      },
-      {
-        "completada": true,
-        "formato": "Video",
-        "fechaAsignacion": "2024-11-01",
-        "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
-        "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
-      },
-      {
-        "completada": true,
-        "formato": "Video",
-        "fechaAsignacion": "2024-11-01",
-        "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
-        "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
-      },
-      {
-        "completada": true,
-        "formato": "Video",
-        "fechaAsignacion": "2024-11-01",
-        "fechaExpiracion": "2024-11-15",
-        "fotoResultado": "https://via.placeholder.com/150", // URL temporal
-        "valoracion": "Buen trabajo",
-      },
-      {
-        "completada": false,
-        "formato": "Pictograma",
-        "fechaAsignacion": "2024-11-05",
-        "fechaExpiracion": "2024-11-20",
-        "fotoResultado": "https://via.placeholder.com/150",
-        "valoracion": "Este comentario es muy largo, así que necesitamos que ocupe más de una línea para que sea visible correctamente y no se superponga a otros elementos.",
       },
     ];
 
@@ -201,7 +100,8 @@ class AdminAlumnoTareas extends StatelessWidget {
                     2: FlexColumnWidth(2),
                     3: FlexColumnWidth(2),
                     4: FlexColumnWidth(2),
-                    5: FlexColumnWidth(3),
+                    5: FlexColumnWidth(2),
+                    6: FlexColumnWidth(3),
                   },
                   children: [
                     // Encabezado
@@ -212,6 +112,7 @@ class AdminAlumnoTareas extends StatelessWidget {
                         _buildCell("Formato",context, isHeader: true),
                         _buildCell("Fecha Asignación", context, isHeader: true),
                         _buildCell("Fecha Expiración", context, isHeader: true),
+                        _buildCell("Fecha Completada", context, isHeader: true),
                         _buildCell("Foto Resultado", context, isHeader: true),
                         _buildCell("Valoración", context, isHeader: true),
                       ],
@@ -227,6 +128,7 @@ class AdminAlumnoTareas extends StatelessWidget {
                             _buildCell(tarea["formato"], context),
                             _buildCell(tarea["fechaAsignacion"], context),
                             _buildCell(tarea["fechaExpiracion"], context),
+                            _buildCell(tarea["fechaCompletada"], context),
                             _buildCell(
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -281,7 +183,7 @@ class AdminAlumnoTareas extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.network(fotoUrl, width: screenWidth*0.3, height: screenHeight * 0.4,),
+              Image.asset(fotoUrl, width: screenWidth*0.3, height: screenHeight * 0.4,),
               SizedBox(height: screenHeight*0.04),
               Text("Foto de la tarea", style: TextStyle(fontSize: screenHeight * 0.02),),
               ElevatedButton(
