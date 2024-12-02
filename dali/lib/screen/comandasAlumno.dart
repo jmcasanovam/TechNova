@@ -24,6 +24,17 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
     return paginas;
   }
 
+  bool estanAulasTerminadas(){
+    int nterminadas = 0;
+    for(int i = 0; i < aulas.length; i++){
+      if(aulas[i].terminada){
+        nterminadas++;
+      }
+    }
+
+    return nterminadas == aulas.length;
+  }
+
   int pagina_actual = 0;
   int aulas_por_pag = 6;
   bool modo_picto = false;
@@ -73,7 +84,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
 
     final lista1 = paginas[pagina_actual].sublist(0, (paginas[pagina_actual].length / 2).ceil());
     final lista2 = paginas[pagina_actual].sublist((paginas[pagina_actual].length / 2).ceil());
-
+    
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(screenWidth * 0.01),
@@ -165,7 +176,40 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                     ],
                   ),
                   SizedBox(height: screenHeight * 0.03),
-                  _crearBotonModoPicto(screenWidth, screenHeight),
+                  Center(child:
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.center,  
+                    children:[
+                      _crearBotonModoPicto(screenWidth, screenHeight),
+                      SizedBox(width: screenWidth*0.5),
+                      FilledButton( //Botón terminar
+                        style: FilledButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          backgroundColor: Colors.red,
+                          minimumSize: Size(screenWidth * 0.12, screenHeight * 0.21),
+                          maximumSize: Size(screenWidth * 0.12, screenHeight * 0.21),
+                        ),
+                        onPressed: !estanAulasTerminadas()?null:() {
+                          //guardar comandas y marcar tarea como completada
+                          volverAtras(context);
+                        },
+                        child: Column(children: [
+                          SizedBox(height: screenHeight*0.005,),
+                          SizedBox(child:Opacity(opacity: !estanAulasTerminadas()?0.5:1.0, child: Image.asset('images/ok.png', width: screenWidth*0.07,))),
+                          SizedBox(height: screenHeight*0.01,),
+                          const Text(
+                            "Completar",
+                            style: const TextStyle(
+                            fontFamily: "Open Sans",
+                            color: Colors.white,
+                            fontSize: 25
+                            ), 
+                          )
+                          ],) ,
+                        ),
+                  ]))
                 ],
               ),
             ),
@@ -187,11 +231,12 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
           minimumSize: Size(screenWidth * 0.17, screenHeight * 0.17),
           maximumSize: Size(screenWidth * 0.17, screenHeight * 0.17),
         ),
-        onPressed: () {
-          Navigator.push(
+        onPressed: aula.get_terminada()?null:() async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => SeleccionMenus(aula, modo_picto)),
           );
+          setState(() {});
         },
         child: modo_picto
             ? Image.asset(
@@ -202,6 +247,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                 aula.nombre,
                 style: TextStyle(fontFamily: "Open Sans", fontSize: screenHeight * 0.07),
               ),
+        
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:dali/screen/comandasAlumno.dart';
 import 'package:flutter/material.dart';
 import 'package:dali/models/aula.dart';
 import 'package:dali/models/menu.dart';
@@ -29,7 +30,6 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
   void volverAtras(BuildContext context) {
     Navigator.of(context).pop();
   }
-
   
   @override
   Widget build(BuildContext context) {
@@ -256,7 +256,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                     },
                     child: Column(children: [
                       SizedBox(height: screenHeight*0.02,),
-                      FittedBox(child: Image.asset('images/menu_comedor.png')),
+                      SizedBox(child: Image.asset('images/menu_comedor.png'), width: screenWidth*0.15),
                       const Text(
                         "Ver menú",
                         style: const TextStyle(
@@ -270,41 +270,139 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                 ]
                 ),
                 SizedBox(height: screenHeight*0.1),
-                Center(child: 
-                  Container(//Botón modo pictogramas
-                    width: screenWidth * 0.17,
-                    height: screenHeight * 0.22,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.rectangle,
+                Center(child:
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:[
+                    Container(//Botón modo pictogramas
+                      width: screenWidth * 0.17,
+                      height: screenHeight * 0.22,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        children: [
+                          IconButton(
+                            icon: Image.asset(
+                              modo_picto == false ?
+                              'images/manos.png':'images/numeros.png',
+                              color: Colors.white,
+                              width: screenWidth * 0.07,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                              modo_picto = !modo_picto;
+                            });
+                            },
+                            ),
+                            Text(
+                              modo_picto == false ?"Pictogramas":"Números",
+                              style: const TextStyle(
+                              fontFamily: "Open Sans",
+                              color: Colors.white,
+                              fontSize: 25
+                            ),
+                          )
+                        ],
+                    ),
+                ),
+                SizedBox(width: screenWidth*0.5),
+                FilledButton( //Botón terminar
+                    style: FilledButton.styleFrom(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Column(
-                      children: [
-                        IconButton(
-                          icon: Image.asset(
-                            modo_picto == false ?
-                            'images/manos.png':'images/numeros.png',
-                            color: Colors.white,
-                            width: screenWidth * 0.07,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                            modo_picto = !modo_picto;
-                          });
+                    backgroundColor: Colors.red,
+                    minimumSize: Size(screenWidth * 0.12, screenHeight * 0.21),
+                    maximumSize: Size(screenWidth * 0.12, screenHeight * 0.21),
+                    ),
+                    onPressed: () {
+                      setState((){
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Column(children: [
+                                  const Text("¿Estás seguro de que quieres elegir estos menús?", style: TextStyle(fontFamily: "Open Sans", fontSize: 40),),
+                                  FilledButton(
+                                    style: FilledButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(screenWidth * 0.01)),
+                                        backgroundColor: Colors.red,
+                                        minimumSize: Size(screenHeight * 0.23, screenHeight * 0.23),
+                                        maximumSize: Size(screenHeight * 0.23, screenHeight * 0.23),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        aula.terminar();
+                                      });
+                                      volverAtras(context); //Debe hacerlo dos veces para cerrar el diálogo y volver hacia la pantalla anterior
+                                      volverAtras(context);
+                                    },
+                                    child:
+                                      Column(children:[
+                                        Image.asset("images/si.png", width: screenWidth*0.07,),
+                                        Text(
+                                          "SÍ",
+                                          style: TextStyle(
+                                            fontFamily: "Open Sans",
+                                            fontSize: screenHeight*0.05
+                                          ),
+                                        ),
+                                      ]),
+                                  ),
+                                  SizedBox(height: screenHeight*0.03),
+                                  FilledButton(
+                                    style: FilledButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(screenWidth * 0.01)),
+                                        backgroundColor: Colors.red,
+                                        minimumSize: Size(screenHeight * 0.23, screenHeight * 0.23),
+                                        maximumSize: Size(screenHeight * 0.23, screenHeight * 0.23),
+                                    ),
+                                    onPressed: () {
+                                      volverAtras(context);
+                                    },
+                                    child:
+                                      Column(children:[
+                                        Image.asset("images/no.png", width: screenWidth*0.07,),
+                                        Text(
+                                          "NO",
+                                          style: TextStyle(
+                                            fontFamily: "Open Sans",
+                                            fontSize: screenHeight*0.05
+                                          ),
+                                        ),
+                                      ]),
+                                  ),
+                                  ])],
+                              ),
+                            );
                           },
-                          ),
-                          Text(
-                            modo_picto == false ?"Pictogramas":"Números",
-                            style: const TextStyle(
-                            fontFamily: "Open Sans",
-                            color: Colors.white,
-                            fontSize: 25
-                          ),
-                        )
-                      ],
-                  ),
-                ),)
+                        );
+                      });
+                    },
+                    child: Column(children: [
+                      SizedBox(height: screenHeight*0.005,),
+                      SizedBox(child:Image.asset('images/ok.png', width: screenWidth*0.07,)),
+                      SizedBox(height: screenHeight*0.01,),
+                      const Text(
+                        "Completar",
+                        style: const TextStyle(
+                        fontFamily: "Open Sans",
+                        color: Colors.white,
+                        fontSize: 25
+                        ), 
+                      )
+                      ],) ,
+                    ),
+                  ]))
+
               ]
             ),
         )
