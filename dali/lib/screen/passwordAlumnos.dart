@@ -51,149 +51,179 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Imagen del perfil
-          Padding(
-            padding: EdgeInsets.all(screenWidth * 0.01),
-            child: Image.asset(
-              widget.image,
-              width: screenWidth * 0.1,
-              height: screenHeight * 0.2,
+          Semantics(
+            label: "imagen del perfil",
+            child: Padding(
+              padding: EdgeInsets.all(screenWidth * 0.01),
+              child: Image.asset(
+                widget.image,
+                width: screenWidth * 0.1,
+                height: screenHeight * 0.2,
+              ),
             ),
           ),
 
           //Bloque de botones
-          Padding(
-            padding: EdgeInsets.only(top: screenHeight * 0.1),
-            child: Column(
-              children: [
-                // Botones de formas
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ShapeButton(
-                      icon: Icons.circle_outlined,
-                      color: Colors.red,
-                      onPressed: () => addShape('circle'),
-                    ),
-                    ShapeButton(
-                      icon: Icons.square_outlined,
-                      color: Colors.blue,
-                      onPressed: () => addShape('square'),
-                    ),
-                    ShapeButton(
-                      icon: Icons.change_history, // Triángulo
-                      color: Colors.orange,
-                      onPressed: () => addShape('triangle'),
-                    ),
-                    ShapeButton(
-                      icon: Icons.star_border,
-                      color: Colors.green,
-                      onPressed: () => addShape('star'),
-                    ),
-                  ],
-                ),
-
-                // Casillas de contraseña
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) {
-                    return Container(
-                      margin: EdgeInsets.only(
-                        left: screenWidth * 0.02,
-                        right: screenWidth * 0.02,
-                        top: screenHeight * 0.04,
-                        bottom: screenHeight * 0.04,
-                      ),
-                      width: screenWidth * 0.15,
-                      height: screenHeight * 0.30,
-                      decoration: BoxDecoration(
-                        color: Colors.blue[100],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: enteredShapes[index] != ''
-                          ? Icon(
-                              _getIconForShape(enteredShapes[index]),
-                              size: screenWidth * 0.1,
-                              color: _colorIcono(enteredShapes[index]),
-                            )
-                          : null,
-                    );
-                  }),
-                ),
-
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.close, color: Colors.red),
-                          iconSize: screenHeight * 0.17,
-                          onPressed: clearShapes,
+          Semantics(
+            label: 'Botones para introducir contraseñas',
+            child: Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.1),
+              child: Column(
+                children: [
+                  // Botones de formas
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Semantics(
+                        label: 'Botón círculo rojo',
+                        child: ShapeButton(
+                          icon: Icons.circle_outlined,
+                          color: Colors.red,
+                          onPressed: () => addShape('circle'),
                         ),
-                        Text(
-                          "BORRAR",
-                          style: TextStyle(
-                            fontSize: screenHeight * 0.03,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      Semantics(
+                        label: 'Botón cuadrado azul',
+                        child: ShapeButton(
+                          icon: Icons.square_outlined,
+                          color: Colors.blue,
+                          onPressed: () => addShape('square'),
+                        ),
+                      ),
+                      Semantics(
+                        label: 'Botón triángulo naranja',
+                        child: ShapeButton(
+                          icon: Icons.change_history, // Triángulo
+                          color: Colors.orange,
+                          onPressed: () => addShape('triangle'),
+                        ),
+                      ),
+                      Semantics(
+                        label: 'Botón estrella verde',
+                        child: ShapeButton(
+                          icon: Icons.star_border,
+                          color: Colors.green,
+                          onPressed: () => addShape('star'),
+                        ),
+                      ),
+                    ],
+                  ),
+            
+                  // Casillas de contraseña
+                  Semantics(
+                    label: 'Casillas de contraseña',
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(3, (index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                            left: screenWidth * 0.02,
+                            right: screenWidth * 0.02,
+                            top: screenHeight * 0.04,
+                            bottom: screenHeight * 0.04,
                           ),
-                        ),
-                      ],
+                          width: screenWidth * 0.15,
+                          height: screenHeight * 0.30,
+                          decoration: BoxDecoration(
+                            color: Colors.blue[100],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: enteredShapes[index] != ''
+                              ? Icon(
+                                  _getIconForShape(enteredShapes[index]),
+                                  size: screenWidth * 0.1,
+                                  color: _colorIcono(enteredShapes[index]),
+                                )
+                              : null,
+                        );
+                      }),
                     ),
-                    ElevatedButton(
-                        style: FilledButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          backgroundColor: Colors.red,
-                          minimumSize:
-                              Size(screenWidth * 0.2, screenHeight * 0.2),
-                          maximumSize:
-                              Size(screenWidth * 0.2, screenHeight * 0.2),
-                        ),
-                        onPressed: () async {
-                          // int result = await login(widget.username, enteredShapes.join());
-
-                          // if (result == 200) {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
-                          //   );
-                          // } else {
-                          //   // Handle login failure (e.g., show an error message)
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //     SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
-                          //   );
-
-                          //   clearShapes();
-                          // }
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    InicioAlumnoScreen(iconoPerfil: widget.image))
-                          );
-                        },
-                        child: SizedBox(
-                            width: screenWidth * 0.16,
-                            child: const FittedBox(
-                              child: Text(
-                                "CONFIRMAR",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ))),
-                  ],
-                )
-              ],
+                  ),
+            
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Semantics(
+                            label: 'Botón borrar',
+                            child: IconButton(
+                              icon: const Icon(Icons.close, color: Colors.red),
+                              iconSize: screenHeight * 0.17,
+                              onPressed: clearShapes,
+                            ),
+                          ),
+                          Text(
+                            "BORRAR",
+                            style: TextStyle(
+                              fontSize: screenHeight * 0.03,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Semantics(
+                        label: 'Botón para confirmar la contraseña',
+                        child: ElevatedButton(
+                            style: FilledButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              backgroundColor: Colors.red,
+                              minimumSize:
+                                  Size(screenWidth * 0.2, screenHeight * 0.2),
+                              maximumSize:
+                                  Size(screenWidth * 0.2, screenHeight * 0.2),
+                            ),
+                            onPressed: () async {
+                              // int result = await login(widget.username, enteredShapes.join());
+                                    
+                              // if (result == 200) {
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
+                              //   );
+                              // } else {
+                              //   // Handle login failure (e.g., show an error message)
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //     SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
+                              //   );
+                                    
+                              //   clearShapes();
+                              // }
+                                    
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        InicioAlumnoScreen(iconoPerfil: widget.image))
+                              );
+                            },
+                            child: SizedBox(
+                                width: screenWidth * 0.16,
+                                child: const FittedBox(
+                                  child: Text(
+                                    "CONFIRMAR",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ))),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
 
           //Boton de cerrar sesion
-          Padding(
-            padding: EdgeInsets.only(
-                right: screenWidth * 0.05, top: screenHeight * 0.02),
-            child: const FittedBox(child: BotonCerrarSesion()),
+          Semantics(
+            label: 'Botón cerrar sesión',
+            child: Padding(
+              padding: EdgeInsets.only(
+                  right: screenWidth * 0.05, top: screenHeight * 0.02),
+              child: const FittedBox(child: BotonCerrarSesion()),
+            ),
           )
         ],
       ),
