@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF44034)),
         useMaterial3: true,
       ),
-      home: const ComandasAlumno(),//SplashScreen(),
+      home: const SplashScreen(),
       routes: {
         '/adminUsuarios': (context) => AdminUsuarios(),
         '/adminAsignarTarea': (context) => AdminAsignarTareas(),
