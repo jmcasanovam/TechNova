@@ -1,6 +1,6 @@
 import 'package:dali/screen/adminAsignarTareas.dart';
 import 'package:dali/screen/adminUsuarios.dart';
-import 'package:dali/screen/historialAlumno.dart';
+import 'package:dali/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF44034)),
         useMaterial3: true,
       ),
-      home: const Historial(),//SplashScreen(),
+      home: const SplashScreen(),
       routes: {
         '/adminUsuarios': (context) => AdminUsuarios(),
         '/adminAsignarTarea': (context) => AdminAsignarTareas(),
