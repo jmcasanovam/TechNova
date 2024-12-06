@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:dali/models/tareaAsignada.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +13,8 @@ class PresentacionTarea extends StatefulWidget{
 }
 
 class _PresentacionTareaState extends State<PresentacionTarea>{
+
+  late ConfettiController confettiController;
 
   void volverAtras(BuildContext context) {
     Navigator.of(context).pop();
@@ -51,6 +56,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
   void initState() {
     super.initState();
     formato_actual = formato_princ;
+    confettiController = ConfettiController(duration: const Duration(milliseconds: 800));
   }
 
   @override
@@ -416,18 +422,62 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                 AbsorbPointer(
                                   absorbing: paso_actual <= pasos_total,
                                   child: Opacity(
-                                    opacity: paso_actual > pasos_total ? 0.5 : 1.0,  // Baja opacidad cuando está desactivado
+                                    opacity: paso_actual > pasos_total ? 1.0 : 0.5,  // Baja opacidad cuando está desactivado
                                     child: IconButton(
                                       icon: Image.asset(
                                         'images/terminar.png',
                                         color: Colors.white,
                                         width: screenWidth * 0.1,
                                       ),
-                                      onPressed: paso_actual > pasos_total
+                                      onPressed: /*paso_actual >= pasos_total
                                           ? () {}//null  // Desactiva el botón si la condición se cumple
-                                          : () {
-                                              // Acción del botón cuando está activo
-                                            },
+                                          :*/ () {
+                                          setState((){
+                                            confettiController.play();
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  content: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [ //Animación confeti
+                                                      Align(alignment: Alignment.center,
+                                                      child: ConfettiWidget(confettiController: confettiController, blastDirection: -pi/2, emissionFrequency: 0.06,),),
+                                                      const Text("¡Felicidades! ¡Tarea terminada!",
+                                                            style: TextStyle(color: Color.fromRGBO(5, 153, 159, 1), fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 50)),
+                                                            
+                                                      FilledButton(
+                                                        style: FilledButton.styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(screenWidth * 0.01)),
+                                                            backgroundColor: Colors.red,
+                                                            minimumSize: Size(screenHeight * 0.2, screenHeight * 0.2),
+                                                            maximumSize: Size(screenHeight * 0.2, screenHeight * 0.2),
+                                                        ),
+                                                        onPressed: () {
+                                                          volverAtras(context); //Debe hacerlo dos veces para cerrar el diálogo y volver hacia la pantalla anterior
+                                                          volverAtras(context);
+                                                        },
+                                                        child:
+                                                          Column(children:[
+                                                            Image.asset("images/si.png", width: screenWidth*0.07,),
+                                                            Text(
+                                                              "Continuar",
+                                                              style: TextStyle(
+                                                                fontFamily: "Open Sans",
+                                                                fontSize: screenHeight*0.025
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          });
+                                        },
                                     ),
                                   ),
                                 ),
