@@ -442,8 +442,6 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                                   content: Column(
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [ //Animación confeti
-                                                      Align(alignment: Alignment.center,
-                                                      child: ConfettiWidget(confettiController: confettiController, blastDirection: -pi/2, emissionFrequency: 0.06,),),
                                                       const Text("¡Felicidades! ¡Tarea terminada!",
                                                             style: TextStyle(color: Color.fromRGBO(5, 153, 159, 1), fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 50)),
                                                             
@@ -471,6 +469,8 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                                             ),
                                                           ]),
                                                     ),
+                                                    Align(alignment: Alignment.center,
+                                                      child: ConfettiWidget(confettiController: confettiController, blastDirection: -pi/2, emissionFrequency: 0.06,),),
                                                     ],
                                                   ),
                                                 );
