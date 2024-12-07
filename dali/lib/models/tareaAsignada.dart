@@ -6,6 +6,7 @@ class TareaAsignada {
   String _formato = "";
   String _descripcion = '';
   int _idPasos = 0;
+  
 
   TareaAsignada([this._nombre = "", this._imagen = 'images/microondas.png', this._formato = "", this._idPasos = 0]);
 
