@@ -24,4 +24,12 @@ class Menu {
   int get_cant(){
     return cantidad;
   }
+
+  void set_nombre(String nombre){
+    this._nombre = nombre;
+  }
+
+  void set_picto(String picto){
+    this._picto = picto;
+  }
 }

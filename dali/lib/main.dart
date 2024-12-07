@@ -2,6 +2,7 @@ import 'package:dali/screen/adminAsignarTareas.dart';
 import 'package:dali/screen/adminCreadorTareas.dart';
 import 'package:dali/screen/adminTareasPlantilla.dart';
 import 'package:dali/screen/adminUsuarios.dart';
+import 'package:dali/screen/adminMenus.dart';
 import 'package:dali/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/adminUsuarios': (context) => AdminUsuarios(),
         '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
         '/adminAsignarTarea': (context) => AdminAsignarTareas(),
+        '/adminMenus' : (context) => AdminMenus(),
 
       },
       debugShowCheckedModeBanner: false,
