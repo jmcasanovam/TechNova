@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dali/controlers/controladores.dart';
 
 import '../widget/barraMenu.dart';
 import 'package:dali/models/menu.dart';
@@ -21,6 +22,8 @@ class _AdminMenusState extends State<AdminMenus> {
   bool tarea_asignada = false;
   List<Menu> menus = [];
   List<TextEditingController> controllers = [];
+    final TextEditingController controladorNumMenus = TextEditingController();
+
 
   void volverAtras(BuildContext context) {
     Navigator.of(context).pop();
@@ -29,7 +32,44 @@ class _AdminMenusState extends State<AdminMenus> {
   void initState() {
     super.initState();
     // Aquí podrías cargar datos específicos del alumno basado en el nickname.
+    cargarCantidadMenus();
   }
+
+  /// Función para obtener el número de menús desde una fuente externa
+  Future<void> cargarCantidadMenus() async {
+    try {
+      // String fecha = '${DateTime.now().day.toString().padLeft(2, '0')}/${DateTime.now().month.toString().padLeft(2, '0')}/${DateTime.now().year}';
+      String fecha = '01/01/2024';
+
+      // Aquí llamamos a la función que devuelve el número de menús dinámicamente
+      int cantidad = await obtenerCantidadMenus(fecha); // Usamos la fecha actual
+      setState(() {
+        numero_menus = cantidad;
+        controladorNumMenus.text = numero_menus.toString();
+
+        // Actualizamos la lista de menús y los controladores
+        while (menus.length < numero_menus) {
+          menus.add(Menu("Menu ${menus.length + 1}", 'images/menus.png'));
+        }
+        while (menus.length > numero_menus) {
+          menus.removeLast();
+        }
+
+        controllers = List.generate(menus.length, (index) {
+          return TextEditingController(text: menus[index].nombre);
+        });
+      });
+    } catch (error) {
+      print("Error al obtener la cantidad de menús: $error");
+    }
+  }
+
+  // /// Función simulada para obtener la cantidad de menús. Reemplazar con la real.
+  // Future<int> obtenerCantidadMenus(String fecha) async {
+  //   // Simulamos un retraso para la carga de datos
+  //   await Future.delayed(Duration(seconds: 2));
+  //   return 5; // Por ejemplo, retornamos 5 menús dinámicamente
+  // }
 
   @override
   Widget build(BuildContext context) {

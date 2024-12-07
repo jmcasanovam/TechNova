@@ -507,3 +507,28 @@ Future<String?> consultarPdfMenu(String nombreMenu) async {
     return null;
   }
 }
+
+
+Future<int> obtenerCantidadMenus(String fecha) async {
+  final url = Uri.parse('http://127.0.0.1:5000/get_menu_count/?fecha=$fecha'); // URL con el parámetro fecha como query string
+
+  try {
+    // Realiza la solicitud GET
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Cantidad de menús: ${data['cantidad_menus']}');
+      return data['cantidad_menus']; // Retorna la cantidad de menús
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+      return 0; // Si hay error, retorna 0 como cantidad de menús
+    }
+  } catch (e) {
+    print('Error al realizar la solicitud: $e');
+    return 0; // Retorna 0 si ocurre algún error inesperado
+  }
+}

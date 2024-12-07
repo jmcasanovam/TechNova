@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF44034)),
         useMaterial3: true,
       ),
-       home: const SplashScreen(),
+      home: AdminMenus(),
+      //  home: const SplashScreen(),
       // home: AdminCreadorTareas(),
       // home: AdminTareasPlantilla(),
       routes: {
