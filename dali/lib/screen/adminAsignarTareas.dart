@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:dali/controlers/controladores.dart';
 import '../widget/barraMenu.dart';
-
 
 class AdminAsignarTareas extends StatefulWidget {
   @override
@@ -10,41 +9,23 @@ class AdminAsignarTareas extends StatefulWidget {
 }
 
 class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
+  final Controladores controladores = Controladores();
   int? tareaSel; // Índice de la tarea seleccionada
   int? alumnoSel; // Índice del alumno seleccionado
   String? formatoSel = 'Texto';
-
-  final List<Map<String, String>> tareas = [
-    {
-      "nombre": "Tarea 1",
-      "descripcion":
-          "Esta es una descripción muy larga para probar cómo se ve en varias líneas dentro de la tabla horizontal.",
-    },
-    {
-      "nombre": "Tarea 2",
-      "descripcion": "Descripción más corta.",
-    },
-  ];
-
-  final List<Map<String, String>> alumnos = [
-    {"nombre": "Ana", "nickname": "ana123"},
-    {"nombre": "Carlos", "nickname": "carlos456"},
-  ];
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-
+    Future<List<Map<String, dynamic>>> tareas = controladores.cargarTareasPlantilla();
+        Future<List<Map<String, dynamic>>> alumnos = controladores.cargarAlumnos();
     return Scaffold(
       body: Column(
         children: [
           // Título superior
           Padding(
-            padding: EdgeInsets.only(
-              bottom: screenHeight * 0.02,
-              top: screenHeight * 0.02,
-            ),
+            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
             child: SizedBox(
               height: screenHeight * 0.1,
               child: Center(
@@ -64,222 +45,177 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
             ),
           ),
 
-          // Tablas horizontales
+          // Tablas de tareas y alumnos
           Expanded(
             child: Row(
               children: [
                 // Tabla de tareas
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: screenHeight * 0.05,
-                        left: screenWidth * 0.03,
-                        right: screenWidth * 0.03,
-                        bottom: screenHeight * 0.1),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Lista de Tareas",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenHeight * 0.03,
-                          ),
-                        ),
-                        Expanded(
-                          child: ListView(
-                            children: [
-                              Table(
-                                defaultVerticalAlignment:
-                                    TableCellVerticalAlignment.intrinsicHeight,
-                                border: TableBorder.all(color: Colors.grey),
-                                columnWidths: const {
-                                  0: FlexColumnWidth(2),
-                                  1: FlexColumnWidth(3),
-                                },
-                                children: [
-                                  // Encabezado
-                                  TableRow(
-                                    decoration:
-                                        const BoxDecoration(color: Colors.green),
-                                    children: [
-                                      _buildCell("Nombre", context,
-                                          isHeader: true),
-                                      _buildCell("Descripción", context,
-                                          isHeader: true),
-                                    ],
-                                  ),
-                                  // Filas dinámicas
-                                  ...tareas.asMap().entries.map((entry) {
-                                    final index = entry.key;
-                                    final task = entry.value;
+  child: FutureBuilder<List<Map<String, dynamic>>>(
+    future: tareas,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      } else if (snapshot.hasData) {
+        List<Map<String, dynamic>> tareasData = snapshot.data!;
 
-                                    return TableRow(
-                                      decoration: BoxDecoration(
-                                        color: tareaSel == index
-                                            ? Colors.yellow
-                                            : Colors.white,
-                                      ),
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              tareaSel = tareaSel == index
-                                                  ? null
-                                                  : index;
-                                            });
-                                          },
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.transparent,
-                                              child: _buildCell(
-                                                  task["nombre"], context)),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              tareaSel = tareaSel == index
-                                                  ? null
-                                                  : index;
-                                            });
-                                          },
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.transparent,
-                                              child: _buildCell(
-                                                  task["descripcion"],
-                                                  context)),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // Botón de Asignar
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        return ListView(
+          children: [
+            Table(
+              border: TableBorder.all(color: Colors.grey),
+              columnWidths: const {
+                0: FlexColumnWidth(1),
+                1: FlexColumnWidth(2),
+              },
+              children: [
+                TableRow(
+                  decoration: const BoxDecoration(color: Colors.green),
                   children: [
-                    ElevatedButton(
-                      onPressed: (tareaSel != null && alumnoSel != null)
-                          ? () {
-                              _mostrarDialogoAsignarTarea(context);
-                              // Acción de asignar tarea
-                              print("Tarea ${tareas[tareaSel!]['nombre']} asignada a ${alumnos[alumnoSel!]['nombre']} con formato: $formatoSel");
-                            }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:Colors.blue,
-                        maximumSize: Size(screenWidth*0.12, screenHeight*0.08),
-                        minimumSize: Size(screenWidth*0.12, screenHeight*0.08),
-                        foregroundColor: Colors.black,
-                      ),
-                      child: Text(
-                        "Asignar Tarea",
-                        style: TextStyle(fontSize: screenHeight * 0.02, fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    _buildCell("Título", context, isHeader: true),
+                    _buildCell("Descripción", context, isHeader: true),
                   ],
                 ),
+                ...tareasData.map((tarea) {
+                  return TableRow(
+                    decoration: BoxDecoration(
+                      color: tareaSel == tarea["idTareaPlantilla"]
+                          ? Colors.yellow
+                          : Colors.white,
+                    ),
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            tareaSel = tareaSel == tarea["idTareaPlantilla"]
+                                ? null
+                                : tarea["idTareaPlantilla"];
+                          });
+                        },
+                        child: _buildCell(tarea["titulo"], context),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            tareaSel = tareaSel == tarea["idTareaPlantilla"]
+                                ? null
+                                : tarea["idTareaPlantilla"];
+                          });
+                        },
+                        child: _buildCell(tarea["descripcion"], context),
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ],
+            ),
+          ],
+        );
+      } else {
+        return Center(child: Text('No hay datos disponibles.'));
+      }
+    },
+  ),
+),
+              // Botón de asignar tarea
+                Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    ElevatedButton(
+      onPressed: (tareaSel != null && alumnoSel != null)
+          ? () {
+              _mostrarDialogoAsignarTarea(context);
+              print(
+                  "Tarea con ID $tareaSel asignada a estudiante con ID $alumnoSel.");
+            }
+          : null,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blue,
+        maximumSize: Size(screenWidth * 0.12, screenHeight * 0.08),
+        minimumSize: Size(screenWidth * 0.12, screenHeight * 0.08),
+        foregroundColor: Colors.black,
+      ),
+      child: Text(
+        "Asignar Tarea",
+        style: TextStyle(
+          fontSize: screenHeight * 0.02,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ],
+),
 
                 // Tabla de alumnos
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: screenHeight * 0.05,
-                        left: screenWidth * 0.03,
-                        right: screenWidth * 0.03,
-                        bottom: screenHeight * 0.1),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Lista de Alumnos",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenHeight * 0.03,
-                          ),
-                        ),
-                        Expanded(
-                          child: ListView(
-                            children: [
-                              Table(
-                                defaultVerticalAlignment:
-                                    TableCellVerticalAlignment.intrinsicHeight,
-                                border: TableBorder.all(color: Colors.grey),
-                                columnWidths: const {
-                                  0: FlexColumnWidth(5),
-                                  1: FlexColumnWidth(5),
-                                },
-                                children: [
-                                  // Encabezado
-                                  TableRow(
-                                    decoration:
-                                        const BoxDecoration(color: Colors.red),
-                                    children: [
-                                      _buildCell("Nombre", context,
-                                          isHeader: true),
-                                      _buildCell("Nickname", context,
-                                          isHeader: true),
-                                    ],
-                                  ),
-                                  // Filas dinámicas
-                                  ...alumnos.asMap().entries.map((entry) {
-                                    final index = entry.key;
-                                    final alumno = entry.value;
+  child: FutureBuilder<List<Map<String, dynamic>>>(
+    future: alumnos,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      } else if (snapshot.hasData) {
+        List<Map<String, dynamic>> alumnosData = snapshot.data!;
 
-                                    return TableRow(
-                                      decoration: BoxDecoration(
-                                        color: alumnoSel == index
-                                            ? Colors.yellow
-                                            : Colors.white,
-                                      ),
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              alumnoSel = alumnoSel == index
-                                                  ? null
-                                                  : index;
-                                            });
-                                          },
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.transparent,
-                                              child: _buildCell(
-                                                  alumno["nombre"], context)),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              alumnoSel = alumnoSel == index
-                                                  ? null
-                                                  : index;
-                                            });
-                                          },
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.transparent,
-                                              child: _buildCell(
-                                                  alumno["nickname"], context)),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+        return ListView(
+          children: [
+            Table(
+              border: TableBorder.all(color: Colors.grey),
+              columnWidths: const {
+                0: FlexColumnWidth(1),
+                1: FlexColumnWidth(2),
+              },
+              children: [
+                TableRow(
+                  decoration: const BoxDecoration(color: Colors.red),
+                  children: [
+                    _buildCell("Nombre", context, isHeader: true),
+                    _buildCell("Nickname", context, isHeader: true),
+                  ],
                 ),
+                ...alumnosData.map((alumno) {
+                  return TableRow(
+                    decoration: BoxDecoration(
+                      color: alumnoSel == alumno["idUsuario"]
+                          ? Colors.yellow
+                          : Colors.white,
+                    ),
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            alumnoSel = alumnoSel == alumno["idUsuario"]
+                                ? null
+                                : alumno["idUsuario"];
+                          });
+                        },
+                        child: _buildCell(alumno["nombre"], context),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            alumnoSel = alumnoSel == alumno["idUsuario"]
+                                ? null
+                                : alumno["idUsuario"];
+                          });
+                        },
+                        child: _buildCell(alumno["nickname"], context),
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ],
+            ),
+          ],
+        );
+      } else {
+        return Center(child: Text('No hay datos disponibles.'));
+      }
+    },
+  ),
+),
               ],
             ),
           ),
@@ -290,8 +226,188 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
       bottomNavigationBar: BarraMenu(selectedIndex: 2),
     );
   }
+  void _mostrarDialogoAsignarTarea(BuildContext context) {
+  DateTime? fechaAsignacion;
+  DateTime? fechaFinalizacion;
+  String formatoPrincipal = 'Texto';
+  List<String> formatosAdicionales = [];
+  List<String> opcionesFormato = ['Texto', 'Audio', 'Imagen', 'Video'];
 
-  Widget _buildCell(dynamic content, BuildContext context,{bool isHeader = false}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      double alto = MediaQuery.of(context).size.height;
+      double ancho = MediaQuery.of(context).size.width;
+
+      return StatefulBuilder(builder: (context, setState) {
+        return AlertDialog(
+          title: Text(
+            'Detalles de Asignación',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: alto * 0.03),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Fecha de Asignación
+                Text('Fecha de Asignación:', style: TextStyle(fontSize: alto * 0.02)),
+                SizedBox(height: alto * 0.02),
+                ElevatedButton(
+                  onPressed: () async {
+                    final DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100),
+                    );
+                    if (pickedDate != null) {
+                      setState(() {
+                        fechaAsignacion = pickedDate;
+                      });
+                    }
+                  },
+                  child: Text(
+                    fechaAsignacion == null
+                        ? 'Seleccionar Fecha'
+                        : '${fechaAsignacion!.day}/${fechaAsignacion!.month}/${fechaAsignacion!.year}',
+                  ),
+                ),
+                SizedBox(height: alto * 0.04),
+
+                // Fecha de Finalización
+                Text('Fecha de Expiración:', style: TextStyle(fontSize: alto * 0.02)),
+                SizedBox(height: alto * 0.02),
+                ElevatedButton(
+                  onPressed: () async {
+                    final DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100),
+                    );
+                    if (pickedDate != null) {
+                      setState(() {
+                        fechaFinalizacion = pickedDate;
+                      });
+                    }
+                  },
+                  child: Text(
+                    fechaFinalizacion == null
+                        ? 'Seleccionar Fecha'
+                        : '${fechaFinalizacion!.day}/${fechaFinalizacion!.month}/${fechaFinalizacion!.year}',
+                  ),
+                ),
+                SizedBox(height: alto * 0.04),
+
+                // Formato Principal
+                Text('Formato Principal:', style: TextStyle(fontSize: alto * 0.02)),
+                SizedBox(height: alto * 0.02),
+                DropdownButton<String>(
+                  value: formatoPrincipal,
+                  items: opcionesFormato.map((String formato) {
+                    return DropdownMenuItem<String>(
+                      value: formato,
+                      child: Text(formato),
+                    );
+                  }).toList(),
+                  onChanged: (String? nuevoFormato) {
+                    setState(() {
+                      formatoPrincipal = nuevoFormato!;
+                      formatosAdicionales.remove(formatoPrincipal);
+                    });
+                  },
+                ),
+                SizedBox(height: alto * 0.04),
+
+                // Formatos Adicionales
+                Text('Formatos Adicionales:', style: TextStyle(fontSize: alto * 0.02)),
+                Column(
+                  children: opcionesFormato.map((String formato) {
+                    final bool isPrincipal = formato == formatoPrincipal;
+                    return CheckboxListTile(
+                      title: Text(formato),
+                      value: isPrincipal ? false : formatosAdicionales.contains(formato),
+                      onChanged: isPrincipal
+                          ? null
+                          : (bool? value) {
+                              setState(() {
+                                if (value == true) {
+                                  formatosAdicionales.add(formato);
+                                } else {
+                                  formatosAdicionales.remove(formato);
+                                }
+                              });
+                            },
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            // Cancelar
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Cancelar'),
+            ),
+            // Confirmar
+            ElevatedButton(
+              onPressed: () async {
+                if (fechaAsignacion != null && fechaFinalizacion != null) {
+                  // Validar y construir formato
+                  String formato = [
+                    formatoPrincipal,
+                    ...formatosAdicionales
+                  ].join(", ").trim();
+
+                  // Verificar que el formato no esté vacío
+                  if (formato.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Selecciona al menos un formato.")),
+                    );
+                    return;
+                  }
+
+                  final bool resultado = await controladores.asignarTarea(
+                    tareaSel!,
+                    alumnoSel!,
+                    tareaSel!, // idTareaPlantilla
+                    formato, // Formato combinado
+                    fechaAsignacion!.toIso8601String(),
+                    fechaFinalizacion!.toIso8601String(),
+                    "", // fotoResultado
+                    "", // valoración
+                    "", // miniatura
+                  );
+
+                  Navigator.of(context).pop();
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        resultado
+                            ? "Tarea asignada exitosamente."
+                            : "Error al asignar la tarea.",
+                      ),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Selecciona ambas fechas.")),
+                  );
+                }
+              },
+              child: Text('Confirmar'),
+            ),
+          ],
+        );
+      });
+    },
+  );
+}
+
+  Widget _buildCell(dynamic content, BuildContext context,
+      {bool isHeader = false}) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Padding(
@@ -311,211 +427,8 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
               softWrap: true,
             ),
     );
+    
   }
-
-  void _mostrarDialogoAsignarTarea(BuildContext context) {
-    DateTime? fechaAsignacion;
-    DateTime? fechaFinalizacion;
-    String formatoPrincipal = 'Audio';
-    List<String> formatosAdicionales = [];
-    List<String> opcionesFormato = ['Audio', 'Texto', 'Imagen', 'Pictograma', 'Video'];
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        double alto = MediaQuery.of(context).size.height;
-        double ancho = MediaQuery.of(context).size.width;
-        return StatefulBuilder(builder: (context, setState) {
-          return AlertDialog(
-            title: Text(
-              'Detalles de Asignación',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: alto*0.06),
-            ),
-            content: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Fecha de Asignación
-                  Text('Fecha Asignación:', style: TextStyle(fontSize: alto*0.02),),
-                  SizedBox(height: alto*0.02),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                      );
-                      if (pickedDate != null) {
-                        setState(() {
-                          fechaAsignacion = pickedDate;
-                        });
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      maximumSize: Size(ancho*0.13, alto*0.05),
-                      minimumSize: Size(ancho*0.13, alto*0.05),
-                    ),
-                    child: Text(fechaAsignacion == null
-                        ? 'Seleccionar Fecha'
-                        : '${fechaAsignacion!.day}/${fechaAsignacion!.month}/${fechaAsignacion!.year}',
-                        style: TextStyle(color: Colors.black, fontSize: alto*0.02),),
-                  ),
-                  SizedBox(height: alto*0.04),
-
-                  // Fecha de Finalización
-                  Text('Fecha Finalización:', style: TextStyle(fontSize: alto*0.02),),
-                  SizedBox(height: alto*0.02),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                      );
-                      if (pickedDate != null) {
-                        setState(() {
-                          fechaFinalizacion = pickedDate;
-                        });
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      maximumSize: Size(ancho*0.13, alto*0.05),
-                      minimumSize: Size(ancho*0.13, alto*0.05),
-                    ),
-                    child: Text(fechaFinalizacion == null
-                        ? 'Seleccionar Fecha'
-                        : '${fechaFinalizacion!.day}/${fechaFinalizacion!.month}/${fechaFinalizacion!.year}',
-                        style: TextStyle(color: Colors.black, fontSize: alto*0.02),),
-                  ),
-                  SizedBox(height: alto*0.04),
-
-                  // Formato Principal
-                  Text('Formato Principal:', style: TextStyle(fontSize: alto*0.02),),
-                  SizedBox(height: alto*0.02),
-                  SizedBox(
-                    height: alto*0.08,
-                    child: DropdownButton<String>(
-                      value: formatoPrincipal,
-                      items: opcionesFormato.map((String formato) {
-                        return DropdownMenuItem<String>(
-                          value: formato,
-                          child: Text(formato, style: TextStyle(fontSize: alto*0.02),),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          formatoPrincipal = newValue!;
-                          formatosAdicionales.remove(formatoPrincipal);
-                        });
-                      },
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: alto * 0.02,
-                        color: Colors.black,
-                      ),
-                      focusColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        size: alto * 0.04,
-                      ),
-                      borderRadius:
-                          BorderRadius.circular(ancho * 0.01),
-                      underline: Container(height: 0,),
-                    ),
-                  ),
-                  SizedBox(height: alto*0.04),
-
-                  // Formatos Adicionales
-                  Text('Formatos Adicionales:', style: TextStyle(fontSize: alto*0.02),),
-                  SizedBox(height: alto*0.02),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: opcionesFormato.map((String formato) {
-                      final bool isPrincipal = formato == formatoPrincipal;
-                      return Transform.scale(
-                        scale: alto*0.0015,
-                        child: CheckboxListTile(
-                          title: Text(
-                            formato,
-                            style: TextStyle(
-                              fontSize: alto * 0.02,
-                            ),
-                          ),
-                          value: isPrincipal
-                              ? false
-                              : formatosAdicionales.contains(formato),
-                          onChanged: isPrincipal
-                              ? null
-                              : (bool? value) {
-                                  setState(() {
-                                    if (value == true) {
-                                      formatosAdicionales.add(formato);
-                                    } else {
-                                      formatosAdicionales.remove(formato);
-                                    }
-                                  });
-                                },
-                          controlAffinity: ListTileControlAffinity.leading,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              // Botón Cancelar
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Cancelar', style: TextStyle(fontSize: alto*0.03),),
-              ),
-              // Botón Confirmar
-              ElevatedButton(
-                onPressed: () {
-                  // Acción de confirmación
-                  if (fechaAsignacion != null && fechaFinalizacion != null) {
-                    print('Fecha Asignación: $fechaAsignacion');
-                    print('Fecha Finalización: $fechaFinalizacion');
-                    print('Formato Principal: $formatoPrincipal');
-                    print('Formatos Adicionales: $formatosAdicionales');
-                    Navigator.of(context).pop();
-                  } else {
-                    // Mostrar un error si las fechas no se han seleccionado
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text("Error", style: TextStyle(fontSize: alto*0.03)),
-                          content: Text("Por favor selecciona ambas fechas.", style: TextStyle(fontSize: alto*0.02)),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text("Aceptar", style: TextStyle(fontSize: alto*0.02)),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  maximumSize: Size(ancho*0.13, alto*0.08),
-                  minimumSize: Size(ancho*0.05, alto*0.08),
-                ),
-                child: Text('Confirmar',style: TextStyle(fontSize: alto*0.03),),
-              ),
-            ],
-          );
-        });
-      },
-    );
-  }
+  
+  
 }
