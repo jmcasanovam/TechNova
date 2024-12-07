@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 
 class BarraMenu extends StatelessWidget {
   final int selectedIndex;
-  // final Function(int) onItemTapped;
   
-  BarraMenu({required this.selectedIndex, 
-  // required this.onItemTapped
-
-  });
+  BarraMenu({required this.selectedIndex,});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +16,7 @@ class BarraMenu extends StatelessWidget {
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(5, (index) {
+        children: List.generate(6, (index) {
           return SizedBox(
             width: screenWidth* 0.1,
             height: screenHeight * 0.15,
@@ -77,8 +73,10 @@ class BarraMenu extends StatelessWidget {
       case 2:
         return 'Asignar tarea';
       case 3:
-        return 'Chats';
+        return 'Menu';
       case 4:
+        return 'Chats';
+      case 5:
         return 'Mi perfil';
       default:
         return '';
@@ -93,8 +91,10 @@ class BarraMenu extends StatelessWidget {
       case 2:
         return 'images/tarea.png';
       case 3:
-        return 'images/chat.png';
+        return 'images/menus.png';
       case 4:
+        return 'images/chat.png';
+      case 5:
         return 'images/usuario.png';
       default:
         return '';
@@ -106,12 +106,14 @@ class BarraMenu extends StatelessWidget {
       case 0:
         return '/adminUsuarios';
       case 1:
-        return '/adminUsuarios';
+        return '/adminCreadorTareas';
       case 2:
         return '/adminAsignarTarea';
       case 3:
-        return '/adminUsuarios';
+        return '/adminMenus';
       case 4:
+        return '/adminUsuarios';
+      case 5:
         return '/adminUsuarios';
       default:
         return '';

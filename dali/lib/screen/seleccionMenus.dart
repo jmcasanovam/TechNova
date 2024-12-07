@@ -322,6 +322,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                       setState((){
                         showDialog(
                           context: context,
+                          barrierDismissible: false,
                           builder: (BuildContext context) {
                             return AlertDialog(
                               content: Column(

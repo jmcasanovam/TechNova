@@ -1,13 +1,10 @@
+import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/adminAlumnoTareas.dart';
 import 'package:dali/screen/adminCreadorPerfil.dart';
 import 'package:dali/screen/adminEditarPerfil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import '../widget/barraMenu.dart';
-
-
-
 
 class AdminUsuarios extends StatefulWidget {
   @override
@@ -16,44 +13,56 @@ class AdminUsuarios extends StatefulWidget {
 
 class _AdminUsuariosState extends State<AdminUsuarios> {
   String? _ordenActual = 'Ordenar A-Z';
-  List<String> nombres = ['Carlos', 'Ana', 'Luis', 'María', 'Pedro','Carlos', 'Ana', 'Luis', 'María', 'Pedro'];
-  
+  List<Map<String, dynamic>> estudiantes = []; // Lista para estudiantes
+  final Controladores controladores = Controladores(); // Instancia de controladores
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    _ordenarLista();
+    _cargarEstudiantes(); // Carga los estudiantes al iniciar
+  }
+
+  Future<void> _cargarEstudiantes() async {
+    try {
+      final data = await controladores.cargarNicknamesEstudiantes(); // Llama a la función desde controladores
+      setState(() {
+        estudiantes = data;
+        _ordenarLista();
+      });
+    } catch (e) {
+      print('Error al cargar estudiantes: $e');
+    }
   }
 
   void _ordenarLista() {
     setState(() {
       if (_ordenActual == 'Ordenar A-Z') {
-        nombres.sort((a, b) => a.compareTo(b));
+        estudiantes.sort((a, b) => a['nickname'].compareTo(b['nickname']));
       } else {
-        nombres.sort((a, b) => b.compareTo(a));
+        estudiantes.sort((a, b) => b['nickname'].compareTo(a['nickname']));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _ordenActual;
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: screenHeight * 0.02, top: screenHeight * 0.02,),
+            padding: EdgeInsets.only(
+              bottom: screenHeight * 0.02,
+              top: screenHeight * 0.02,
+            ),
             child: SizedBox(
               height: screenHeight * 0.1,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  
                   Expanded(
                     child: Center(
                       child: FittedBox(
@@ -71,28 +80,28 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                     ),
                   ),
                 ],
-              )
+              ),
             ),
           ),
-
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: screenWidth * 0.05, left: screenWidth * 0.05),
+              padding: EdgeInsets.only(
+                right: screenWidth * 0.05,
+                left: screenWidth * 0.05,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Botones de "Ordenar" y "Crear Perfil"
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      //Boton desplegable ordenar
                       Container(
                         alignment: Alignment.center,
-                        width: screenWidth*0.1,
+                        width: screenWidth * 0.1,
                         height: screenHeight * 0.06,
-                        decoration: BoxDecoration(  
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                          color: Colors.red, // Color de fondo del contenedor
+                          color: Colors.red,
                         ),
                         child: DropdownButton<String>(
                           value: _ordenActual,
@@ -114,20 +123,22 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                             fontFamily: 'Roboto',
                             fontSize: screenHeight * 0.02,
                           ),
-                          icon: Icon(Icons.arrow_drop_down, color: Colors.white, size: screenWidth*0.02,), 
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white,
+                            size: screenWidth * 0.02,
+                          ),
                           dropdownColor: Colors.red,
-                          borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
-                          underline: Container(height: 0,),
-                          // padding: EdgeInsets.only(left: screenWidth*0.02),
+                          borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                          underline: Container(
+                            height: 0,
+                          ),
                         ),
                       ),
-
-                      //Boton de crear perfil
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          // fixedSize: Size(screenWidth*0.1, screenHeight * 0.06),
-                          minimumSize: Size(screenWidth*0.1, screenHeight * 0.06),
-                          maximumSize: Size(screenWidth*0.1, screenHeight * 0.06),
+                          minimumSize: Size(screenWidth * 0.1, screenHeight * 0.06),
+                          maximumSize: Size(screenWidth * 0.1, screenHeight * 0.06),
                           backgroundColor: Colors.red,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(screenWidth * 0.01),
@@ -137,10 +148,11 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminCreadorPerfil()),
+                              builder: (context) => AdminCreadorPerfil(),
+                            ),
                           );
                         },
-                        icon: Icon(Icons.add, color: Colors.white,size: screenWidth*0.02),
+                        icon: Icon(Icons.add, color: Colors.white, size: screenWidth * 0.02),
                         label: Text(
                           'Crear perfil',
                           style: TextStyle(
@@ -152,38 +164,43 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                       ),
                     ],
                   ),
-                  
                   SizedBox(height: screenHeight * 0.02),
-
-                  // Lista de alumnos
-                  
-
-                  Text("Nickname", style: TextStyle(
-                            fontSize: screenHeight * 0.03,
-                            fontFamily: 'Roboto',
-                            color: Colors.black,
-                          ),),
-                  Divider(color: Colors.black, thickness: screenHeight*0.006,),  
+                  Text(
+                    "Nickname",
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.03,
+                      fontFamily: 'Roboto',
+                      color: Colors.black,
+                    ),
+                  ),
+                  Divider(color: Colors.black, thickness: screenHeight * 0.006),
                   Expanded(
                     child: Container(
-                      decoration: BoxDecoration(  
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                        color: Colors.grey[200], // Color de fondo del contenedor
+                        color: Colors.grey[200],
                       ),
                       child: ListView.builder(
-                        padding: EdgeInsets.only(top: screenHeight * 0.01, bottom: screenHeight * 0.01, left: screenWidth * 0.01, right: screenWidth * 0.01),
-                        itemCount: nombres.length, 
+                        padding: EdgeInsets.all(screenWidth * 0.01),
+                        itemCount: estudiantes.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.only(bottom: screenHeight * 0.01),
                             child: Container(
-                              // height: screenHeight*0.07,
                               decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius: BorderRadius.circular(screenWidth * 0.02),
                               ),
                               child: ListTile(
-                                title: Text(nombres[index], style: TextStyle(fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold,fontFamily: 'Roboto', color: Colors.white)),
+                                title: Text(
+                                  estudiantes[index]['nickname'],
+                                  style: TextStyle(
+                                    fontSize: screenHeight * 0.03,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Roboto',
+                                    color: Colors.white,
+                                  ),
+                                ),
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -192,29 +209,49 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => AdminAlumnoTareas(nickname: nombres[index]),
+                                            builder: (context) => AdminAlumnoTareas(
+                                              nickname: estudiantes[index]['nickname'],
+                                            ),
                                           ),
                                         );
                                       },
                                       style: TextButton.styleFrom(
-                                        backgroundColor: Colors.red[100]
+                                        backgroundColor: Colors.red[100],
                                       ),
-                                      child: Text("Tareas", style: TextStyle(fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold,fontFamily: 'Roboto', color: Colors.black)),
+                                      child: Text(
+                                        "Tareas",
+                                        style: TextStyle(
+                                          fontSize: screenHeight * 0.03,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Roboto',
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
-                                    SizedBox(width: screenWidth*0.01,),
+                                    SizedBox(width: screenWidth * 0.01),
                                     TextButton(
                                       onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => AdminEditarPerfil(nickname: nombres[index]),
+                                            builder: (context) => AdminEditarPerfil(
+                                              nickname: estudiantes[index]['nickname'],
+                                            ),
                                           ),
                                         );
                                       },
                                       style: TextButton.styleFrom(
-                                        backgroundColor: Colors.red[100]
+                                        backgroundColor: Colors.red[100],
                                       ),
-                                      child: Text("Editar perfil", style: TextStyle(fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold,fontFamily: 'Roboto',  color: Colors.black)),
+                                      child: Text(
+                                        "Editar perfil",
+                                        style: TextStyle(
+                                          fontSize: screenHeight * 0.03,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Roboto',
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -231,9 +268,7 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
           ),
         ],
       ),
-      // Barra de menú
-      bottomNavigationBar: BarraMenu(selectedIndex: 0,),
+      bottomNavigationBar: BarraMenu(selectedIndex: 0),
     );
   }
 }
-

@@ -100,7 +100,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                                   // Encabezado
                                   TableRow(
                                     decoration:
-                                        const BoxDecoration(color: Colors.red),
+                                        const BoxDecoration(color: Colors.green),
                                     children: [
                                       _buildCell("Nombre", context,
                                           isHeader: true),
