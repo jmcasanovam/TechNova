@@ -23,15 +23,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
        home: const SplashScreen(),
-      // home: AdminCreadorTareas(),
-      // home: AdminTareasPlantilla(),
-      // routes: {
-      //   '/adminUsuarios': (context) => AdminUsuarios(),
-      //   '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
-      //   '/adminAsignarTarea': (context) => AdminAsignarTareas(),
-      //   '/adminMenus' : (context) => AdminMenus(),
+      //home: AdminCreadorTareas(),
+      //home: AdminTareasPlantilla(),
+      routes: {
+        '/adminUsuarios': (context) => AdminUsuarios(),
+        '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
+        '/adminAsignarTarea': (context) => AdminAsignarTareas(),
+        '/adminMenus' : (context) => AdminMenus(),
 
-      // },
+      },
       debugShowCheckedModeBanner: false,
     );
   }

@@ -264,16 +264,11 @@ Future<List<Map<String, dynamic>>> cargarTareasPlantilla() async {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body);  // Esto es un Map
 
-      // Filtrar solo nombre y descripción
-      List<Map<String, dynamic>> tareas = [];
-      for (var tarea in data) {
-        tareas.add({
-          'nombre': tarea['nombre'],  // Asumiendo que 'nombre' es el nombre de la tarea
-          'descripcion': tarea['descripcion'],  // Asumiendo que 'descripcion' es la descripción de la tarea
-        });
-      }
+      // Acceder a la clave 'tareasPlantilla' que contiene la lista de tareas
+      List<Map<String, dynamic>> tareas = List<Map<String, dynamic>>.from(data['tareasPlantilla']);
+
       print('Tareas cargadas: ${tareas.length}');
       return tareas;  // Retorna las tareas con solo nombre y descripción
     } else {
@@ -324,25 +319,20 @@ Future<List<Map<String, dynamic>>> cargarNicknamesEstudiantes() async {
 
 // Función para cargar todos los nombres y nickname de los estudiantes para el ADMIN
 Future<List<Map<String, dynamic>>> cargarAlumnos() async {
-  final url = Uri.parse('http://127.0.0.1:5000/get_nombre_nickname_estudiantes');  // Asegúrate de que la URL es correcta
+ final url = Uri.parse('http://127.0.0.1:5000/get_nombre_nickname_estudiantes');  // Asegúrate de que la URL es correcta
 
   try {
     // Realiza la solicitud GET
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body);  // Esto es un Map
 
-      // Filtrar solo nombre y nickname
-      List<Map<String, dynamic>> estudiantes = [];
-      for (var estudiante in data) {
-        estudiantes.add({
-         // 'nombre': estudiante['nombre'],  // Asumiendo que 'nombre' es el nombre del alumno
-          'nickname': estudiante['nickname'],  // Asumiendo que 'nickname' es el nickname del alumno
-        });
-      }
+      // Acceder a la clave 'estudiantes' que contiene la lista de estudiantes
+      List<Map<String, dynamic>> estudiantes = List<Map<String, dynamic>>.from(data['estudiantes']);
+
       print('Estudiantes cargados: ${estudiantes.length}');
-      return estudiantes;  // Retorna los alumnos con solo nombre y nickname
+      return estudiantes;  // Retorna los estudiantes con solo nombre, nickname y idEstudiante
     } else {
       final error = jsonDecode(response.body);
       print('Error: ${error['error']}');
@@ -354,7 +344,7 @@ Future<List<Map<String, dynamic>>> cargarAlumnos() async {
   }
 }
 // Función para asignar una tarea por el ADMIN
-Future<bool> asignarTarea(int idTareaAsignada, int idEstudiante, int idTareaPlantilla, String completada, String formato, String fechaAsignacion, String fechaExpiracion, String fotoResultado, String valoracion, String miniatura) async {
+Future<bool> asignarTarea(int idEstudiante, int idTareaPlantilla, int completada, String formato, String fechaAsignacion, String fechaExpiracion, String fotoResultado, String valoracion, String miniatura) async {
   final url = Uri.parse('http://127.0.0.1:5000/asignar_tarea');  // Asegúrate de que la URL es correcta
 
   try {
@@ -363,7 +353,7 @@ Future<bool> asignarTarea(int idTareaAsignada, int idEstudiante, int idTareaPlan
       url,
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        'idTareaAsignada': idTareaAsignada,
+        //'idTareaAsignada': idTareaAsignada,
         'idEstudiante': idEstudiante,
         'idTareaPlantilla': idTareaPlantilla,
         'completada': completada,
