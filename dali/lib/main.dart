@@ -22,16 +22,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF44034)),
         useMaterial3: true,
       ),
-      // home: const SplashScreen(),
+       home: const SplashScreen(),
       // home: AdminCreadorTareas(),
-      home: AdminTareasPlantilla(),
-      routes: {
-        '/adminUsuarios': (context) => AdminUsuarios(),
-        '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
-        '/adminAsignarTarea': (context) => AdminAsignarTareas(),
-        '/adminMenus' : (context) => AdminMenus(),
+      // home: AdminTareasPlantilla(),
+      // routes: {
+      //   '/adminUsuarios': (context) => AdminUsuarios(),
+      //   '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
+      //   '/adminAsignarTarea': (context) => AdminAsignarTareas(),
+      //   '/adminMenus' : (context) => AdminMenus(),
 
-      },
+      // },
       debugShowCheckedModeBanner: false,
     );
   }

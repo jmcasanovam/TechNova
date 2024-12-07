@@ -112,6 +112,7 @@ class AdminAlumnoTareas extends StatelessWidget {
                             _buildCell("Fecha Expiración", context, isHeader: true),
                             _buildCell("Foto Resultado", context, isHeader: true),
                             _buildCell("Valoración", context, isHeader: true),
+                            _buildCell("Fecha Completada", context, isHeader: true),
                           ],
                         ),
                         ...tareasData.map((tarea) => TableRow(
@@ -125,6 +126,7 @@ class AdminAlumnoTareas extends StatelessWidget {
                                 _buildCell(tarea["formato"], context),
                                 _buildCell(tarea["fechaAsignacion"], context),
                                 _buildCell(tarea["fechaExpiracion"], context),
+                                
                                 _buildCell(
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
@@ -139,6 +141,7 @@ class AdminAlumnoTareas extends StatelessWidget {
                                   context,
                                 ),
                                 _buildCell(tarea["valoracion"], context),
+                                _buildCell(tarea["fechaCompletada"], context),
                               ],
                             )),
 
