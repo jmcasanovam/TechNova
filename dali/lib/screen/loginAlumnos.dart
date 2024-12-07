@@ -44,9 +44,12 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
         actions: [
 
           // Icono de cerrar sesión
-          Padding(
-            padding: EdgeInsets.only(right: screenWidth *0.05, top: screenHeight*0.02),
-            child: const BotonCerrarSesion()
+          Semantics(
+            label: 'Cerrar Sesión',
+            child: Padding(
+              padding: EdgeInsets.only(right: screenWidth *0.05, top: screenHeight*0.02),
+              child: const BotonCerrarSesion()
+            ),
           )          
         ],
         backgroundColor: Colors.transparent,
@@ -60,13 +63,16 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Flecha izquierda
-                IconButton(
-                  icon: Image.asset('images/left-arrow-accesible.png', width: screenWidth * 0.08,),
-                  onPressed: () {
-                    setState(() {
-                      if (currentPage > 0) currentPage--;
-                    });
-                  },
+                Semantics(
+                  label: 'Flecha izquierda',
+                  child: IconButton(
+                    icon: Image.asset('images/left-arrow-accesible.png', width: screenWidth * 0.08,),
+                    onPressed: () {
+                      setState(() {
+                        if (currentPage > 0) currentPage--;
+                      });
+                    },
+                  ),
                 ),
                 
                 // Grid de imágenes y nombres
@@ -83,49 +89,52 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                       final itemIndex = currentPage * 8 + index;
                       return Column(
                         children: [
-                          FilledButton(
-                            style: FilledButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(screenWidth * 0.02), side:BorderSide(color: Colors.black, width: screenWidth * 0.001)),
-                              backgroundColor: Colors.transparent,
-                              minimumSize: Size(screenWidth * 0.7/4, screenHeight * 0.6/2),
-                              maximumSize: Size(screenWidth * 0.7/4, screenHeight * 0.6/2),
-                              
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PasswordAlumnos(
-                                    image: imagesData[itemIndex]['image']!,
-                                    username: imagesData[itemIndex]['name']!,
-                                    // name: imagesData[itemIndex]['name']!,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                              Image.asset(
-                                imagesData[itemIndex]['image']!,
-                                height: screenHeight * 0.6/2*0.8,
-                                width: screenWidth * 0.7/4,
+                          Semantics(
+                            label: "Perfil de $imagesData[itemIndex]['name']" ,
+                            child: FilledButton(
+                              style: FilledButton.styleFrom(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(screenWidth * 0.02), side:BorderSide(color: Colors.black, width: screenWidth * 0.001)),
+                                backgroundColor: Colors.transparent,
+                                minimumSize: Size(screenWidth * 0.7/4, screenHeight * 0.6/2),
+                                maximumSize: Size(screenWidth * 0.7/4, screenHeight * 0.6/2),
+                                
                               ),
-                              SizedBox(
-                                height: screenHeight * 0.6/2*0.1,
-                                child : FittedBox(
-                                  child: Text(
-                                    imagesData[itemIndex]['name']!,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: screenHeight * 0.05,
-                                      fontFamily: 'OpenSans',
-                                      ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PasswordAlumnos(
+                                      image: imagesData[itemIndex]['image']!,
+                                      username: imagesData[itemIndex]['name']!,
+                                      // name: imagesData[itemIndex]['name']!,
                                     ),
+                                  ),
+                                );
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                Image.asset(
+                                  imagesData[itemIndex]['image']!,
+                                  height: screenHeight * 0.6/2*0.8,
+                                  width: screenWidth * 0.7/4,
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.6/2*0.1,
+                                  child : FittedBox(
+                                    child: Text(
+                                      imagesData[itemIndex]['name']!,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: screenHeight * 0.05,
+                                        fontFamily: 'OpenSans',
+                                        ),
+                                      ),
+                                  )
                                 )
-                              )
-                            ],)
+                              ],)
+                            ),
                           )
                         ],
                       );
@@ -135,13 +144,16 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                 ),
 
                 // Flecha derecha
-                IconButton(
-                  icon: Image.asset('images/right-arrow-accesible.png', width: screenWidth * 0.08,),
-                  onPressed: () {
-                    setState(() {
-                      if ((currentPage + 1) * 8 < imagesData.length) currentPage++;
-                    });
-                  },
+                Semantics(
+                  label: 'Flecha derecha',
+                  child: IconButton(
+                    icon: Image.asset('images/right-arrow-accesible.png', width: screenWidth * 0.08,),
+                    onPressed: () {
+                      setState(() {
+                        if ((currentPage + 1) * 8 < imagesData.length) currentPage++;
+                      });
+                    },
+                  ),
                 ),
               ],
             ),

@@ -22,7 +22,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
   String? contrasenaSeleccionada2 = 'Cuadrado';
   String? contrasenaSeleccionada3 = 'Cuadrado';
 
-  List<String> formatos = ['Texto', 'Video', 'Imagen', 'Pictograma'];
+  List<String> formatos = ['Texto', 'Video', 'Imagen', 'Pictograma', 'Audio'];
   List<String> preferenciasNotificacion = ['Nada', 'Audio', 'Texto'];
   List<String> opcionesContrasena = ['Cuadrado', 'Triángulo', 'Círculo', 'Cruz'];
   String foto = 'images/panda.png';

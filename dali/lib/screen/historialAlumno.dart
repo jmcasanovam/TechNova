@@ -1,5 +1,6 @@
 import 'package:dali/models/tareaAsignada.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 
 class Historial extends StatefulWidget {
@@ -24,11 +25,30 @@ class _HistorialState extends State<Historial> {
   }
 
   List<List<TareaAsignada>> dias = [[
-    TareaAsignada('¡Pongamos el microondas!', 'images/comedor.png', ),
-    TareaAsignada ('Vamos a lavarnos las manos', 'images/feliz.png')],
-  [TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'), TareaAsignada ('Vamos a lavarnos las manos', 'images/feliz.png'), TareaAsignada('Tomar comandas', 'images/comedor.png')]];
+      TareaAsignada('¡Pongamos el microondas!', 'images/comedor.png'),
+      TareaAsignada('Vamos a lavarnos las manos', 'images/feliz.png'),
+    ],[
+      TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'),
+      TareaAsignada('Vamos a lavarnos las manos', 'images/feliz.png'),
+      TareaAsignada('Tomar comandas', 'images/comedor.png'),
+    ],
+    [
+      TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'),
+      TareaAsignada('Vamos a lavarnos las manos', 'images/feliz.png'),
+      TareaAsignada('Tomar comandas', 'images/comedor.png'),
+      TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'),
+      TareaAsignada('Vamos a lavarnos las manos', 'images/feliz.png'),
+            TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'),
+      TareaAsignada('Vamos a lavarnos las manos', 'images/feliz.png'),
+            TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png'),
+      TareaAsignada('Vamos a lavarnos las manos', 'images/feliz.png'),
+    ]
+  ];
+
   int dia_actual = 0;
-  int dias_totales = 2;
+  int dias_totales = 3;
+  int hoy = 0; //constante (porque el día de hoy siempre será el primero)
+  List<String> fechas = [DateFormat('dd/MM/yy').format(DateTime(2024, 02, 12)), DateFormat('dd/MM/yy').format(DateTime(2024, 02, 11)), DateFormat('dd/MM/yy').format(DateTime(2024, 02, 10))];
 
   int pagina_actual = 0; //página dentro del día
 
@@ -79,20 +99,35 @@ class _HistorialState extends State<Historial> {
                       },
                       child: Container(
                         width: screenWidth * 0.9,
-                        height: screenHeight * 0.68,
+                        //height: screenHeight * 0.61,
                         decoration: BoxDecoration(
                           color: const Color.fromRGBO(176, 211, 255, 1),
                           borderRadius: BorderRadius.circular(screenWidth * 0.07),
                         ),
                         child: Column(
                           children: [
-                            SizedBox(height: screenWidth* 0.01),
                             SizedBox(
                               width: screenWidth * 0.9,
-                              height: screenHeight * 0.65,
+                              height: screenHeight * 0.6,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  SizedBox( //flecha arriba
+                                    width: screenWidth * 0.06,
+                                    child:pagina_actual==0?null:IconButton(
+                                    icon: Image.asset(
+                                      'images/flecha-arriba.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    iconSize: screenWidth * 0.05,
+                                    onPressed: () {
+                                      setState(() {
+                                        if (pagina_actual > 0)
+                                          pagina_actual--; // Navegar a la página anterior
+                                      });
+                                    },
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -102,7 +137,7 @@ class _HistorialState extends State<Historial> {
                                       //Flecha para la izquierda
                                         SizedBox(
                                           width: screenWidth * 0.1,
-                                          child: IconButton(
+                                          child:dia_actual==hoy?null:IconButton(
                                           icon: Image.asset(
                                             'images/flecha-izquierda.png',
                                             fit: BoxFit.cover,
@@ -110,12 +145,12 @@ class _HistorialState extends State<Historial> {
                                           iconSize: screenWidth * 0.1,
                                           onPressed: () {
                                             setState(() {
-                                              if (pagina_actual > 0) {
-                                                pagina_actual--; // Navegar a la página anterior
+                                              if (dia_actual > 0) {
+                                                dia_actual--; // Navegar a la página anterior
                                               } else {
-                                                dia_actual = (dia_actual - 1 + dias_totales) % dias_totales; // Navegar al día anterior
-                                                pagina_actual = paginarTareas(dias[dia_actual], 3).length - 1; // Ir a la última página del nuevo día
+                                                dia_actual = (dia_actual - 1 + dias_totales) % dias_totales;
                                               }
+                                                pagina_actual = 0; // Ir a la primera página del nuevo día
                                             });
                                           },
                                           ),
@@ -137,7 +172,7 @@ class _HistorialState extends State<Historial> {
                                                       width: screenWidth*0.05,
                                                     ),
                                                     Text(
-                                                      dia_actual == 0 ? "HOY" : "AYER",
+                                                      dia_actual == hoy ? "HOY" : fechas[dia_actual],
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: screenWidth * 0.03,
@@ -147,7 +182,7 @@ class _HistorialState extends State<Historial> {
                                                   ],
                                                 ),
                                                 
-                                                for (var tarea in paginarTareas(dias[dia_actual], 3)[pagina_actual])
+                                                //for (var tarea in paginarTareas(dias[dia_actual], 1)[pagina_actual])
                                                   Column(
                                                     children: [
                                                       Row(
@@ -156,7 +191,7 @@ class _HistorialState extends State<Historial> {
                                                           ClipRRect(
                                                             borderRadius: BorderRadius.circular(screenWidth * 0.07),
                                                             child: Image.asset(
-                                                              tarea.imagen,
+                                                              dias[dia_actual][pagina_actual].imagen,
                                                               width: screenWidth * 0.1,
                                                               height: screenHeight * 0.1,
                                                             ),
@@ -164,7 +199,7 @@ class _HistorialState extends State<Historial> {
                                                           SizedBox(width: screenWidth * 0.02),
                                                           Expanded(
                                                             child: Text(
-                                                              tarea.nombre,
+                                                              dias[dia_actual][pagina_actual].nombre,
                                                               style: TextStyle(
                                                                 color: Colors.white,
                                                                 fontSize: screenWidth * 0.03,
@@ -187,7 +222,7 @@ class _HistorialState extends State<Historial> {
                                       //Flecha para la derecha
                                       SizedBox(
                                           width: MediaQuery.of(context).size.width * 0.1,
-                                          child: IconButton(
+                                          child: dia_actual==dias_totales-1?null:IconButton(
                                           icon: Image.asset(
                                             'images/flecha-derecha.png',
                                             fit: BoxFit.cover,
@@ -195,18 +230,35 @@ class _HistorialState extends State<Historial> {
                                           iconSize: MediaQuery.of(context).size.width * 0.1,
                                           onPressed: () {
                                             setState(() {
-                                              List<List<TareaAsignada>> paginas = paginarTareas(dias[dia_actual], 3);
-                                              if (pagina_actual < paginas.length - 1) {
-                                                pagina_actual++; // Navegar a la siguiente página
+                                              if (dia_actual < dias.length - 1) {
+                                                dia_actual++; // Navegar a la siguiente página
                                               } else {
                                                 dia_actual = (dia_actual + 1) % dias_totales; // Navegar al siguiente día
-                                                pagina_actual = 0; // Ir a la primera página del nuevo día
                                               }
+                                              pagina_actual = 0; // Ir a la primera página del nuevo día
+
                                             });
                                           },
                                           ),
                                         ),
                                     ],
+                                  ),
+                                  SizedBox( //flecha hacia abajo
+                                    width: screenWidth * 0.06,
+                                    child:pagina_actual==dias[dia_actual].length - 1?null:IconButton(
+                                    icon: Image.asset(
+                                      'images/flecha-abajo.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                    iconSize: screenWidth * 0.05,
+                                    onPressed: () {
+                                      setState(() {
+                                        List<List<TareaAsignada>> paginas = paginarTareas(dias[dia_actual], 1);
+                                        if (pagina_actual < paginas.length - 1)
+                                          pagina_actual++; // Navegar a la página siguiente
+                                      });
+                                    },
+                                    ),
                                   ),
                                 ],
                               ),
@@ -216,7 +268,7 @@ class _HistorialState extends State<Historial> {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             )));
   }

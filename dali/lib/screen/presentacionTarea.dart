@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:dali/models/tareaAsignada.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +14,8 @@ class PresentacionTarea extends StatefulWidget{
 
 class _PresentacionTareaState extends State<PresentacionTarea>{
 
+  late ConfettiController confettiController;
+
   void volverAtras(BuildContext context) {
     Navigator.of(context).pop();
   }
@@ -21,7 +26,6 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
   int pasos_total = 2;
   String paso_final = 'images/feliz.png';
 
-  int formato_actual = 0; //inicializar al formato por defecto del alumno
 
   List<String> pasos_img = ['images/logo_technova_con_fondo.png', 'images/hoy.png', 'images/logoapp_general.png'];
   List<String> pasos_vid = ['images/vídeo en línea.png', 'images/vídeo en línea.png', 'images/vídeo en línea.png',];
@@ -29,11 +33,30 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
   List<String> pasos_audio = ['images/herramienta-de-audio-con-altavoz.png', 'images/herramienta-de-audio-con-altavoz.png', 'images/herramienta-de-audio-con-altavoz.png',];
   List<String> pasos_texto = ["Abre el microondas.", "Dale al botón.", "Cierra el microondas."];
 
-  
+  String formato_princ = "img";
+  List<String> formatos_adic = ["txt", "pic", "vid"];
+  String formato_actual = ""; //inicializar al formato por defecto del alumno
+
+  bool hay_formato(String formato){
+    if(formato == formato_princ){
+      return true;
+    }
+    else{
+      for(int i = 0; i<formatos_adic.length; i++){
+        if(formato == formatos_adic[i]){
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 
   @override
   void initState() {
     super.initState();
+    formato_actual = formato_princ;
+    confettiController = ConfettiController(duration: const Duration(milliseconds: 800));
   }
 
   @override
@@ -41,7 +64,6 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
             body: Padding(
             padding: EdgeInsets.all(screenWidth * 0.01),
@@ -93,13 +115,17 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                         children: [
                           Column(
                             children: [
-                              Container( //Botón modo fotos
+                              hay_formato("img")?Container( //Botón modo fotos
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: formato_actual=="img"?Color.fromRGBO(5, 153, 159, 1):Colors.red,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(8),
+                                  border: formato_actual=="img"?Border.all(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ):null,
                                 ),
                                 child: IconButton(
                                   icon: Image.asset(
@@ -109,21 +135,25 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                   ),
                                   onPressed: () {
                                     setState((){
-                                      formato_actual = 0;
+                                      formato_actual = "img";
                                     });
                                   },
                                 ),
-                              ),
-                              SizedBox(
+                              ):Container(),
+                              hay_formato("img")?SizedBox(
                                 height: screenHeight * 0.02,
-                              ),
-                              Container(//Botón modo vídeo
+                              ):SizedBox.shrink(),
+                              hay_formato("vid")?Container(//Botón modo vídeo
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: formato_actual=="vid"?Color.fromRGBO(5, 153, 159, 1):Colors.red,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(8),
+                                  border: formato_actual=="vid"?Border.all(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ):null,
                                 ),
                                 child: IconButton(
                                   icon: Image.asset(
@@ -133,21 +163,25 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                   ),
                                   onPressed: () {
                                     setState((){
-                                      formato_actual = 1;
+                                      formato_actual = "vid";
                                     });                                  
                                   },
                                 ),
-                              ),
-                              SizedBox(
+                              ):Container(),
+                              hay_formato("vid")?SizedBox(
                                 height: screenHeight * 0.02,
-                              ),
-                              Container(//Botón modo picto
+                              ):SizedBox.shrink(),
+                              hay_formato("pic")?Container(//Botón modo picto
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: formato_actual=="pic"?Color.fromRGBO(5, 153, 159, 1):Colors.red,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(8),
+                                  border: formato_actual=="pic"?Border.all(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ):null,
                                 ),
                                 child: IconButton(
                                   icon: Image.asset(
@@ -157,21 +191,25 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                   ),
                                   onPressed: () {
                                     setState((){
-                                      formato_actual = 2;
+                                      formato_actual = "pic";
                                     });
                                   },
                                 ),
-                              ),
-                              SizedBox(
+                              ):Container(),
+                              hay_formato("pic")?SizedBox(
                                 height: screenHeight * 0.02,
-                              ),
-                              Container(//Botón modo audio
+                              ):SizedBox.shrink(),
+                              hay_formato("aud")?Container(//Botón modo audio
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: formato_actual=="aud"?Color.fromRGBO(5, 153, 159, 1):Colors.red,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(8),
+                                  border: formato_actual=="aud"?Border.all(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ):null,
                                 ),
                                 child: IconButton(
                                   icon: Image.asset(
@@ -181,21 +219,25 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                   ),
                                   onPressed: () {
                                     setState((){
-                                      formato_actual = 3;
+                                      formato_actual = "aud";
                                     });
                                   },
                                 ),
-                              ),
-                              SizedBox(
+                              ):Container(),
+                              hay_formato("aud")?SizedBox(
                                 height: screenHeight * 0.02,
-                              ),
-                              Container(//Botón modo texto
+                              ):SizedBox.shrink(),
+                              hay_formato("txt")?Container(//Botón modo texto
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  color: formato_actual=="txt"?Color.fromRGBO(5, 153, 159, 1):Colors.red,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(8),
+                                  border: formato_actual=="txt"?Border.all(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ):null,
                                 ),
                                 child: IconButton(
                                   icon: Image.asset(
@@ -205,11 +247,11 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                   ),
                                   onPressed: () {
                                     setState((){
-                                      formato_actual = 4;
+                                      formato_actual = "txt";
                                     });
                                   },
                                 ),
-                              ),                                                
+                              ):Container(),                                                
                           ],
                           ),
                         ],
@@ -263,7 +305,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                         ),
                                       ),
                                     ),
-                                    formato_actual == 4 && paso_actual <= pasos_total?
+                                    formato_actual == "txt" && paso_actual <= pasos_total?
                                     Text(pasos_texto[paso_actual],
                                           style: TextStyle(
                                             color: Colors.white,
@@ -275,20 +317,20 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                       height: screenHeight * 0.4,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(16.0),
-                                        image: formato_actual == 4 && paso_actual <= pasos_total
+                                        image: formato_actual == "txt" && paso_actual <= pasos_total
                                         ? null
                                         : DecorationImage(
                                           image: AssetImage(
                                             () {
                                               if(paso_actual <= pasos_total){
                                                 switch (formato_actual) {
-                                                  case 0:
+                                                  case "img":
                                                     return pasos_img[paso_actual];
-                                                  case 1:
+                                                  case "vid":
                                                     return pasos_vid[paso_actual];
-                                                  case 2:
+                                                  case "pic":
                                                     return pasos_picto[paso_actual];
-                                                  case 3:
+                                                  case "aud":
                                                     return pasos_audio[paso_actual];
                                                   default:
                                                     return pasos_img[paso_actual];
@@ -380,18 +422,62 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                 AbsorbPointer(
                                   absorbing: paso_actual <= pasos_total,
                                   child: Opacity(
-                                    opacity: paso_actual > pasos_total ? 0.5 : 1.0,  // Baja opacidad cuando está desactivado
+                                    opacity: paso_actual > pasos_total ? 1.0 : 0.5,  // Baja opacidad cuando está desactivado
                                     child: IconButton(
                                       icon: Image.asset(
                                         'images/terminar.png',
                                         color: Colors.white,
                                         width: screenWidth * 0.1,
                                       ),
-                                      onPressed: paso_actual > pasos_total
+                                      onPressed: /*paso_actual >= pasos_total
                                           ? () {}//null  // Desactiva el botón si la condición se cumple
-                                          : () {
-                                              // Acción del botón cuando está activo
-                                            },
+                                          :*/ () {
+                                          setState((){
+                                            confettiController.play();
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  content: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [ //Animación confeti
+                                                      const Text("¡Felicidades! ¡Tarea terminada!",
+                                                            style: TextStyle(color: Color.fromRGBO(5, 153, 159, 1), fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 50)),
+                                                            
+                                                      FilledButton(
+                                                        style: FilledButton.styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(screenWidth * 0.01)),
+                                                            backgroundColor: Colors.red,
+                                                            minimumSize: Size(screenHeight * 0.2, screenHeight * 0.2),
+                                                            maximumSize: Size(screenHeight * 0.2, screenHeight * 0.2),
+                                                        ),
+                                                        onPressed: () {
+                                                          volverAtras(context); //Debe hacerlo dos veces para cerrar el diálogo y volver hacia la pantalla anterior
+                                                          volverAtras(context);
+                                                        },
+                                                        child:
+                                                          Column(children:[
+                                                            Image.asset("images/si.png", width: screenWidth*0.07,),
+                                                            Text(
+                                                              "Continuar",
+                                                              style: TextStyle(
+                                                                fontFamily: "Open Sans",
+                                                                fontSize: screenHeight*0.025
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
+                                                    Align(alignment: Alignment.center,
+                                                      child: ConfettiWidget(confettiController: confettiController, blastDirection: -pi/2, emissionFrequency: 0.06,),),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          });
+                                        },
                                     ),
                                   ),
                                 ),
