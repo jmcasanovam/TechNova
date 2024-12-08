@@ -130,35 +130,6 @@ class _AdminMenusState extends State<AdminMenus> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // nombre
-                          Row(
-                            children: [
-                              Text(
-                                'Subir menú',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: screenHeight * 0.025,
-                                ),
-                              ),
-                              SizedBox(width: screenWidth * 0.02),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                  maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
-                                ),
-                                
-                                onPressed: () {
-                                  // Lógica para examinar PDF
-                                },
-                                child: Text('Examinar PDF', style: TextStyle(
-                                  fontSize: screenHeight * 0.02,
-                                ),),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: screenHeight * 0.02),
-
-                
                           Row(
                             children: [
                               Text(
@@ -253,6 +224,20 @@ class _AdminMenusState extends State<AdminMenus> {
                                     },
 
                                     child: Text('Actualizar Nombre', style: TextStyle(
+                                      fontSize: screenHeight * 0.02,
+                                    ),),
+                                    
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
+                                      maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                    ),
+                                    
+                                    onPressed: () {
+                                      // Lógica para examinar PDF
+                                    },
+                                    child: Text('Examinar PDF', style: TextStyle(
                                       fontSize: screenHeight * 0.02,
                                     ),),
                                   ),
