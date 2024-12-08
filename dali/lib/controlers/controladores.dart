@@ -25,6 +25,8 @@ Future<int> login(String username, String password) async {
   }
 }
 
+
+
 Future<List<TareaAsignada>> obtenerTareas(String username) async {
   final url = Uri.parse('http://127.0.0.1:5000/get_tareas'+"?idAlumno="+username);
   final response = await http.get(url);
@@ -44,7 +46,7 @@ Future<List<TareaAsignada>> obtenerTareas(String username) async {
    }
 
 }
-
+//foto de perfil?
 Future<List<Map<String, String>>> getEstudiantesNicknameyPerfil() async {
   final url = Uri.parse('http://127.0.0.1:5000/get_estudiantes_foto_nickname'); // Ajusta el endpoint según tu API
 
