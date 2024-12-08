@@ -363,6 +363,8 @@ Future<bool> asignarTarea(int idEstudiante, int idTareaPlantilla, int completada
         'fotoResultado': fotoResultado,
         'valoracion': valoracion,
         'miniatura': miniatura,
+        'fechaCompletada' : "0000-00-00"
+
       }),
     );
 
