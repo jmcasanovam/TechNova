@@ -257,6 +257,7 @@ Future<bool> actualizarPerfilPorNickname(String nickname, Map<String, dynamic> d
     return false;  // En caso de error en la solicitud
   }
 }
+
 // Función para cargar todas las tareasPlantilla para el ADMIN
 Future<List<Map<String, dynamic>>> cargarTareasPlantilla() async {
   final url = Uri.parse('http://127.0.0.1:5000/get_tareas_plantilla');  // Asegúrate de que la URL es correcta
