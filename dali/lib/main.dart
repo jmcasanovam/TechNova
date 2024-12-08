@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: AdminMenus(),
-       home: const SplashScreen(),
-      // home: AdminCreadorTareas(),
+        home: const SplashScreen(),
+    // home: AdminCreadorTareas(),
       // home: AdminTareasPlantilla(),
       routes: {
         '/adminUsuarios': (context) => AdminUsuarios(),

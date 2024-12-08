@@ -363,8 +363,6 @@ Future<bool> asignarTarea(int idEstudiante, int idTareaPlantilla, int completada
         'fotoResultado': fotoResultado,
         'valoracion': valoracion,
         'miniatura': miniatura,
-        'fechaCompletada' : "0000-00-00"
-
       }),
     );
 
@@ -387,7 +385,24 @@ Future<bool> asignarTarea(int idEstudiante, int idTareaPlantilla, int completada
     return false;
   }
 }
-}
+
+
+// Función para crear un estudiante
+  Future<Map<String, dynamic>> crearEstudiante(Map<String, dynamic> data) async {
+    final url = Uri.parse('http://127.0.0.1:5000/crear_estudiante');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error al crear estudiante: ${response.body}');
+    }
+  }
+
 
 Future<List<Map<String, dynamic>>> cargarMenu() async {
   final url = Uri.parse('http://127.0.0.1:5000/get_menu'); // Asegúrate de que la URL es correcta
@@ -498,8 +513,45 @@ Future<String?> consultarPdfMenu(String nombreMenu) async {
     print('Error al realizar la solicitud: $e');
     return null;
   }
+
+}
+  
+
+  // Función para crear un administrador en la base de datos
+  Future<Map<String, dynamic>> crearAdministrador(Map<String, dynamic> data) async {
+  final url = Uri.parse('http://127.0.0.1:5000/crear_administrador');
+  final response = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 201) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error al crear administrador: ${response.body}');
+  }
 }
 
+// Función para crear un educador en la base de datos
+Future<Map<String, dynamic>> crearEducador(Map<String, dynamic> data) async {
+  final url = Uri.parse('http://127.0.0.1:5000/crear_educador');
+  final response = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 201) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error al crear educador: ${response.body}');
+  }
+}
+
+ 
+
+}
 
 Future<int> obtenerCantidadMenus(String fecha) async {
   final url = Uri.parse('http://127.0.0.1:5000/get_menu_count/?fecha=$fecha'); // URL con el parámetro fecha como query string
@@ -522,5 +574,33 @@ Future<int> obtenerCantidadMenus(String fecha) async {
   } catch (e) {
     print('Error al realizar la solicitud: $e');
     return 0; // Retorna 0 si ocurre algún error inesperado
+  }
+}
+
+Future<bool> editarPerfilAlumno(String nickname, Map<String, dynamic> datosActualizados) async {
+  final url = Uri.parse('http://127.0.0.1:5000/editar_perfil_alumno'); // Ruta sin el nickname en la URL
+
+  try {
+    // Agregar el nickname al cuerpo de los datos
+    datosActualizados['nickname'] = nickname;
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(datosActualizados), // Enviamos los datos actualizados
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Perfil del alumno actualizado con éxito: $data');
+      return true; // Si la actualización fue exitosa
+    } else {
+      final error = jsonDecode(response.body);
+      print('Error: ${error['error']}');
+      return false; // Si la actualización falló
+    }
+  } catch (e) {
+    print('Error al realizar la solicitud: $e');
+    return false; // En caso de error en la solicitud
   }
 }
