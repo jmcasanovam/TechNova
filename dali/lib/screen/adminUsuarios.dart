@@ -1,6 +1,6 @@
 import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/adminAlumnoTareas.dart';
-import 'package:dali/screen/adminCreadorPerfil.dart';
+import 'package:dali/screen/adminCreadorPerfil2.dart';
 import 'package:dali/screen/adminEditarPerfil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
