@@ -23,6 +23,7 @@ class _AdminMenusState extends State<AdminMenus> {
   List<Menu> menus = [];
   List<TextEditingController> controllers = [];
     final TextEditingController controladorNumMenus = TextEditingController();
+    final Controladores controladores = Controladores();
 
 
   void volverAtras(BuildContext context) {
@@ -42,7 +43,7 @@ class _AdminMenusState extends State<AdminMenus> {
       String fecha = '01/01/2024';
 
       // Aquí llamamos a la función que devuelve el número de menús dinámicamente
-      int cantidad = await obtenerCantidadMenus(fecha); // Usamos la fecha actual
+      int cantidad = await controladores.obtenerCantidadMenus(fecha); // Usamos la fecha actual
       setState(() {
         numero_menus = cantidad;
         controladorNumMenus.text = numero_menus.toString();

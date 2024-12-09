@@ -366,6 +366,7 @@ Future<bool> asignarTarea(int idEstudiante, int idTareaPlantilla, int completada
         'fotoResultado': fotoResultado,
         'valoracion': valoracion,
         'miniatura': miniatura,
+        'fechaCompletada': null,
       }),
     );
 
@@ -554,7 +555,7 @@ Future<Map<String, dynamic>> crearEducador(Map<String, dynamic> data) async {
 
  
 
-}
+
 
 Future<int> obtenerCantidadMenus(String fecha) async {
   final url = Uri.parse('http://127.0.0.1:5000/get_menu_count/?fecha=$fecha'); // URL con el parámetro fecha como query string
@@ -606,4 +607,7 @@ Future<bool> editarPerfilAlumno(String nickname, Map<String, dynamic> datosActua
     print('Error al realizar la solicitud: $e');
     return false; // En caso de error en la solicitud
   }
+}
+
+
 }

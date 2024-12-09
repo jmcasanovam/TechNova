@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; // Para serializar los datos
-import 'package:http/http.dart' as http; // Para hacer la solicitud PUT
 import 'package:dali/controlers/controladores.dart';
 
 import '../widget/barraMenu.dart';
@@ -21,6 +20,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
   String? contrasenaSeleccionada1 = 'Cuadrado';
   String? contrasenaSeleccionada2 = 'Cuadrado';
   String? contrasenaSeleccionada3 = 'Cuadrado';
+    final Controladores controladores = Controladores();
 
   List<String> formatos = ['Texto', 'Video', 'Imagen', 'Pictograma', 'Audio'];
   List<String> preferenciasNotificacion = ['Nada', 'Audio', 'Texto'];
@@ -227,7 +227,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                             ].join(", "),
                           };
 
-                          bool resultado = await editarPerfilAlumno(
+                          bool resultado = await controladores.editarPerfilAlumno(
                             widget.nickname,
                             datosActualizados,
                           );

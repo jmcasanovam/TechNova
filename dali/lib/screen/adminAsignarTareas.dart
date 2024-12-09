@@ -13,6 +13,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
   int? tareaSel; // Índice de la tarea seleccionada
   int? alumnoSel; // Índice del alumno seleccionado
   String? formatoSel = 'Texto';
+  int completada = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -369,9 +370,9 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                   }
 
                   final bool resultado = await controladores.asignarTarea(
-                    tareaSel!,
                     alumnoSel!,
                     tareaSel!, // idTareaPlantilla
+                    completada, // Completada
                     formato, // Formato combinado
                     fechaAsignacion!.toIso8601String(),
                     fechaFinalizacion!.toIso8601String(),
