@@ -25,6 +25,8 @@ Future<int> login(String username, String password) async {
   }
 }
 
+
+
 Future<List<TareaAsignada>> obtenerTareas(String username) async {
   final url = Uri.parse('http://127.0.0.1:5000/get_tareas'+"?idAlumno="+username);
   final response = await http.get(url);
@@ -44,7 +46,7 @@ Future<List<TareaAsignada>> obtenerTareas(String username) async {
    }
 
 }
-
+//foto de perfil?
 Future<List<Map<String, String>>> getEstudiantesNicknameyPerfil() async {
   final url = Uri.parse('http://127.0.0.1:5000/get_estudiantes_foto_nickname'); // Ajusta el endpoint según tu API
 
@@ -255,6 +257,7 @@ Future<bool> actualizarPerfilPorNickname(String nickname, Map<String, dynamic> d
     return false;  // En caso de error en la solicitud
   }
 }
+
 // Función para cargar todas las tareasPlantilla para el ADMIN
 Future<List<Map<String, dynamic>>> cargarTareasPlantilla() async {
   final url = Uri.parse('http://127.0.0.1:5000/get_tareas_plantilla');  // Asegúrate de que la URL es correcta
@@ -550,5 +553,60 @@ Future<Map<String, dynamic>> crearEducador(Map<String, dynamic> data) async {
 }
 
  
+
+
+
+Future<int> obtenerCantidadMenus(String fecha) async {
+  final url = Uri.parse('http://127.0.0.1:5000/get_menu_count/?fecha=$fecha'); // URL con el parámetro fecha como query string
+
+  try {
+    // Realiza la solicitud GET
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Cantidad de menús: ${data['cantidad_menus']}');
+      return data['cantidad_menus']; // Retorna la cantidad de menús
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+      return 0; // Si hay error, retorna 0 como cantidad de menús
+    }
+  } catch (e) {
+    print('Error al realizar la solicitud: $e');
+    return 0; // Retorna 0 si ocurre algún error inesperado
+  }
+}
+
+Future<bool> editarPerfilAlumno(String nickname, Map<String, dynamic> datosActualizados) async {
+  final url = Uri.parse('http://127.0.0.1:5000/editar_perfil_alumno'); // Ruta sin el nickname en la URL
+
+  try {
+    // Agregar el nickname al cuerpo de los datos
+    datosActualizados['nickname'] = nickname;
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(datosActualizados), // Enviamos los datos actualizados
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Perfil del alumno actualizado con éxito: $data');
+      return true; // Si la actualización fue exitosa
+    } else {
+      final error = jsonDecode(response.body);
+      print('Error: ${error['error']}');
+      return false; // Si la actualización falló
+    }
+  } catch (e) {
+    print('Error al realizar la solicitud: $e');
+    return false; // En caso de error en la solicitud
+  }
+}
+
 
 }

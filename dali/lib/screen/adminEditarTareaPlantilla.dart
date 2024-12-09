@@ -33,7 +33,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
 
     //se carga de la base de datos
     numeroDePasos = 2;
-    descripcionTarea = 'tienes que poner lalalala';
+    descripcionTarea = 'Descripcion';
     tituloController = TextEditingController(text: tituloTarea);
     descripcionController = TextEditingController(text: descripcionTarea);
     pasosTexto = List.generate(numeroDePasos, (_) => 'blabla');
