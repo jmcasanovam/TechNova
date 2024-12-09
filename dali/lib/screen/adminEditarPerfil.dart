@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; // Para serializar los datos
-import 'package:http/http.dart' as http; // Para hacer la solicitud PUT
 import 'package:dali/controlers/controladores.dart';
 
 import '../widget/barraMenu.dart';
