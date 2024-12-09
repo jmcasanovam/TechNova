@@ -385,7 +385,24 @@ Future<bool> asignarTarea(int idEstudiante, int idTareaPlantilla, int completada
     return false;
   }
 }
-}
+
+
+// Función para crear un estudiante
+  Future<Map<String, dynamic>> crearEstudiante(Map<String, dynamic> data) async {
+    final url = Uri.parse('http://127.0.0.1:5000/crear_estudiante');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error al crear estudiante: ${response.body}');
+    }
+  }
+
 
 Future<List<Map<String, dynamic>>> cargarMenu() async {
   final url = Uri.parse('http://127.0.0.1:5000/get_menu'); // Asegúrate de que la URL es correcta
@@ -496,4 +513,42 @@ Future<String?> consultarPdfMenu(String nombreMenu) async {
     print('Error al realizar la solicitud: $e');
     return null;
   }
+
+}
+  
+
+  // Función para crear un administrador en la base de datos
+  Future<Map<String, dynamic>> crearAdministrador(Map<String, dynamic> data) async {
+  final url = Uri.parse('http://127.0.0.1:5000/crear_administrador');
+  final response = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 201) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error al crear administrador: ${response.body}');
+  }
+}
+
+// Función para crear un educador en la base de datos
+Future<Map<String, dynamic>> crearEducador(Map<String, dynamic> data) async {
+  final url = Uri.parse('http://127.0.0.1:5000/crear_educador');
+  final response = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 201) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error al crear educador: ${response.body}');
+  }
+}
+
+ 
+
 }
