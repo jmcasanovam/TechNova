@@ -185,7 +185,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                    builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image),
+                                                    builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image, username: widget.username),
                                                   ),
                                                 );
                                               } else {
@@ -198,12 +198,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                                                 clearShapes();
                                               }
                                     
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        InicioAlumnoScreen(iconoPerfil: widget.image))
-                              );
+                             
                             },
                             child: SizedBox(
                                 width: screenWidth * 0.16,

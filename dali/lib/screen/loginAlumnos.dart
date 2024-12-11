@@ -291,7 +291,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.network(
+                                  Image.asset(
                                     estudiante['rutaImagenPerfil']!,
                                     height: screenHeight * 0.6 / 2 * 0.8,
                                     width: screenWidth * 0.7 / 4,

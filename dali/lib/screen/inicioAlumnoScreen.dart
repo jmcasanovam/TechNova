@@ -6,8 +6,12 @@ import 'package:dali/screen/presentacionTarea.dart';
 import 'package:flutter/material.dart';
 
 class InicioAlumnoScreen extends StatefulWidget {
-  String _iconoPerfil;
-  InicioAlumnoScreen({super.key, required String iconoPerfil}) : _iconoPerfil = iconoPerfil;
+  String _iconoPerfil = '';
+  String _username = '';
+  InicioAlumnoScreen({super.key, required String iconoPerfil, required String username}) {
+    _iconoPerfil = iconoPerfil;
+    _username = username;
+  }
 
   @override
   State<InicioAlumnoScreen> createState() => _InicioAlumnoScreenState();

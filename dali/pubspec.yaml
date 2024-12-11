@@ -35,7 +35,7 @@ dependencies:
   confetti: ^0.7.0
   video_player: 
   just_audio:
-  image_picker:
+  image_picker: 
 
 
 
