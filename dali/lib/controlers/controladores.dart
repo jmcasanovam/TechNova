@@ -609,5 +609,30 @@ Future<bool> editarPerfilAlumno(String nickname, Map<String, dynamic> datosActua
   }
 }
 
+Future<List<TareaAsignada>> obtenerTareasNoCompletadas(String nickname) async {
+  final url = Uri.parse('http://127.0.0.1:5000/get_tareas_no_completadas/?nickname=$nickname'); 
+
+  // Hacer la solicitud GET
+  final response = await http.get(
+    url,
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    final List<dynamic> tareasData = data['tareas_no_completadas'] ?? [];
+    
+    // Convertir la respuesta en objetos TareaAsignada
+    return tareasData.map((tarea) {
+      return TareaAsignada(
+        tarea['nombre'] ?? 'Tarea sin nombre',
+        tarea['miniatura'] ?? 'sin miniatura',
+        tarea['formato'] ?? 'desconocido',
+      );
+    }).toList();
+  } else {
+    throw Exception('Error en la solicitud: ${response.statusCode}');
+  }
+}
 
 }

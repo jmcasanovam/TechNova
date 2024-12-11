@@ -14,22 +14,23 @@ class InicioAlumnoScreen extends StatefulWidget {
 }
 
 class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
-  List<TareaAsignada> _tareas = [
-    TareaAsignada('¡Pongamos el microondas!', 'images/microondas.png', 'video', 1),
-    TareaAsignada('¡Pongamos el microondas2!', 'images/comedor.png', 'video', 2),
-    TareaAsignada('¡Toca anotar los menús!', 'images/menu_comedor.png', 'menu', 3),
-  ];
+  List<TareaAsignada> _tareas = [];
   
   int _tareaActual = 0;
 
-  
+
   // onInitState() async{
   //   super.initState();
   //   setState(() async{
-  //     List<TareaAsignada> aux = await obtenerTareas("alumno1");
+  //     List<TareaAsignada> aux = await _cargarTareas();
   //     _tareas = aux;
   //   });
   // }
+  @override
+void initState() {
+  super.initState();
+  _cargarTareas(); // Llamada a la carga de tareas sin usar setState dentro de la función async
+}
 
 
   void accederTarea(BuildContext context) {
@@ -70,6 +71,20 @@ class _InicioAlumnoScreenState extends State<InicioAlumnoScreen> {
     }
     });
   }
+  // Método para cargar y procesar las tareas
+Future<void> _cargarTareas() async {
+  try {
+    final controladores = Controladores(); // Crear instancia de Controladores
+    final List<TareaAsignada> tareas = await controladores.obtenerTareasNoCompletadas("pedritoxd");
+
+    // Actualizar la lista de tareas
+    setState(() {
+      _tareas = tareas;
+    });
+  } catch (e) {
+    print("Error al cargar las tareas: $e");
+  }
+}
 
   @override
   Widget build(BuildContext context) {
