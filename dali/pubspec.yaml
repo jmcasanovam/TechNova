@@ -33,6 +33,9 @@ dependencies:
   http: 
   intl: ^0.18.0
   confetti: ^0.7.0
+  video_player: 
+  just_audio:
+  image_picker:
 
 
 
