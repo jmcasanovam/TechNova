@@ -11,7 +11,7 @@ class AdminCreadorPerfil extends StatefulWidget {
 
 class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
   String tipoSeleccionado = 'Alumno';
-  List<String> opcionesContrasena = ['Cuadrado', 'Triángulo', 'Círculo', 'Cruz'];
+  List<String> opcionesContrasena = ['circle', 'triangle', 'square', 'star'];
   List<String> preferenciasNotificacion = ['Default', 'Mensaje', 'Mensaje+Sonido'];
   bool oculto = true;
   //PickedFile? _imageFile; // Para almacenar la imagen seleccionada
@@ -146,6 +146,7 @@ class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
 
                 // Para el tipo Alumno, se genera la contraseña con las opciones seleccionadas
                 if (tipoSeleccionado == 'Alumno') {
+
                   if (contrasenaSeleccionada1 == null || contrasenaSeleccionada2 == null || contrasenaSeleccionada3 == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Selecciona todas las opciones para la contraseña')),
@@ -153,6 +154,8 @@ class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
                     return;
                   }
                   contrasena = _crearContrasena(); // Concatenar opciones de contraseña
+                  print("HOLAAAAA");
+                  print("la contraseña es :" + contrasena);
                 } else {
                   // Para el Administrador o Educador, tomamos la contraseña personalizada desde el TextField
                   contrasena = passwordController.text;
@@ -172,6 +175,7 @@ class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
 
                 // Crear el nuevo usuario según el tipo
                 if (tipoSeleccionado == 'Alumno') {
+                  print(contrasena);
                   await controladores.crearEstudiante({
                     'nombre': nombre,
                     'nickname': nickname,

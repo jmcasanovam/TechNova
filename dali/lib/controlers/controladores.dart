@@ -26,6 +26,33 @@ Future<int> login(String username, String password) async {
 }
 
 
+Future<bool> login_estudiante(String nickname, String password) async {
+  final url = Uri.parse('http://127.0.0.1:5000/login_estudiante'); // Cambia por la URL de tu API
+  try {
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'nickname': nickname, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Inicio de sesión exitoso. ID Usuario: ${data['idUsuario']}');
+      // Guarda el ID Usuario o cualquier dato necesario
+      return true;
+    } else {
+      final error = jsonDecode(response.body);
+      print('Error: ${error['error']}');
+      return false;
+    }
+  } catch (e) {
+    print('Error de conexión: $e');
+    return false; // Código genérico para errores de conexión
+  }
+}
+
+
+
 
 Future<List<TareaAsignada>> obtenerTareas(String username) async {
   final url = Uri.parse('http://127.0.0.1:5000/get_tareas'+"?idAlumno="+username);

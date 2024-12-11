@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class PasswordAlumnos extends StatefulWidget {
   final String image; // Ruta de la imagen seleccionada
   final String username;
+  
 
   const PasswordAlumnos(
       {super.key, required this.image, required this.username});
@@ -21,6 +22,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
     ''
   ]; // Lista para las formas seleccionadas
 
+  final controladores = Controladores(); // Crear instancia de Controladores
   // Método para agregar una forma en la primera casilla vacía
   void addShape(String shape) {
     setState(() {
@@ -175,22 +177,26 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                                   Size(screenWidth * 0.2, screenHeight * 0.2),
                             ),
                             onPressed: () async {
-                              // int result = await login(widget.username, enteredShapes.join());
-                                    
-                              // if (result == 200) {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image)),
-                              //   );
-                              // } else {
-                              //   // Handle login failure (e.g., show an error message)
-                              //   ScaffoldMessenger.of(context).showSnackBar(
-                              //     SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
-                              //   );
-                                    
-                              //   clearShapes();
-                              // }
+                                 // Llamar al método login_estudiante y obtener el resultado
+                                              bool isLoginSuccessful = await controladores.login_estudiante(widget.username, enteredShapes.join());
+
+                                              if (isLoginSuccessful) {
+                                                // Navegar a la pantalla de inicio del alumno
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => InicioAlumnoScreen(iconoPerfil: widget.image),
+                                                  ),
+                                                );
+                                              } else {
+                                                // Manejar el fallo de inicio de sesión
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text('Te has equivocado. Inténtalo de nuevo.')),
+                                                );
+
+                                                // Limpiar las casillas
+                                                clearShapes();
+                                              }
                                     
                               Navigator.push(
                                 context,
