@@ -471,12 +471,16 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                             borderRadius: BorderRadius.circular(screenWidth * 0.01),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
+                        onPressed: () async{
+                          final shouldReload = await Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => AdminCreadorTareas()),
                           );
+
+                          if (shouldReload == true) {
+                            _cargarTareas();
+                          }
                         },
                         icon: Icon(Icons.add, color: Colors.white, size: screenWidth * 0.02),
                         label: Text(

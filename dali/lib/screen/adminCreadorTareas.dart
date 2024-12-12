@@ -1,3 +1,6 @@
+import 'package:dali/controlers/controladores.dart';
+import 'package:dali/models/pasos.dart';
+import 'package:dali/models/tareaPlantilla.dart';
 import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
 import '../widget/barraMenu.dart';
@@ -11,6 +14,8 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
   String tituloTarea = '';
   String descripcionTarea = '';
   int numeroDePasos = 1;
+  late Tareaplantilla tareaplantilla;
+  late Pasos pasos;
 
   // Controladores para los pasos
   List<String> pasosTexto = [];
@@ -269,7 +274,19 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
                 maximumSize: Size(screenWidth * 0.2, screenHeight * 0.07),
                 backgroundColor: Colors.green[900],
               ),
-              onPressed: _todosLosPasosCompletados() && tituloTarea!="" && descripcionTarea!="" ? () {} : null,
+              onPressed: _todosLosPasosCompletados() && tituloTarea!="" && descripcionTarea!="" ? () async{
+                tareaplantilla = Tareaplantilla(titulo: tituloTarea, descripcion: descripcionTarea);
+                pasos = Pasos(urlTexto: pasosTexto[0], urlImagen: 'ruta_ejemplo', urlVideo: 'ruta_ejemplo', urlPictograma: 'ruta_ejemplo', urlAudio: 'ruta_ejemplo');
+                
+                int resultado = await Controladores().crearTareaPlantilla(tareaplantilla, pasos);
+                if (resultado == 201) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Tarea creada correctamente')));
+
+                    Navigator.of(context).pop(true);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al crear la tarea')));
+                }
+              } : null,
               child: Text('CREAR', style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white, fontWeight: FontWeight.bold),),
             ),
           ),
