@@ -1,3 +1,4 @@
+import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert'; // Para serializar los datos
 import 'package:dali/controlers/controladores.dart';
@@ -49,49 +50,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: screenHeight * 0.02,
-              top: screenHeight * 0.02,
-            ),
-            child: SizedBox(
-              height: screenHeight * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Image.asset(
-                      'images/back-arrow.png',
-                      width: screenWidth * 0.08,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: FittedBox(
-                        child: Text(
-                          "Editar Perfil",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Roboto',
-                            fontSize: screenHeight * 0.08,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: screenWidth * 0.08,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          AdminTitulo(atras: true, titulo: "Editar Perfil"),
 
           Expanded(
             child: Row(

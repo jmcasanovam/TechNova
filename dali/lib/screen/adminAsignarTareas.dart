@@ -1,3 +1,4 @@
+import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:dali/controlers/controladores.dart';
@@ -25,26 +26,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
       body: Column(
         children: [
           // Título superior
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
-            child: SizedBox(
-              height: screenHeight * 0.1,
-              child: Center(
-                child: FittedBox(
-                  child: Text(
-                    "Asignar Tareas",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Roboto',
-                      fontSize: screenHeight * 0.08,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          AdminTitulo(atras: false, titulo: "Asignar Tareas"),
 
           // Tablas de tareas y alumnos
           Expanded(

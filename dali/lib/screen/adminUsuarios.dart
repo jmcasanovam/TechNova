@@ -2,6 +2,7 @@ import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/adminAlumnoTareas.dart';
 import 'package:dali/screen/adminCreadorPerfil2.dart';
 import 'package:dali/screen/adminEditarPerfil.dart';
+import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../widget/barraMenu.dart';
@@ -52,37 +53,7 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: screenHeight * 0.02,
-              top: screenHeight * 0.02,
-            ),
-            child: SizedBox(
-              height: screenHeight * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: FittedBox(
-                        child: Text(
-                          "Alumnos",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Roboto',
-                            fontSize: screenHeight * 0.08,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          AdminTitulo(atras: false, titulo: "Alumnos"),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(

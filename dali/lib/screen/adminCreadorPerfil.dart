@@ -1,3 +1,4 @@
+import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
 //import 'package:image_picker/image_picker.dart'; // Importa para seleccionar imágenes
 import 'package:dali/controlers/controladores.dart';
@@ -34,42 +35,7 @@ class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: screenHeight * 0.02, top: screenHeight * 0.02),
-            child: SizedBox(
-              height: screenHeight * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Image.asset(
-                      'images/back-arrow.png',
-                      width: screenWidth * 0.08,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: FittedBox(
-                        child: Text(
-                          "Creador de perfil",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Roboto',
-                            fontSize: screenHeight * 0.08,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: screenWidth * 0.08),
-                ],
-              ),
-            ),
-          ),
+          AdminTitulo(atras: true, titulo: "Creador de perfil",),
 
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
