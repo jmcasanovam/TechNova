@@ -363,11 +363,27 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                 minimumSize: Size(screenWidth * 0.1, screenHeight * 0.07),
                 maximumSize: Size(screenWidth * 0.1, screenHeight * 0.07),
               ),
-              onPressed: () {
-                setState(() {
-                  tareas.removeAt(index); // Elimina la tarea localmente
-                  // Aquí puedes agregar la lógica para borrar la tarea en el servidor
-                });
+              onPressed: () async{
+                int id = tareas[index]['idTareaPlantilla'];
+
+                int resultado = await _borrarTareaAsync(id, index);
+
+                if(resultado != 200){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error al borrar la tarea'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Tarea borrada correctamente'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+                
                 Navigator.of(context).pop(); // Cierra el diálogo
               },
               child: Text(
@@ -380,6 +396,23 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
       },
     );
   }
+
+  Future<int> _borrarTareaAsync(int id, int index) async {
+  try {
+    int respuesta = await Controladores().borrarTareaPlantilla(id);
+
+    if (respuesta == 200) {
+      // Actualiza el estado después del borrado exitoso
+    setState(() {
+      tareas.removeAt(index); // Elimina la tarea localmente
+    });
+    }
+    return respuesta; // Indica éxito
+  } catch (e) {
+    print("Error al borrar la tarea: $e");
+    return 400; // Indica error
+  }
+}
 
   @override
   Widget build(BuildContext context) {

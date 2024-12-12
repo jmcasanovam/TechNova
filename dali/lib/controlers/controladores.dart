@@ -712,4 +712,21 @@ class Controladores {
       throw Exception('Error al crear tarea plantilla: ${response.body}');
     }
   }
+
+  // Función para borrar una tarea plantilla
+  Future<int> borrarTareaPlantilla(int idTareaPlantilla) async {
+    final url = Uri.parse('http://127.0.0.1:5000/borrar_tarea_plantilla');
+    final response = await http.delete(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'idTareaPlantilla': idTareaPlantilla}),
+    );
+
+    if (response.statusCode == 200) {
+      return 200;
+    } else {
+      throw Exception('Error al borrar tarea plantilla: ${response.body}');
+    }
+
+  }
 }
