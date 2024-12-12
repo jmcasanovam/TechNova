@@ -1,8 +1,13 @@
 import 'package:dali/screen/adminAsignarTareas.dart';
 import 'package:dali/screen/adminCreadorTareas.dart';
+import 'package:dali/screen/adminPerfil.dart';
 import 'package:dali/screen/adminTareasPlantilla.dart';
 import 'package:dali/screen/adminUsuarios.dart';
 import 'package:dali/screen/adminMenus.dart';
+import 'package:dali/screen/loginProfesor.dart';
+import 'package:dali/screen/profeAlumnos.dart';
+import 'package:dali/screen/profeMateriales.dart';
+import 'package:dali/screen/profePerfil.dart';
 import 'package:dali/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,14 +28,22 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: AdminMenus(),
-        home: const SplashScreen(),
+        // home: const SplashScreen(),
     // home: AdminCreadorTareas(),
-      // home: AdminTareasPlantilla(),
+      // home: AdminPerfil(),
+      // home: LoginProfesor(),
+      home: ProfeUsuarios(),
+
       routes: {
         '/adminUsuarios': (context) => AdminUsuarios(),
         '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
         '/adminAsignarTarea': (context) => AdminAsignarTareas(),
         '/adminMenus' : (context) => AdminMenus(),
+        '/adminPerfil' : (context) => AdminPerfil(),
+        '/profeUsuarios': (context) => ProfeUsuarios(),
+        '/profeMateriales': (context) => ProfeMateriales(),
+        '/profePerfil': (context) => ProfePerfil(),
+
 
       },
       debugShowCheckedModeBanner: false,

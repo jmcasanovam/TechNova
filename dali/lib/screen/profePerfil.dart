@@ -1,18 +1,14 @@
-import 'package:dali/controlers/controladores.dart';
-import 'package:dali/screen/adminAlumnoTareas.dart';
-import 'package:dali/screen/adminCreadorPerfil2.dart';
-import 'package:dali/screen/adminEditarPerfil.dart';
 import 'package:dali/widget/adminTitulo.dart';
+import 'package:dali/widget/barraMenuProfe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../widget/barraMenu.dart';
 
-class AdminPerfil extends StatefulWidget {
+class ProfePerfil extends StatefulWidget {
   @override
-  _AdminPerfilState createState() => _AdminPerfilState();
+  _ProfePerfilState createState() => _ProfePerfilState();
 }
 
-class _AdminPerfilState extends State<AdminPerfil> {
+class _ProfePerfilState extends State<ProfePerfil> {
 
   String nombre = "juan";
   String nickname = "juan123";
@@ -354,7 +350,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 5),
+      bottomNavigationBar: BarraMenuProfe(selectedIndex: 2),
     );
   }
 }

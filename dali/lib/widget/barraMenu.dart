@@ -114,7 +114,7 @@ class BarraMenu extends StatelessWidget {
       case 4:
         return '/adminUsuarios';
       case 5:
-        return '/adminUsuarios';
+        return '/adminPerfil';
       default:
         return '';
     }

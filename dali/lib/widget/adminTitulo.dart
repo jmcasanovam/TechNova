@@ -16,43 +16,43 @@ class AdminTitulo extends StatelessWidget {
     return Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.02, top: screenHeight * 0.02,),
             child: 
-            SizedBox(
-              height: screenHeight * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if(!atras)SizedBox(
-                    width: screenWidth * 0.1,
-                  ),
-                  if(atras) IconButton(
-                    icon: Image.asset('images/back-arrow.png', width: screenWidth * 0.08,),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: FittedBox(
-                        child: Text(
-                          titulo,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Roboto',
-                            fontSize: screenHeight * 0.08,
-                            fontWeight: FontWeight.bold,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenHeight*0.1),
+              child: SizedBox(
+                height: screenHeight * 0.1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if(!atras)SizedBox(
+                      width: screenWidth * 0.07,
+                    )
+                    else IconButton(
+                      icon: Image.asset('images/back-arrow.png', width: screenWidth * 0.07,),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: FittedBox(
+                          child: Text(
+                            titulo,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Roboto',
+                              fontSize: screenHeight * 0.08,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  BotonCerrarSesion(),
-                  SizedBox(
-                    width: screenWidth * 0.08,
-                  ),
-                ],
-              )
+                    BotonCerrarSesion(),
+                  ],
+                )
+              ),
             ),
           );
   }
