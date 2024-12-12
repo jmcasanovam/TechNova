@@ -276,7 +276,9 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
               ),
               onPressed: _todosLosPasosCompletados() && tituloTarea!="" && descripcionTarea!="" ? () async{
                 tareaplantilla = Tareaplantilla(titulo: tituloTarea, descripcion: descripcionTarea);
-                pasos = Pasos(urlTexto: pasosTexto[0], urlImagen: 'ruta_ejemplo', urlVideo: 'ruta_ejemplo', urlPictograma: 'ruta_ejemplo', urlAudio: 'ruta_ejemplo');
+
+                String datos_texto = pasosTexto.join("|");
+                pasos = Pasos(urlTexto: datos_texto, urlImagen: [], urlVideo: [], urlPictograma: [], urlAudio: []);
                 
                 int resultado = await Controladores().crearTareaPlantilla(tareaplantilla, pasos);
                 if (resultado == 201) {
