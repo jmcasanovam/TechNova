@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dali/models/pasos.dart';
 import 'package:dali/models/tareaAsignada.dart';
 import 'package:dali/models/tareaPlantilla.dart';
+import 'package:dali/models/usuario.dart';
 import 'package:http/http.dart' as http;
 
 class Controladores {
@@ -827,6 +828,36 @@ class Controladores {
       return 200;
     } else {
       return 400;
+    }
+  }
+
+  Future<Usuario?> getInfoEstudiante2(String nickname) async {
+    // URL del endpoint en tu backend
+    final url = Uri.parse('http://127.0.0.1:5000/get_info_estudiante/'+ "?nickname=" + nickname);
+
+    try {
+      
+      final response = await http.get(
+        url,
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      // Verifica si la solicitud fue exitosa
+      if (response.statusCode == 200) {
+        // Decodifica la respuesta JSON
+        final data = jsonDecode(response.body);
+        final usuario = Usuario.fromJson(data);
+        return usuario;
+      } else {
+        // Maneja errores con códigos HTTP distintos de 200
+        final error = jsonDecode(response.body);
+        print('Error: ${error['error']}');
+        return null;
+      }
+    } catch (e) {
+      // Maneja errores generales de conexión o excepciones
+      print('Error al realizar la solicitud: $e');
+      return null;
     }
   }
 }

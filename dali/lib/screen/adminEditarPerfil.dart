@@ -1,3 +1,4 @@
+import 'package:dali/models/usuario.dart';
 import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert'; // Para serializar los datos
@@ -17,30 +18,46 @@ class AdminEditarPerfil extends StatefulWidget {
 class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
   String nombre = '';
   String? formatoSeleccionado = 'Texto';
-  String? notificacionSeleccionada = 'Nada';
+  String? notificacionSeleccionada = 'Default';
   String? contrasenaSeleccionada1 = 'Cuadrado';
   String? contrasenaSeleccionada2 = 'Cuadrado';
   String? contrasenaSeleccionada3 = 'Cuadrado';
     final Controladores controladores = Controladores();
 
   List<String> formatos = ['Texto', 'Video', 'Imagen', 'Pictograma', 'Audio'];
-  List<String> preferenciasNotificacion = ['Nada', 'Audio', 'Texto'];
+  List<String> preferenciasNotificacion = ['Default', 'Mensaje', 'Mensaje+Audio'];
   List<String> opcionesContrasena = ['Cuadrado', 'Triángulo', 'Círculo', 'Cruz'];
   String foto = 'images/panda.png';
+
+  late Usuario? usuario;
 
   @override
   void initState() {
     super.initState();
-    obtenerNombre(widget.nickname);
+    _cargarDatosUsuario();
   }
 
-  void obtenerNombre(String nickname) async {
-    // Aquí deberías hacer la solicitud para obtener el nombre basado en el nickname
-    // Por simplicidad, vamos a simularlo con un nombre fijo
+  void _cargarDatosUsuario() async {
+    usuario = await controladores.getInfoEstudiante2(widget.nickname);
+
+    if(usuario == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error al cargar los datos del usuario.")),
+      );
+      return;
+    }
+
     setState(() {
-      nombre = "Nombre del usuario"; // Reemplaza esto con el nombre obtenido
+      nombre = usuario!.nombre;
+      formatoSeleccionado = usuario!.formato;
+      print("El formato es ${usuario!.formato}");
+      print(usuario!.preferenciasNotificacion);
+      notificacionSeleccionada = usuario!.preferenciasNotificacion;
+      
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
