@@ -782,4 +782,49 @@ class Controladores {
       throw Exception('Error en la solicitud: $e');
     }
   }
+
+  // Función para obtener una tarea plantilla por su ID
+  Future<Tareaplantilla> getTareaPlantilla(String idTareaPlantilla) async {
+    final url = Uri.parse(
+        'http://127.0.0.1:5000/consultar_tarea_plantilla?idTareaPlantilla=$idTareaPlantilla');
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      try {
+        final tareaPlantilla = Tareaplantilla.fromJson(data);
+        // print("Tarea plantilla cargada correctamente:");
+        // print("Título: ${tareaPlantilla.titulo}");
+        // tareaPlantilla.imprimir();
+        return tareaPlantilla;
+      } catch (e) {
+        print("Error al procesar Tareaplantilla: $e");
+        throw Exception('Error al cargar la tarea plantilla: $e');
+      }
+    } else {
+      throw Exception('Error al consultar tarea plantilla: ${response.body}');
+    }
+  }
+
+  //Actualizar tarea plantilla
+  Future<int> actualizarTareaPlantilla(
+      Tareaplantilla tareaplantilla, Pasos pasos) async {
+    final url = Uri.parse('http://127.0.0.1:5000/actualizar_tarea_plantilla');
+    final response = await http.put(url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'tareaPlantilla': tareaplantilla.toJson(),
+          'pasos': pasos.toJson(),
+        }));
+
+    if (response.statusCode == 200) {
+      return 200;
+    } else {
+      return 400;
+    }
+  }
 }

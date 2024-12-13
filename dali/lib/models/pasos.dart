@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 class Pasos {
-  int _idPasos;
-  List<String> _urlVideo;
-  List<String> _urlAudio;
-  String _urlTexto;
-  List<String> _urlImagen;
-  List<String> _urlPictograma;
+  late int _idPasos;
+  late List<String> _urlVideo;
+  late List<String> _urlAudio;
+  late String _urlTexto;
+  late List<String> _urlImagen;
+  late List<String> _urlPictograma;
 
   // Constructor actualizado
   Pasos({
@@ -22,13 +24,34 @@ class Pasos {
         _urlPictograma = urlPictograma;
 
   // Método para convertir el JSON en un objeto Pasos
-  Pasos.fromJson(Map<String, dynamic> json)
-      : _idPasos = json['idPasos'],
-        _urlVideo = List<String>.from(json['urlVideo']),
-        _urlAudio = List<String>.from(json['urlAudio']),
-        _urlTexto = json['urlTexto'] ?? "", // Manejo de valores nulos
-        _urlImagen = List<String>.from(json['urlImagen']),
-        _urlPictograma = List<String>.from(json['urlPictograma']);
+  // Pasos.fromJson(Map<String, dynamic> json)
+  //     : _idPasos = json['idPasos'],
+  //       _urlVideo = List<String>.from(json['urlVideo']),
+  //       _urlAudio = List<String>.from(json['urlAudio']),
+  //       _urlTexto = json['urlTexto'] ?? "", // Manejo de valores nulos
+  //       _urlImagen = List<String>.from(json['urlImagen']),
+  //       _urlPictograma = List<String>.from(json['urlPictograma']);
+  Pasos.fromJson(Map<String, dynamic> json) {
+    _idPasos = json['idPasos'] ?? int.tryParse(json['idPasos'].toString()) ?? 0;
+
+    // Convierte cadenas en listas reales usando jsonDecode
+    _urlVideo = json['urlVideo'] != null
+        ? List<String>.from(jsonDecode(json['urlVideo']))
+        : [];
+    _urlAudio = json['urlAudio'] != null
+        ? List<String>.from(jsonDecode(json['urlAudio']))
+        : [];
+      List<dynamic> _aux = [];
+      _aux = json['urlTexto'];
+    _urlTexto = _aux.join(' | ');
+    _urlImagen = json['urlImagen'] != null
+        ? List<String>.from(jsonDecode(json['urlImagen']))
+        : [];
+    _urlPictograma = json['urlPictograma'] != null
+        ? List<String>.from(jsonDecode(json['urlPictograma']))
+        : [];
+        
+  }
 
   // Método para convertir el objeto Pasos en un mapa JSON
   Map<String, dynamic> toJson() {
@@ -40,6 +63,16 @@ class Pasos {
       'urlImagen': _urlImagen,
       'urlPictograma': _urlPictograma,
     };
+  }
+
+  void imprimir(){
+    print("Pasos");
+    print("idPasos: $_idPasos");
+    print("urlVideo: $_urlVideo");
+    print("urlAudio: $_urlAudio");
+    print("urlTexto: $_urlTexto");
+    print("urlImagen: $_urlImagen");
+    print("urlPictograma: $_urlPictograma");
   }
 
   // Getters y setters para acceder a los campos privados

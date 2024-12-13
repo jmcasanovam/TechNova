@@ -7,9 +7,6 @@
 
 // import '../widget/barraMenu.dart';
 
-
-
-
 // class AdminTareasPlantilla extends StatefulWidget {
 //   @override
 //   _AdminTareasPlantillaState createState() => _AdminTareasPlantillaState();
@@ -18,7 +15,6 @@
 // class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
 //   String? _ordenActual = 'Ordenar A-Z';
 //   List<String> tareas = ['Poner lavadora', 'Abrir puerta', 'Limpiar los platos'];
-  
 
 //   @override
 //   void initState(){
@@ -79,7 +75,6 @@
 //     );
 //   }
 
-
 //   @override
 //   Widget build(BuildContext context) {
 //     _ordenActual;
@@ -87,7 +82,7 @@
 //     final screenWidth = MediaQuery.of(context).size.width;
 
 //     return Scaffold(
-      
+
 //       body: Column(
 //         children: [
 //           Padding(
@@ -98,7 +93,7 @@
 //                 mainAxisAlignment: MainAxisAlignment.center,
 //                 crossAxisAlignment: CrossAxisAlignment.center,
 //                 children: [
-                  
+
 //                   Expanded(
 //                     child: Center(
 //                       child: FittedBox(
@@ -135,7 +130,7 @@
 //                         alignment: Alignment.center,
 //                         width: screenWidth*0.1,
 //                         height: screenHeight * 0.06,
-//                         decoration: BoxDecoration(  
+//                         decoration: BoxDecoration(
 //                           borderRadius: BorderRadius.circular(screenWidth * 0.01),
 //                           color: Colors.green, // Color de fondo del contenedor
 //                         ),
@@ -159,9 +154,9 @@
 //                             fontFamily: 'Roboto',
 //                             fontSize: screenHeight * 0.02,
 //                           ),
-//                           icon: Icon(Icons.arrow_drop_down, color: Colors.white, size: screenWidth*0.02,), 
+//                           icon: Icon(Icons.arrow_drop_down, color: Colors.white, size: screenWidth*0.02,),
 //                           dropdownColor: Colors.green,
-//                           borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
+//                           borderRadius:  BorderRadius.circular(screenWidth * 0.01),
 //                           underline: Container(height: 0,),
 //                           // padding: EdgeInsets.only(left: screenWidth*0.02),
 //                         ),
@@ -197,27 +192,26 @@
 //                       ),
 //                     ],
 //                   ),
-                  
+
 //                   SizedBox(height: screenHeight * 0.02),
 
 //                   // Lista de tareas
-                  
 
 //                   Text("Tareas Plantilla", style: TextStyle(
 //                     fontSize: screenHeight * 0.03,
 //                     fontFamily: 'Roboto',
 //                     color: Colors.black,
 //                   ),),
-//                   Divider(color: Colors.black, thickness: screenHeight*0.006,),  
+//                   Divider(color: Colors.black, thickness: screenHeight*0.006,),
 //                   Expanded(
 //                     child: Container(
-//                       decoration: BoxDecoration(  
+//                       decoration: BoxDecoration(
 //                         borderRadius: BorderRadius.circular(screenWidth * 0.01),
 //                         color: Colors.grey[200], // Color de fondo del contenedor
 //                       ),
 //                       child: ListView.builder(
 //                         padding: EdgeInsets.only(top: screenHeight * 0.01, bottom: screenHeight * 0.01, left: screenWidth * 0.01, right: screenWidth * 0.01),
-//                         itemCount: tareas.length, 
+//                         itemCount: tareas.length,
 //                         itemBuilder: (context, index) {
 //                           return Padding(
 //                             padding: EdgeInsets.only(bottom: screenHeight * 0.01),
@@ -277,8 +271,6 @@
 //   }
 // }
 
-
-
 import 'package:dali/screen/adminCreadorTareas.dart';
 import 'package:dali/screen/adminEditarTareaPlantilla.dart';
 import 'package:flutter/material.dart';
@@ -286,7 +278,6 @@ import 'package:flutter/widgets.dart';
 
 import '../widget/barraMenu.dart';
 import 'package:dali/controlers/controladores.dart';
-
 
 class AdminTareasPlantilla extends StatefulWidget {
   @override
@@ -308,7 +299,8 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
     setState(() {
       _isLoading = true;
     });
-    final List<Map<String, dynamic>> tareasCargadas = await Controladores().cargarTareasPlantilla();
+    final List<Map<String, dynamic>> tareasCargadas =
+        await Controladores().cargarTareasPlantilla();
     setState(() {
       tareas = tareasCargadas;
       _ordenarLista(); // Ordena después de cargar
@@ -354,7 +346,8 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
               },
               child: Text(
                 "No",
-                style: TextStyle(fontSize: screenHeight * 0.02, color: Colors.black),
+                style: TextStyle(
+                    fontSize: screenHeight * 0.02, color: Colors.black),
               ),
             ),
             TextButton(
@@ -363,19 +356,19 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                 minimumSize: Size(screenWidth * 0.1, screenHeight * 0.07),
                 maximumSize: Size(screenWidth * 0.1, screenHeight * 0.07),
               ),
-              onPressed: () async{
+              onPressed: () async {
                 int id = tareas[index]['idTareaPlantilla'];
 
                 int resultado = await _borrarTareaAsync(id, index);
 
-                if(resultado != 200){
+                if (resultado != 200) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Error al borrar la tarea'),
                       duration: Duration(seconds: 2),
                     ),
                   );
-                }else{
+                } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Tarea borrada correctamente'),
@@ -383,12 +376,13 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                     ),
                   );
                 }
-                
+
                 Navigator.of(context).pop(); // Cierra el diálogo
               },
               child: Text(
                 "Sí",
-                style: TextStyle(fontSize: screenHeight * 0.02, color: Colors.white),
+                style: TextStyle(
+                    fontSize: screenHeight * 0.02, color: Colors.white),
               ),
             ),
           ],
@@ -398,21 +392,21 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
   }
 
   Future<int> _borrarTareaAsync(int id, int index) async {
-  try {
-    int respuesta = await Controladores().borrarTareaPlantilla(id);
+    try {
+      int respuesta = await Controladores().borrarTareaPlantilla(id);
 
-    if (respuesta == 200) {
-      // Actualiza el estado después del borrado exitoso
-    setState(() {
-      tareas.removeAt(index); // Elimina la tarea localmente
-    });
+      if (respuesta == 200) {
+        // Actualiza el estado después del borrado exitoso
+        setState(() {
+          tareas.removeAt(index); // Elimina la tarea localmente
+        });
+      }
+      return respuesta; // Indica éxito
+    } catch (e) {
+      print("Error al borrar la tarea: $e");
+      return 400; // Indica error
     }
-    return respuesta; // Indica éxito
-  } catch (e) {
-    print("Error al borrar la tarea: $e");
-    return 400; // Indica error
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -461,7 +455,8 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                         width: screenWidth * 0.1,
                         height: screenHeight * 0.06,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                          borderRadius:
+                              BorderRadius.circular(screenWidth * 0.01),
                           color: Colors.green,
                         ),
                         child: DropdownButton<String>(
@@ -490,21 +485,25 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                             size: screenWidth * 0.02,
                           ),
                           dropdownColor: Colors.green,
-                          borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                          borderRadius:
+                              BorderRadius.circular(screenWidth * 0.01),
                           underline: Container(height: 0),
                         ),
                       ),
                       // Botón de crear tarea plantilla
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size(screenWidth * 0.2, screenHeight * 0.06),
-                          maximumSize: Size(screenWidth * 0.2, screenHeight * 0.06),
+                          minimumSize:
+                              Size(screenWidth * 0.2, screenHeight * 0.06),
+                          maximumSize:
+                              Size(screenWidth * 0.2, screenHeight * 0.06),
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.01),
                           ),
                         ),
-                        onPressed: () async{
+                        onPressed: () async {
                           final shouldReload = await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -515,7 +514,8 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                             _cargarTareas();
                           }
                         },
-                        icon: Icon(Icons.add, color: Colors.white, size: screenWidth * 0.02),
+                        icon: Icon(Icons.add,
+                            color: Colors.white, size: screenWidth * 0.02),
                         label: Text(
                           'Crear tarea plantilla',
                           style: TextStyle(
@@ -543,19 +543,23 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                       : Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                              borderRadius:
+                                  BorderRadius.circular(screenWidth * 0.01),
                               color: Colors.grey[200],
                             ),
                             child: ListView.builder(
-                              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenHeight * 0.01),
                               itemCount: tareas.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding: EdgeInsets.only(bottom: screenHeight * 0.01),
+                                  padding: EdgeInsets.only(
+                                      bottom: screenHeight * 0.01),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.green,
-                                      borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                                      borderRadius: BorderRadius.circular(
+                                          screenWidth * 0.02),
                                     ),
                                     child: ListTile(
                                       title: Text(
@@ -571,16 +575,26 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           TextButton(
-                                            onPressed: () {
-                                              Navigator.push(
+                                            onPressed: () async {
+                                              final shouldReload =
+                                                  await Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => AdminEditarTareaPlantilla(titulo: tareas[index]['titulo']),
+                                                  builder: (context) =>
+                                                      AdminEditarTareaPlantilla(
+                                                          idTareaPlantilla:
+                                                              (tareas[index][
+                                                                      'idTareaPlantilla'])
+                                                                  .toString()),
                                                 ),
                                               );
+                                              if (shouldReload == true) {
+                                                _cargarTareas();
+                                              }
                                             },
                                             style: TextButton.styleFrom(
-                                              backgroundColor: Colors.green[100],
+                                              backgroundColor:
+                                                  Colors.green[100],
                                             ),
                                             child: Text(
                                               "Editar tarea plantilla",
@@ -598,7 +612,8 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                                               borrarTarea(index);
                                             },
                                             style: TextButton.styleFrom(
-                                              backgroundColor: Colors.green[100],
+                                              backgroundColor:
+                                                  Colors.green[100],
                                             ),
                                             child: Text(
                                               "Borrar tarea plantilla",
