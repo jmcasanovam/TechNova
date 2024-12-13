@@ -69,7 +69,7 @@ class BarraMenuProfe extends StatelessWidget {
       case 0:
         return 'Alumnos';
       case 1:
-        return 'Editar tarea';
+        return 'Pedir materiales';
       case 2:
         return 'Mi perfil';
       default:

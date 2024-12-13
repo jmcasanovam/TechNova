@@ -126,12 +126,19 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                                     children: materials.map((material) {
                                       return Padding(
                                         padding: EdgeInsets.symmetric(vertical: screenHeight * 0.005),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(material['nombre']),
-                                            Text("x${material['cantidad']}"),
-                                          ],
+                                        child: Container(
+                                          padding: EdgeInsets.only(left: screenWidth*0.05, right: screenWidth*0.1),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(screenWidth*0.01),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(material['nombre']),
+                                              Text("x${material['cantidad']}"),
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }).toList(),
