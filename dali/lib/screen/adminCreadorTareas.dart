@@ -19,6 +19,10 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
 
   // Controladores para los pasos
   List<String> pasosTexto = [];
+  List<String> pasosImagen = [];
+  List<String> pasosVideo = [];
+  List<String> pasosPictograma = [];
+  List<String> pasosAudio = [];
   List<bool> textoCompletado = [];
   List<bool> imagenCompletada = [];
   List<bool> videoCompletado = [];
@@ -33,6 +37,11 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
 
   void _inicializarPasos() {
     pasosTexto = List.generate(numeroDePasos, (_) => '');
+    pasosImagen = List.generate(numeroDePasos, (_) => '');
+    pasosVideo = List.generate(numeroDePasos, (_) => '');
+    pasosPictograma = List.generate(numeroDePasos, (_) => '');
+    pasosAudio = List.generate(numeroDePasos, (_) => '');
+
     textoCompletado = List.generate(numeroDePasos, (_) => false);
     imagenCompletada = List.generate(numeroDePasos, (_) => false);
     videoCompletado = List.generate(numeroDePasos, (_) => false);
@@ -54,6 +63,10 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
       if (nuevoNumero > numeroDePasos) {
         int diferencia = nuevoNumero - numeroDePasos;
         pasosTexto.addAll(List.generate(diferencia, (_) => ''));
+        pasosImagen.addAll(List.generate(diferencia, (_) => ''));
+        pasosVideo.addAll(List.generate(diferencia, (_) => ''));
+        pasosPictograma.addAll(List.generate(diferencia, (_) => ''));
+        pasosAudio.addAll(List.generate(diferencia, (_) => ''));
         textoCompletado.addAll(List.generate(diferencia, (_) => false));
         imagenCompletada.addAll(List.generate(diferencia, (_) => false));
         videoCompletado.addAll(List.generate(diferencia, (_) => false));
@@ -63,6 +76,10 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
       // Si el nuevo número es menor, se truncan las listas
       else if (nuevoNumero < numeroDePasos) {
         pasosTexto = pasosTexto.sublist(0, nuevoNumero);
+        pasosImagen = pasosImagen.sublist(0, nuevoNumero);
+        pasosVideo = pasosVideo.sublist(0, nuevoNumero);
+        pasosPictograma = pasosPictograma.sublist(0, nuevoNumero);
+        pasosAudio = pasosAudio.sublist(0, nuevoNumero);
         textoCompletado = textoCompletado.sublist(0, nuevoNumero);
         imagenCompletada = imagenCompletada.sublist(0, nuevoNumero);
         videoCompletado = videoCompletado.sublist(0, nuevoNumero);
@@ -75,7 +92,45 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
   }
 
 
-  void _mostrarDialogoTexto(int index) {
+  void _mostrarDialogoURL(int index, List<String> lista, String tipo, List<bool> completado) {
+    TextEditingController textoController = TextEditingController();
+    textoController.text = lista[index];
+    showDialog(
+      context: context,
+      builder: (context) {
+        final screenHeight = MediaQuery.of(context).size.height;
+        final screenWidth = MediaQuery.of(context).size.width;
+        return AlertDialog(
+          title: Text('Paso ${index + 1} - $tipo', style: TextStyle(fontSize: screenHeight*0.02),),
+          content: TextField(
+            style: TextStyle(fontSize: screenHeight*0.02),
+            controller: textoController,
+            maxLines: 4,
+            decoration: InputDecoration(hintText: 'Introduce la URL aquí', labelStyle: TextStyle(fontSize: screenHeight*0.02)),
+          ),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                backgroundColor: Colors.blue
+              ),
+              onPressed: () {
+                setState(() {
+                  lista[index] = textoController.text;
+                  completado[index] = textoController.text.isNotEmpty;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text('Confirmar', style: TextStyle(fontSize: screenHeight*0.02, color: Colors.white),),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+void _mostrarDialogoTexto(int index) {
     TextEditingController textoController = TextEditingController();
     textoController.text = pasosTexto[index];
     showDialog(
@@ -113,7 +168,7 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
     );
   }
 
-  Widget _cuadroFormato(String titulo, List<bool> completado, Function(int) onPressed, final ancho, final alto) {
+  Widget _cuadroFormato(String titulo, List<bool> completado, final ancho, final alto, List<String> lista, String tipo) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: ancho*0.02, left: ancho * 0.02),
@@ -133,7 +188,14 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
               return Padding(
                 padding: EdgeInsets.only(top: alto*0.02),
                 child: TextButton(
-                  onPressed: () => onPressed(index),
+                  onPressed: () {
+                    if (tipo == 'TEXTO') {
+                      _mostrarDialogoTexto(index);
+                    } else {
+                      _mostrarDialogoURL(index, lista, tipo, completado);
+                    }
+                  },
+                  
                   style: TextButton.styleFrom(
                     backgroundColor: completado[index] ? Colors.green[200] : Colors.blue,
                     foregroundColor: Colors.white,
@@ -248,19 +310,11 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
               child: Row( 
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _cuadroFormato('TEXTO', textoCompletado, _mostrarDialogoTexto, screenWidth, screenHeight),
-                  _cuadroFormato('IMAGEN', imagenCompletada, (index) {
-                    setState(() => imagenCompletada[index] = true);
-                  }, screenWidth, screenHeight),
-                  _cuadroFormato('VIDEO', videoCompletado, (index) {
-                    setState(() => videoCompletado[index] = true);
-                  }, screenWidth, screenHeight),
-                  _cuadroFormato('PICTOGRAMA', pictogramaCompletado, (index) {
-                    setState(() => pictogramaCompletado[index] = true);
-                  }, screenWidth, screenHeight),
-                  _cuadroFormato('AUDIO', audioCompletado, (index) {
-                    setState(() => audioCompletado[index] = true);
-                  }, screenWidth, screenHeight),
+                  _cuadroFormato('TEXTO', textoCompletado, screenWidth, screenHeight, pasosTexto, 'TEXTO'),
+                  _cuadroFormato('IMAGEN', imagenCompletada, screenWidth, screenHeight, pasosImagen, 'IMAGEN'),
+                  _cuadroFormato('VIDEO', videoCompletado, screenWidth, screenHeight, pasosVideo, 'VIDEO'),
+                  _cuadroFormato('PICTOGRAMA', pictogramaCompletado, screenWidth, screenHeight, pasosPictograma, 'PICTOGRAMA'),
+                  _cuadroFormato('AUDIO', audioCompletado, screenWidth, screenHeight, pasosAudio, 'AUDIO'),
                 ],
               ),
             ),
@@ -278,7 +332,7 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
                 tareaplantilla = Tareaplantilla(titulo: tituloTarea, descripcion: descripcionTarea);
 
                 String datos_texto = pasosTexto.join("|");
-                pasos = Pasos(urlTexto: datos_texto, urlImagen: [], urlVideo: [], urlPictograma: [], urlAudio: []);
+                pasos = Pasos(urlTexto: datos_texto, urlImagen: pasosImagen, urlVideo: pasosVideo, urlPictograma: pasosPictograma, urlAudio: pasosAudio);
                 
                 int resultado = await Controladores().crearTareaPlantilla(tareaplantilla, pasos);
                 if (resultado == 201) {
