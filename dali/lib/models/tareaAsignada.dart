@@ -25,21 +25,26 @@ class TareaAsignada {
   );
 
   TareaAsignada.fromJson(Map<String, dynamic> json) {
-    idTareaAsignada = json['idTareaAsignada'];
-    idEstudiante = json['idEstudiante'];
-    idTareaPlantilla = json['idTareaPlantilla'];
-    completada = json['completada'];
-    formato = json['formato'];
-    fechaAsignacion = DateTime.parse(json['fechaAsignacion']);
-    fechaExpiracion = DateTime.parse(json['fechaExpiracion']);
-    fotoResultado = json['fotoResultado'];
-    valoracion = json['valoracion'];
-    miniatura = json['miniatura'];
-    fechaCompletada = DateTime.parse(json['fechaCompletada']);
-    _idPasos = json['_idPasos'];
-    titulo = json['titulo'];
-  }
-  
+  idTareaAsignada = json['idTareaAsignada'] ?? 0; // Asignamos 0 si el valor es null
+  idEstudiante = json['idEstudiante'] ?? 0; // Asignamos 0 si el valor es null
+  idTareaPlantilla = json['idTareaPlantilla'] ?? 0; // Asignamos 0 si el valor es null
+  completada = json['completada'] ?? 0; // Asignamos 0 si el valor es null
+  formato = json['formato'] ?? ''; // Asignamos cadena vacía si el valor es null
+  fechaAsignacion = json['fechaAsignacion'] != null 
+      ? DateTime.parse(json['fechaAsignacion']) 
+      : DateTime.now(); // Asignamos la fecha actual si el valor es null
+  fechaExpiracion = json['fechaExpiracion'] != null 
+      ? DateTime.parse(json['fechaExpiracion']) 
+      : DateTime.now(); // Asignamos la fecha actual si el valor es null
+  fotoResultado = json['fotoResultado'] ?? ''; // Asignamos cadena vacía si el valor es null
+  valoracion = json['valoracion'] ?? ''; // Asignamos cadena vacía si el valor es null
+  miniatura = json['miniatura'] ?? ''; // Asignamos cadena vacía si el valor es null
+  fechaCompletada = json['fechaCompletada'] != null 
+      ? DateTime.parse(json['fechaCompletada']) 
+      : null; // Asignamos null si no existe la fecha
+  _idPasos = json['_idPasos'] ?? 0; // Asignamos 0 si el valor es null
+  titulo = json['titulo'] ?? ''; // Asignamos cadena vacía si el valor es null
+}
 
   int get idPasos => _idPasos;
 
@@ -50,8 +55,8 @@ class TareaAsignada {
       'idTareaPlantilla': idTareaPlantilla,
       'completada': completada,
       'formato': formato,
-      'fechaAsignacion': fechaAsignacion?.toIso8601String(),
-      'fechaExpiracion': fechaExpiracion?.toIso8601String(),
+      'fechaAsignacion': fechaAsignacion.toIso8601String(),
+      'fechaExpiracion': fechaExpiracion.toIso8601String(),
       'fotoResultado': fotoResultado,
       'valoracion': valoracion,
       'miniatura': miniatura,
