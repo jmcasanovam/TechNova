@@ -753,35 +753,37 @@ class Controladores {
   }
 }
 
- Future<List<List<TareaAsignada>>> obtenerTareasMiniaturaTitulo(String nickname) async {
-    try {
-      // Realizar la solicitud GET a la API
-      final response = await http.get(Uri.parse('http://127.0.0.1:5000/get_tareas_miniatura_titulo/$nickname'));
+ Future<List<TareaAsignada>> obtenerTareasMiniaturaTituloFechaCompletada(String nickname) async {
+  try {
+    // Realizar la solicitud GET a la API
+    final response = await http.get(
+      Uri.parse('http://127.0.0.1:5000/get_tareas_miniatura_titulo_fechas/$nickname'),
+    );
 
-      if (response.statusCode == 200) {
-        // Si la respuesta es exitosa (código 200)
-        final List<dynamic> data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      // Decodificar el cuerpo de la respuesta
+      final Map<String, dynamic> data = json.decode(response.body);
 
-        // Crear una lista de listas de tareas
-        List<List<TareaAsignada>> tareasPorDia = [];
+      // Verificar si el nickname tiene tareas asignadas
+      if (data.containsKey(nickname)) {
+        final List<dynamic> tareasJson = data[nickname];
 
-        // Divide las tareas por día en la respuesta
-        for (var dia in data) {
-          List<TareaAsignada> tareasDia = [];
-          for (var tareaJson in dia) {
-            tareasDia.add(TareaAsignada.fromJson(tareaJson));
-          }
-          tareasPorDia.add(tareasDia);
-        }
+        // Convertir la lista JSON en una lista de objetos TareaAsignada
+        List<TareaAsignada> tareas = tareasJson
+            .map((tareaJson) => TareaAsignada.fromJson(tareaJson))
+            .toList();
 
-        return tareasPorDia;
+        return tareas;
       } else {
-        throw Exception('Error al cargar tareas');
+        throw Exception('No se encontraron tareas para el nickname $nickname.');
       }
-    } catch (e) {
-      throw Exception('Error en la solicitud: $e');
+    } else {
+      throw Exception('Error al cargar las tareas: ${response.statusCode}');
     }
+  } catch (e) {
+    throw Exception('Error en la solicitud: $e');
   }
+}
 
   // Función para obtener una tarea plantilla por su ID
   Future<Tareaplantilla> getTareaPlantilla(String idTareaPlantilla) async {

@@ -38,43 +38,40 @@ void initState() {
 
 
   void accederTarea(BuildContext context) {
-    if(_tareas.elementAt(_tareaActual).formato == 'menu'){
+     if (_tareas.isNotEmpty) {
+    if (_tareas.elementAt(_tareaActual).formato == 'menu') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ComandasAlumno()),
       );
-    }
-    else {
+    } else {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const PresentacionTarea()),
       );
     }
   }
+  }
 
-  void tareaAnterior() {
-    setState(() {
-      if (_tareaActual > 0) {
+ void tareaAnterior() {
+  setState(() {
+    if (_tareas.isNotEmpty && _tareaActual > 0) {
       _tareaActual--;
-    }
-    else {
+    } else if (_tareas.isNotEmpty) {
       _tareaActual = _tareas.length - 1;
     }
-    });
-    
+  });
+}
 
-  }
-
-  void tareaSiguiente() {
-    setState(() {
-      if (_tareaActual < _tareas.length - 1) {
+void tareaSiguiente() {
+  setState(() {
+    if (_tareas.isNotEmpty && _tareaActual < _tareas.length - 1) {
       _tareaActual++;
-    }
-    else {
+    } else if (_tareas.isNotEmpty) {
       _tareaActual = 0;
     }
-    });
-  }
+  });
+}
   // Método para cargar y procesar las tareas
 Future<void> _cargarTareas() async {
   try {
@@ -92,6 +89,16 @@ Future<void> _cargarTareas() async {
 
   @override
   Widget build(BuildContext context) {
+    if (_tareas.isEmpty) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Inicio Alumno'),
+      ),
+      body: Center(
+        child: CircularProgressIndicator(), // Indicador de carga
+      ),
+    );
+  }
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
