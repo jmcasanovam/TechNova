@@ -1,15 +1,17 @@
-import 'package:dali/models/tareaAsignada.dart';
 import 'package:flutter/material.dart';
+import 'package:dali/models/tareaAsignada.dart';
+import 'package:dali/controlers/controladores.dart';
 import 'package:intl/intl.dart';
 
-
 class Historial extends StatefulWidget {
-  const Historial({super.key});
+  final String _username;
+  const Historial({super.key, required String username}) : _username = username;
 
   @override
   _HistorialState createState() => _HistorialState();
 }
-  // This widget is the root of your application.
+
+// This widget is the root of your application.
 class _HistorialState extends State<Historial> {
 
   void volverAtras(BuildContext context) {
@@ -191,7 +193,7 @@ class _HistorialState extends State<Historial> {
                                                           ClipRRect(
                                                             borderRadius: BorderRadius.circular(screenWidth * 0.07),
                                                             child: Image.asset(
-                                                              dias[dia_actual][pagina_actual].imagen,
+                                                              dias[dia_actual][pagina_actual].miniatura,
                                                               width: screenWidth * 0.1,
                                                               height: screenHeight * 0.1,
                                                             ),
@@ -199,7 +201,7 @@ class _HistorialState extends State<Historial> {
                                                           SizedBox(width: screenWidth * 0.02),
                                                           Expanded(
                                                             child: Text(
-                                                              dias[dia_actual][pagina_actual].nombre,
+                                                              dias[dia_actual][pagina_actual].titulo,
                                                               style: TextStyle(
                                                                 color: Colors.white,
                                                                 fontSize: screenWidth * 0.03,

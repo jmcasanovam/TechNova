@@ -729,4 +729,57 @@ class Controladores {
     }
 
   }
+
+
+  Future<List<TareaAsignada>> obtenerTareasFechaExpiracion(String nickname) async {
+  final url = Uri.parse('http://127.0.0.1:5000/get_tareas_fechaExpiracion/$nickname');
+
+  // Hacer la solicitud GET
+  final response = await http.get(
+    url,
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    final List<dynamic> tareasData = data[nickname] ?? [];
+
+    // Convertir la respuesta en objetos Tarea
+    return tareasData.map<TareaAsignada>((tarea) {
+      return TareaAsignada.fromJson(tarea);
+    }).toList();
+  } else {
+    throw Exception('Error en la solicitud: ${response.statusCode}');
+  }
+}
+
+ Future<List<List<TareaAsignada>>> obtenerTareasMiniaturaTitulo(String nickname) async {
+    try {
+      // Realizar la solicitud GET a la API
+      final response = await http.get(Uri.parse('http://127.0.0.1:5000/get_tareas_miniatura_titulo/$nickname'));
+
+      if (response.statusCode == 200) {
+        // Si la respuesta es exitosa (código 200)
+        final List<dynamic> data = json.decode(response.body);
+
+        // Crear una lista de listas de tareas
+        List<List<TareaAsignada>> tareasPorDia = [];
+
+        // Divide las tareas por día en la respuesta
+        for (var dia in data) {
+          List<TareaAsignada> tareasDia = [];
+          for (var tareaJson in dia) {
+            tareasDia.add(TareaAsignada.fromJson(tareaJson));
+          }
+          tareasPorDia.add(tareasDia);
+        }
+
+        return tareasPorDia;
+      } else {
+        throw Exception('Error al cargar tareas');
+      }
+    } catch (e) {
+      throw Exception('Error en la solicitud: $e');
+    }
+  }
 }

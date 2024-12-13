@@ -3,7 +3,8 @@ import 'package:dali/widget/botonCerrarSesion.dart';
 import 'package:flutter/material.dart';
 
 class MenuAlumnoScreen extends StatefulWidget {
-  const MenuAlumnoScreen({super.key});
+  final String _username;
+  const MenuAlumnoScreen({super.key,required String username}) : _username = username;
 
   @override
   State<MenuAlumnoScreen> createState() => _MenuAlumnoScreenState();
@@ -77,7 +78,7 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Historial()));
+                              builder: (context) =>   Historial(username: widget._username)));
                     }),
                   ],
                 ))
