@@ -860,4 +860,26 @@ class Controladores {
       return null;
     }
   }
+
+  //Comprobar login de administrador y educador
+  Future< Map<String?, String?>?> loginAdminEducador(String nickname, String password) async {
+    final url = Uri.parse('http://127.0.0.1:5000/login_admin_profesor');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'nickname': nickname, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      Map<String?, String?> map = {
+        'idUsuario': data['idUsuario'].toString(),
+        'tipo': data['tipo'],
+      };
+      return map;
+    } else {
+      return null;
+    }
+
+  }
 }
