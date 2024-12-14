@@ -1,9 +1,11 @@
 import 'package:dali/screen/adminAsignarTareas.dart';
+import 'package:dali/screen/adminChats.dart';
 import 'package:dali/screen/adminCreadorTareas.dart';
 import 'package:dali/screen/adminPerfil.dart';
 import 'package:dali/screen/adminTareasPlantilla.dart';
 import 'package:dali/screen/adminUsuarios.dart';
 import 'package:dali/screen/adminMenus.dart';
+import 'package:dali/screen/chatAlumno.dart';
 import 'package:dali/screen/loginProfesor.dart';
 import 'package:dali/screen/profeAlumnos.dart';
 import 'package:dali/screen/profeMateriales.dart';
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
       // home: AdminPerfil(),
       // home: LoginProfesor(),
       // home: ProfeUsuarios(),
+      // home: ChatAlumno(),
+
 
       routes: {
         '/adminUsuarios': (context) => AdminUsuarios(),
@@ -43,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/profeUsuarios': (context) => ProfeUsuarios(),
         '/profeMateriales': (context) => ProfeMateriales(),
         '/profePerfil': (context) => ProfePerfil(),
+        '/adminChats':  (context) => AdminChats(),
 
 
       },

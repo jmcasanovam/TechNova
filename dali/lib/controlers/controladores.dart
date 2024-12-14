@@ -2,11 +2,15 @@ import 'dart:convert';
 import 'package:dali/models/pasos.dart';
 import 'package:dali/models/tareaAsignada.dart';
 import 'package:dali/models/tareaPlantilla.dart';
+import 'package:dali/models/usuario.dart';
 import 'package:http/http.dart' as http;
 
 class Controladores {
+  // String _url_cabeza = "http://172.20.10.2:5000";
+  String _url_cabeza = "http://127.0.0.1:5000";
+
   Future<int> login(String username, String password) async {
-    final url = Uri.parse('http://127.0.0.1:5000/login');
+    final url = Uri.parse('$_url_cabeza/login');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -27,7 +31,7 @@ class Controladores {
 
   Future<bool> login_estudiante(String nickname, String password) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/login_estudiante'); // Cambia por la URL de tu API
+        '$_url_cabeza/login_estudiante'); // Cambia por la URL de tu API
     try {
       final response = await http.post(
         url,
@@ -53,7 +57,7 @@ class Controladores {
 
   Future<List<TareaAsignada>> obtenerTareas(String username) async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/get_tareas' + "?idAlumno=" + username);
+        Uri.parse('$_url_cabeza/get_tareas' + "?idAlumno=" + username);
     final response = await http.get(url);
 
     List<TareaAsignada> tareas = [];
@@ -74,7 +78,7 @@ class Controladores {
 //foto de perfil?
   Future<List<Map<String, String>>> getEstudiantesNicknameyPerfil() async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_estudiantes_foto_nickname'); // Ajusta el endpoint según tu API
+        '$_url_cabeza/get_estudiantes_foto_nickname'); // Ajusta el endpoint según tu API
 
     try {
       final response = await http.get(
@@ -109,7 +113,7 @@ class Controladores {
 
   Future<Map<String, dynamic>?> getInfoEstudiante(String nickname) async {
     // URL del endpoint en tu backend
-    final url = Uri.parse('http://127.0.0.1:5000/get_estudiante');
+    final url = Uri.parse('$_url_cabeza/get_estudiante');
 
     try {
       // Realiza la solicitud POST enviando el nickname en el cuerpo
@@ -141,7 +145,7 @@ class Controladores {
   Future<List<Map<String, dynamic>>> getTareasCompletadasPorDia(
       String nickname) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_tareas_completadas'); // Ajusta el endpoint de tu API
+        '$_url_cabeza/get_tareas_completadas'); // Ajusta el endpoint de tu API
 
     try {
       // Realiza una solicitud POST enviando el nickname
@@ -174,7 +178,7 @@ class Controladores {
   Future<List<Map<String, dynamic>>> getTareasAsignadasPorHoy(
       String nickname) async {
     final url =
-        Uri.parse('http://127.0.0.1:5000/get_tareas_hoy'); // Ajusta el endpoint
+        Uri.parse('$_url_cabeza/get_tareas_hoy'); // Ajusta el endpoint
 
     try {
       // Realiza la solicitud POST con el nickname
@@ -205,7 +209,7 @@ class Controladores {
       String nickname) async {
     // Construir la URL con el parámetro de consulta (query string)
     final url =
-        Uri.parse('http://127.0.0.1:5000/get_admin_estudiantes/$nickname');
+        Uri.parse('$_url_cabeza/get_admin_estudiantes/$nickname');
 
     try {
       // Realiza la solicitud GET
@@ -234,7 +238,7 @@ class Controladores {
   Future<List<Map<String, dynamic>>> getTareasPorNickname(
       String nickname) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_tareas_estudiante/$nickname'); // Usar localhost para emuladores
+        '$_url_cabeza/get_tareas_estudiante/$nickname'); // Usar localhost para emuladores
 
     try {
       final response = await http.get(url);
@@ -274,7 +278,7 @@ class Controladores {
   Future<bool> actualizarPerfilPorNickname(
       String nickname, Map<String, dynamic> datosActualizados) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/update_usuario/$nickname'); // Ajusta la URL al endpoint correspondiente
+        '$_url_cabeza/update_usuario/$nickname'); // Ajusta la URL al endpoint correspondiente
 
     try {
       // Realiza la solicitud PUT con el nickname y los nuevos datos
@@ -302,7 +306,7 @@ class Controladores {
 // Función para cargar todas las tareasPlantilla para el ADMIN
   Future<List<Map<String, dynamic>>> cargarTareasPlantilla() async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_tareas_plantilla'); // Asegúrate de que la URL es correcta
+        '$_url_cabeza/get_tareas_plantilla'); // Asegúrate de que la URL es correcta
 
     try {
       // Realiza la solicitud GET
@@ -330,7 +334,7 @@ class Controladores {
 
   Future<List<Map<String, dynamic>>> cargarNicknamesEstudiantes() async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_admin_estudiantes'); // Ajusta la URL si es necesario
+        '$_url_cabeza/get_admin_estudiantes'); // Ajusta la URL si es necesario
 
     try {
       // Realiza la solicitud GET
@@ -366,7 +370,7 @@ class Controladores {
 // Función para cargar todos los nombres y nickname de los estudiantes para el ADMIN
   Future<List<Map<String, dynamic>>> cargarAlumnos() async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_nombre_nickname_estudiantes'); // Asegúrate de que la URL es correcta
+        '$_url_cabeza/get_nombre_nickname_estudiantes'); // Asegúrate de que la URL es correcta
 
     try {
       // Realiza la solicitud GET
@@ -404,7 +408,7 @@ class Controladores {
       String valoracion,
       String miniatura) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/asignar_tarea'); // Asegúrate de que la URL es correcta
+        '$_url_cabeza/asignar_tarea'); // Asegúrate de que la URL es correcta
 
     try {
       // Realiza la solicitud POST
@@ -449,7 +453,7 @@ class Controladores {
 // Función para crear un estudiante
   Future<Map<String, dynamic>> crearEstudiante(
       Map<String, dynamic> data) async {
-    final url = Uri.parse('http://127.0.0.1:5000/crear_estudiante');
+    final url = Uri.parse('$_url_cabeza/crear_estudiante');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -465,7 +469,7 @@ class Controladores {
 
   Future<List<Map<String, dynamic>>> cargarMenu() async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_menu'); // Asegúrate de que la URL es correcta
+        '$_url_cabeza/get_menu'); // Asegúrate de que la URL es correcta
 
     try {
       // Realiza la solicitud GET
@@ -509,7 +513,7 @@ class Controladores {
 
       // Construir la URL con el parámetro de fecha
       final url = Uri.parse(
-          'http://127.0.0.1:5000/get_menu?fechaMenu=$fechaFormatoApi');
+          '$_url_cabeza/get_menu?fechaMenu=$fechaFormatoApi');
 
       // Realiza la solicitud GET
       final response = await http.get(url);
@@ -547,7 +551,7 @@ class Controladores {
 
     try {
       // Construir la URL con el parámetro nombreMenu
-      final url = Uri.parse('http://127.0.0.1:5000/get_menu_pdf/');
+      final url = Uri.parse('$_url_cabeza/get_menu_pdf/');
 
       // Realiza la solicitud GET con el nombre del menú en el cuerpo (JSON)
       final response = await http.get(url, headers: {
@@ -580,7 +584,7 @@ class Controladores {
   // Función para crear un administrador en la base de datos
   Future<Map<String, dynamic>> crearAdministrador(
       Map<String, dynamic> data) async {
-    final url = Uri.parse('http://127.0.0.1:5000/crear_administrador');
+    final url = Uri.parse('$_url_cabeza/crear_administrador');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -596,7 +600,7 @@ class Controladores {
 
 // Función para crear un educador en la base de datos
   Future<Map<String, dynamic>> crearEducador(Map<String, dynamic> data) async {
-    final url = Uri.parse('http://127.0.0.1:5000/crear_educador');
+    final url = Uri.parse('$_url_cabeza/crear_educador');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -612,7 +616,7 @@ class Controladores {
 
   Future<int> obtenerCantidadMenus(String fecha) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_menu_count/?fecha=$fecha'); // URL con el parámetro fecha como query string
+        '$_url_cabeza/get_menu_count/?fecha=$fecha'); // URL con el parámetro fecha como query string
 
     try {
       // Realiza la solicitud GET
@@ -638,7 +642,7 @@ class Controladores {
   Future<bool> editarPerfilAlumno(
       String nickname, Map<String, dynamic> datosActualizados) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/editar_perfil_alumno'); // Ruta sin el nickname en la URL
+        '$_url_cabeza/editar_perfil_alumno'); // Ruta sin el nickname en la URL
 
     try {
       // Agregar el nickname al cuerpo de los datos
@@ -668,7 +672,7 @@ class Controladores {
   Future<List<TareaAsignada>> obtenerTareasNoCompletadas(
       String nickname) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/get_tareas_no_completadas/?nickname=$nickname');
+        '$_url_cabeza/get_tareas_no_completadas/?nickname=$nickname');
 
     // Hacer la solicitud GET
     final response = await http.get(
@@ -695,7 +699,7 @@ class Controladores {
 
   // Función para crear una tarea plantilla
   Future<int> crearTareaPlantilla(Tareaplantilla tareaplantilla, Pasos pasos) async {
-    final url = Uri.parse('http://127.0.0.1:5000/tarea_plantilla');
+    final url = Uri.parse('$_url_cabeza/tarea_plantilla');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -715,7 +719,7 @@ class Controladores {
 
   // Función para borrar una tarea plantilla
   Future<int> borrarTareaPlantilla(int idTareaPlantilla) async {
-    final url = Uri.parse('http://127.0.0.1:5000/borrar_tarea_plantilla');
+    final url = Uri.parse('$_url_cabeza/borrar_tarea_plantilla');
     final response = await http.delete(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -726,6 +730,158 @@ class Controladores {
       return 200;
     } else {
       throw Exception('Error al borrar tarea plantilla: ${response.body}');
+    }
+
+  }
+
+
+  Future<List<TareaAsignada>> obtenerTareasFechaExpiracion(String nickname) async {
+  final url = Uri.parse('$_url_cabeza/get_tareas_fechaExpiracion/$nickname');
+
+  // Hacer la solicitud GET
+  final response = await http.get(
+    url,
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    final List<dynamic> tareasData = data[nickname] ?? [];
+
+    // Convertir la respuesta en objetos Tarea
+    return tareasData.map<TareaAsignada>((tarea) {
+      return TareaAsignada.fromJson(tarea);
+    }).toList();
+  } else {
+    throw Exception('Error en la solicitud: ${response.statusCode}');
+  }
+}
+
+ Future<List<TareaAsignada>> obtenerTareasMiniaturaTituloFechaCompletada(String nickname) async {
+  try {
+    // Realizar la solicitud GET a la API
+    final response = await http.get(
+      Uri.parse('$_url_cabeza/get_tareas_miniatura_titulo_fechas/$nickname'),
+    );
+
+    if (response.statusCode == 200) {
+      // Decodificar el cuerpo de la respuesta
+      final Map<String, dynamic> data = json.decode(response.body);
+
+      // Verificar si el nickname tiene tareas asignadas
+      if (data.containsKey(nickname)) {
+        final List<dynamic> tareasJson = data[nickname];
+
+        // Convertir la lista JSON en una lista de objetos TareaAsignada
+        List<TareaAsignada> tareas = tareasJson
+            .map((tareaJson) => TareaAsignada.fromJson(tareaJson))
+            .toList();
+
+        return tareas;
+      } else {
+        throw Exception('No se encontraron tareas para el nickname $nickname.');
+      }
+    } else {
+      throw Exception('Error al cargar las tareas: ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception('Error en la solicitud: $e');
+  }
+}
+
+  // Función para obtener una tarea plantilla por su ID
+  Future<Tareaplantilla> getTareaPlantilla(String idTareaPlantilla) async {
+    final url = Uri.parse(
+        '$_url_cabeza/consultar_tarea_plantilla?idTareaPlantilla=$idTareaPlantilla');
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      try {
+        final tareaPlantilla = Tareaplantilla.fromJson(data);
+        // print("Tarea plantilla cargada correctamente:");
+        // print("Título: ${tareaPlantilla.titulo}");
+        // tareaPlantilla.imprimir();
+        return tareaPlantilla;
+      } catch (e) {
+        print("Error al procesar Tareaplantilla: $e");
+        throw Exception('Error al cargar la tarea plantilla: $e');
+      }
+    } else {
+      throw Exception('Error al consultar tarea plantilla: ${response.body}');
+    }
+  }
+
+  //Actualizar tarea plantilla
+  Future<int> actualizarTareaPlantilla(
+      Tareaplantilla tareaplantilla, Pasos pasos) async {
+    final url = Uri.parse('$_url_cabeza/actualizar_tarea_plantilla');
+    final response = await http.put(url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'tareaPlantilla': tareaplantilla.toJson(),
+          'pasos': pasos.toJson(),
+        }));
+
+    if (response.statusCode == 200) {
+      return 200;
+    } else {
+      return 400;
+    }
+  }
+
+  Future<Usuario?> getInfoEstudiante2(String nickname) async {
+    // URL del endpoint en tu backend
+    final url = Uri.parse('$_url_cabeza/get_info_estudiante/'+ "?nickname=" + nickname);
+
+    try {
+      
+      final response = await http.get(
+        url,
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      // Verifica si la solicitud fue exitosa
+      if (response.statusCode == 200) {
+        // Decodifica la respuesta JSON
+        final data = jsonDecode(response.body);
+        final usuario = Usuario.fromJson(data);
+        return usuario;
+      } else {
+        // Maneja errores con códigos HTTP distintos de 200
+        final error = jsonDecode(response.body);
+        print('Error: ${error['error']}');
+        return null;
+      }
+    } catch (e) {
+      // Maneja errores generales de conexión o excepciones
+      print('Error al realizar la solicitud: $e');
+      return null;
+    }
+  }
+
+  //Comprobar login de administrador y educador
+  Future< Map<String?, String?>?> loginAdminEducador(String nickname, String password) async {
+    final url = Uri.parse('$_url_cabeza/login_admin_profesor');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'nickname': nickname, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      Map<String?, String?> map = {
+        'idUsuario': data['idUsuario'].toString(),
+        'tipo': data['tipo'],
+      };
+      return map;
+    } else {
+      return null;
     }
 
   }

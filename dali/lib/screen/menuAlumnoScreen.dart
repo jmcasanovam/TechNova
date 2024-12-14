@@ -3,7 +3,8 @@ import 'package:dali/widget/botonCerrarSesion.dart';
 import 'package:flutter/material.dart';
 
 class MenuAlumnoScreen extends StatefulWidget {
-  const MenuAlumnoScreen({super.key});
+  final String _username;
+  const MenuAlumnoScreen({super.key,required String username}) : _username = username;
 
   @override
   State<MenuAlumnoScreen> createState() => _MenuAlumnoScreenState();
@@ -72,13 +73,21 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
 
                     // }),
                     // ],
-                    _crearBoton(context, 'Historial', 'images/historial.png',
-                        () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Historial()));
-                    }),
+                    _crearBoton(context, 'Historial', 'images/historial.png', () {
+  if (widget._username.isNotEmpty) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Historial(username: widget._username),
+      ),
+    );
+  } else {
+    // Mostrar un mensaje de error si el username está vacío o es nulo
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('El nombre de usuario es inválido')),
+    );
+  }
+}),
                   ],
                 ))
               ],
