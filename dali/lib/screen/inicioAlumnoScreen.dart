@@ -38,48 +38,45 @@ void initState() {
 
 
   void accederTarea(BuildContext context) {
-    if(_tareas.elementAt(_tareaActual).formato == 'menu'){
+     if (_tareas.isNotEmpty) {
+    if (_tareas.elementAt(_tareaActual).formato == 'menu') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ComandasAlumno()),
       );
-    }
-    else {
+    } else {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const PresentacionTarea()),
       );
     }
   }
+  }
 
-  void tareaAnterior() {
-    setState(() {
-      if (_tareaActual > 0) {
+ void tareaAnterior() {
+  setState(() {
+    if (_tareas.isNotEmpty && _tareaActual > 0) {
       _tareaActual--;
-    }
-    else {
+    } else if (_tareas.isNotEmpty) {
       _tareaActual = _tareas.length - 1;
     }
-    });
-    
+  });
+}
 
-  }
-
-  void tareaSiguiente() {
-    setState(() {
-      if (_tareaActual < _tareas.length - 1) {
+void tareaSiguiente() {
+  setState(() {
+    if (_tareas.isNotEmpty && _tareaActual < _tareas.length - 1) {
       _tareaActual++;
-    }
-    else {
+    } else if (_tareas.isNotEmpty) {
       _tareaActual = 0;
     }
-    });
-  }
+  });
+}
   // Método para cargar y procesar las tareas
 Future<void> _cargarTareas() async {
   try {
     final controladores = Controladores(); // Crear instancia de Controladores
-    final List<TareaAsignada> tareas = await controladores.obtenerTareasNoCompletadas("pedritoxd");
+    final List<TareaAsignada> tareas = await controladores.obtenerTareasNoCompletadas(widget._username);
 
     // Actualizar la lista de tareas
     setState(() {
@@ -92,6 +89,16 @@ Future<void> _cargarTareas() async {
 
   @override
   Widget build(BuildContext context) {
+    if (_tareas.isEmpty) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Inicio Alumno'),
+      ),
+      body: Center(
+        child: CircularProgressIndicator(), // Indicador de carga
+      ),
+    );
+  }
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -114,7 +121,7 @@ Future<void> _cargarTareas() async {
                           fontWeight: FontWeight.bold,
                         )),
 
-                    const BotonMenu()
+                    BotonMenu(username: widget._username),
                   ],
                 ),
                 SizedBox(height: screenHeight * 0.01),
@@ -182,14 +189,14 @@ Future<void> _cargarTareas() async {
                                               borderRadius:
                                                   BorderRadius.circular(screenWidth * 0.07),
                                               child: Image.asset(
-                                                _tareas.elementAt(_tareaActual).imagen,
+                                                _tareas.elementAt(_tareaActual).miniatura,
                                                 fit: BoxFit
                                                     .cover, // Ensure the image fits the container
                                               ),
                                             ),
                                           ),
                                           Text(
-                                            _tareas.elementAt(_tareaActual).nombre,
+                                            _tareas.elementAt(_tareaActual).titulo,
                                             style: TextStyle(
                                               fontSize: screenWidth * 0.05,
                                               fontWeight: FontWeight.bold,
@@ -230,12 +237,15 @@ Future<void> _cargarTareas() async {
 
 
 class BotonMenu extends StatelessWidget {
-  const BotonMenu({super.key});
+String _username = '';
+   BotonMenu({super.key,required String username}) {
+    _username = username;
+  }
 
   void abrirMenu(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const MenuAlumnoScreen()),
+      MaterialPageRoute(builder: (context) =>  MenuAlumnoScreen(username: _username)),
     );
   }
 

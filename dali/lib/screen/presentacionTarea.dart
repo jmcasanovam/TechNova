@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:dali/models/tareaAsignada.dart';
+import 'package:dali/screen/chatAlumno.dart';
 import 'package:flutter/material.dart';
 
 
@@ -92,7 +93,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                           FittedBox(
                             fit: BoxFit.scaleDown, // Escala hacia abajo si el texto es demasiado grande
                             child: Text(
-                              _tarea.nombre,
+                              _tarea.titulo,
                               style: TextStyle(
                                 fontSize: screenWidth * 0.08,
                                 fontWeight: FontWeight.bold,
@@ -393,7 +394,12 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                     width: screenWidth * 0.1,
                                   ),
                                   onPressed: () {
-                                    // Acción del botón
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChatAlumno(),
+                                      ),
+                                    );
                                   },
                                 ),
                                 Text(

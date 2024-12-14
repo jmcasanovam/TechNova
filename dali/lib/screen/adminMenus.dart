@@ -21,6 +21,7 @@ class _AdminMenusState extends State<AdminMenus> {
   int numero_menus = 0;
   bool comanda_tomada = false;
   bool tarea_asignada = false;
+  bool confirmable = false;
   List<Menu> menus = [];
   List<TextEditingController> controllers = [];
     final TextEditingController controladorNumMenus = TextEditingController();
@@ -140,9 +141,32 @@ class _AdminMenusState extends State<AdminMenus> {
                                     return TextEditingController(text: menus[index].nombre);
                                   });
                                 },
-                                child: Text('Actualizar', style: TextStyle(
+                                child: Text('Actualizar Cantidad', style: TextStyle(
                                   fontSize: screenHeight * 0.02,
                                 ),),
+                              ),
+                              SizedBox(width: screenWidth * 0.02),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
+                                  maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                  backgroundColor: Colors.red,
+                                ),
+                                onPressed: menus.length > 0 ?() {
+                                  setState(() {
+                                    for (int i = 0; i < menus.length; i++)
+                                      menus[i].set_nombre(controllers[i].text);
+                                    
+                                    confirmable = false;
+                                  });
+                                }:null,
+                                child: Text(
+                                  'Confirmar Cambios',
+                                  style: TextStyle(
+                                    fontSize: screenHeight * 0.02,
+                                    color: Colors.white
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -156,12 +180,12 @@ class _AdminMenusState extends State<AdminMenus> {
                                     SizedBox(
                                       width: screenWidth * 0.2,
                                       child: TextField(
-                                        keyboardType: TextInputType.number,
                                         controller: controllers[i],
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.025,
                                         ),
+                                      onChanged: (text){ confirmable = true;},
                                       ),
                                     ),
                                   SizedBox(width: screenWidth*0.01),
@@ -178,7 +202,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                       fontSize: screenHeight * 0.02,
                                     ),),
                                   ),
-                                  ElevatedButton(
+                                  /*ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
                                       maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
@@ -193,7 +217,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                       fontSize: screenHeight * 0.02,
                                     ),),
                                     
-                                  ),
+                                  ),*/
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
@@ -251,11 +275,11 @@ class _AdminMenusState extends State<AdminMenus> {
                                   fontSize: screenHeight * 0.025,
                                 ),
                               ),
-                              SizedBox(width: screenWidth * 0.02),
+                              SizedBox(width: screenWidth*0.05),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(screenWidth * 0.2, screenHeight * 0.1),
-                                  maximumSize: Size(screenWidth * 0.2, screenHeight * 0.1),
+                                  minimumSize: Size(screenWidth * 0.24, screenHeight * 0.1),
+                                  maximumSize: Size(screenWidth * 0.24, screenHeight * 0.1),
                                   backgroundColor: Colors.red,
                                 ),
                                 onPressed: () {
@@ -264,14 +288,14 @@ class _AdminMenusState extends State<AdminMenus> {
                                       context: context,
                                       builder: (BuildContext context){
                                         return AlertDialog(
-                                          content: Column(children: [
+                                          content: Container(height: screenHeight*0.6, child: Column(children: [
                                             const Text("Menus asignados",
                                               style: TextStyle(
                                                 fontFamily: 'Open Sans',
                                                 fontSize: 40,
                                                 color: Colors.red
                                               )),
-                                            Container(height: screenHeight*0.7, child: SingleChildScrollView(
+                                            Container(height: screenHeight*0.4, child: SingleChildScrollView(
                                               child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
@@ -285,7 +309,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                                       ),)]),
                                               ],
                                             ))),
-                                            SizedBox(height: screenHeight*0.05),
+                                            //SizedBox(height: screenHeight*0.02),
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                 minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
@@ -301,7 +325,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                                 fontSize: screenHeight * 0.02,
                                               ),),
                                             ),
-                                          ],) 
+                                          ],) )
                                           
                                         );
                                       }
@@ -311,10 +335,10 @@ class _AdminMenusState extends State<AdminMenus> {
                                 child: Text(
                                   'Consultar Comanda',
                                   style: TextStyle(
-                                    fontSize: screenHeight * 0.03,
+                                    fontSize: screenWidth * 0.015,
                                     color: Colors.white,
                                   ),
-                                ),
+                                  ),
                               ),
                             ],
                           ),
