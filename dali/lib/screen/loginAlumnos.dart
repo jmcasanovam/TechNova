@@ -50,7 +50,9 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Flecha izquierda
-                        IconButton(
+                        Semantics(
+                          label: "Botón izquierda",
+                          child: IconButton(
                           icon: Image.asset(
                             'images/left-arrow-accesible.png',
                             width: screenWidth * 0.08,
@@ -60,7 +62,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                               if (currentPage > 0) currentPage--;
                             });
                           },
-                        ),
+                        ),),
             
                         // Grid de imágenes y nombres
                         Expanded(
@@ -79,7 +81,8 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                               final estudiante = estudiantesData[itemIndex];
                               return Column(
                                 children: [
-                                  FilledButton(
+                                  Semantics(label: "Botón Alumno $estudiante['nickname']",
+                                  child: FilledButton(
                                     style: FilledButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(screenWidth * 0.02),
@@ -133,7 +136,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                                         ),
                                       ],
                                     ),
-                                  ),
+                                  ),),
                                 ],
                               );
                             },
@@ -141,7 +144,9 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                         ),
             
                         // Flecha derecha
-                        IconButton(
+                        Semantics(
+                          label: "Botón derecha",
+                          child: IconButton(
                           icon: Image.asset(
                             'images/right-arrow-accesible.png',
                             width: screenWidth * 0.08,
@@ -151,7 +156,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                               if ((currentPage + 1) * 8 < estudiantesData.length) currentPage++;
                             });
                           },
-                        ),
+                        ),)
                       ],
                     ),
                   ],
