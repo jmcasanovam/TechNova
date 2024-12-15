@@ -179,7 +179,8 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                               ),
                             ],
                           ),
-                           // Contraseña
+                          SizedBox(height: screenHeight * 0.02),
+                          // Contraseña
                           Row(
                             // mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -288,8 +289,37 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                               ),
                             ],
                           ),
+                          SizedBox(height: screenHeight * 0.04),
+                          Row(
+                            children: [
+                              Text(
+                                'Foto Inicio Sesión:',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.025,
+                                ),
+                              ),
+                              SizedBox(width: screenWidth * 0.02),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
+                                  maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                  // backgroundColor: Colors.red, // Color del botón
+                                ),
+                                
+                                onPressed: () {
+                                  // Lógica para examinar foto
+                                },
+                                child: Text('Examinar foto', style: TextStyle(
+                                  fontSize: screenHeight * 0.02,
+                                ),),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
+
+                      // boton de confirmar
                       Padding(
                         padding: EdgeInsets.only(
                           bottom: screenHeight * 0.05,

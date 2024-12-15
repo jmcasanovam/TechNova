@@ -395,7 +395,7 @@ import '../widget/barraMenu.dart';
               SizedBox(width: screenWidth * 0.02),
               Container(
                 alignment: Alignment.center,
-                width: screenWidth*0.1,
+                width: screenWidth*0.13,
                 height: screenHeight * 0.06,
                 decoration: BoxDecoration(  
                   borderRadius: BorderRadius.circular(screenWidth * 0.01),

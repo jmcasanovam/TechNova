@@ -37,95 +37,121 @@ class _AdminPerfilState extends State<AdminPerfil> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //Cambiar de nomobre
-                Container(
-                  width: screenWidth*0.35,
-                  height: screenHeight*0.1,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth*0.05),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
                       children: [
-                        Text("Nombre:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                        //Cambiar de nomobre
                         Container(
+                          width: screenWidth*0.35,
+                          height: screenHeight*0.1,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(screenWidth*0.01),
-                            color: Colors.white,
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(screenWidth * 0.02),
                           ),
-                          width: screenWidth * 0.15,
-                          child: TextField(
-                            controller: TextEditingController(text: nombre),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: screenHeight * 0.02,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: screenWidth*0.05),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Nombre:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(screenWidth*0.01),
+                                    color: Colors.white,
+                                  ),
+                                  width: screenWidth * 0.15,
+                                  child: TextField(
+                                    controller: TextEditingController(text: nombre),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: screenHeight * 0.02,
+                                    ),
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
+                                      focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
+                                      hintText: 'Ingrese su nombre',
+                                      hintStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: screenHeight * 0.020,
+                                      ),
+                                    ),
+                                    onChanged: (value) => nombreNuevo = value,
+                                    ),
+                                )
+                              ],
                             ),
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
-                              focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
-                              hintText: 'Ingrese su nombre',
-                              hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: screenHeight * 0.020,
-                              ),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight*0.02,),
+
+                        //cambiar de nickname
+                        Container(
+                          width: screenWidth*0.35,
+                          height: screenHeight*0.1,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: screenWidth*0.05),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Nickname:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(screenWidth*0.01),
+                                    color: Colors.white,
+                                  ),
+                                  width: screenWidth * 0.15,
+                                  child: TextField(
+                                    controller: TextEditingController(text: nickname),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: screenHeight * 0.02,
+                                    ),
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
+                                      focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
+                                      hintText: 'Ingrese su nickname',
+                                      hintStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: screenHeight * 0.020,
+                                      ),
+                                    ),
+                                    onChanged: (value) => nicknameNuevo = value,
+                                    ),
+                                )
+                              ],
                             ),
-                            onChanged: (value) => nombreNuevo = value,
-                            ),
-                        )
+                          ),
+                        ),
+
+                        SizedBox(height: screenHeight*0.02,),
                       ],
                     ),
-                  ),
+                    SizedBox(width: screenWidth*0.02,),
+                    FilledButton(
+                      style: FilledButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(screenWidth * 0.02)),
+                        backgroundColor: Colors.red[400],
+                        minimumSize: Size(screenWidth * 0.15, screenHeight * 0.15),
+                        maximumSize: Size(screenWidth * 0.15, screenHeight * 0.15),
+                      ),
+                      onPressed: () => {},
+                      child: Text(
+                        "Confirmar valores",
+                        style: TextStyle(fontSize: screenHeight * 0.03),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
                 ),
 
-                SizedBox(height: screenHeight*0.02,),
-
-                //cambiar de nickname
-                Container(
-                  width: screenWidth*0.35,
-                  height: screenHeight*0.1,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth*0.05),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Nickname:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(screenWidth*0.01),
-                            color: Colors.white,
-                          ),
-                          width: screenWidth * 0.15,
-                          child: TextField(
-                            controller: TextEditingController(text: nickname),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: screenHeight * 0.02,
-                            ),
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
-                              focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
-                              hintText: 'Ingrese su nickname',
-                              hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: screenHeight * 0.020,
-                              ),
-                            ),
-                            onChanged: (value) => nicknameNuevo = value,
-                            ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: screenHeight*0.02,),
 
                 //Cambiar contraseña
                 FilledButton(
