@@ -73,162 +73,273 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Nombre
-                        Row(
-                          children: [
-                            Text(
-                              'Nombre:',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: screenHeight * 0.025,
-                              ),
-                            ),
-                            SizedBox(width: screenWidth * 0.02),
-                            SizedBox(
-                              width: screenWidth * 0.2,
-                              child: TextField(
-                                controller: TextEditingController(text: nombre),
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Nombre
+                          Row(
+                            children: [
+                              Text(
+                                'Nombre:',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
-                                onChanged: (value) {
+                              ),
+                              SizedBox(width: screenWidth * 0.02),
+                              SizedBox(
+                                width: screenWidth * 0.2,
+                                child: TextField(
+                                  controller: TextEditingController(text: nombre),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: screenHeight * 0.025,
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nombre = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: screenHeight * 0.02),
+                  
+                          // Desplegable de Formato
+                          Row(
+                            children: [
+                              Text(
+                                'Formato:',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.025,
+                                ),
+                              ),
+                              SizedBox(width: screenWidth * 0.02),
+                              DropdownButton<String>(
+                                value: formatoSeleccionado,
+                                onChanged: (String? newValue) {
                                   setState(() {
-                                    nombre = value;
+                                    formatoSeleccionado = newValue;
                                   });
                                 },
+                                items: formatos.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                style: TextStyle(
+                                  fontSize: screenHeight * 0.02,
+                                  color: Colors.black,
+                                ),
+                                icon: Icon(Icons.arrow_drop_down, size: screenHeight * 0.04),
+                                underline: Container(height: 0),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Desplegable de Formato
-                        Row(
-                          children: [
-                            Text(
-                              'Formato:',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: screenHeight * 0.025,
+                            ],
+                          ),
+                          SizedBox(height: screenHeight * 0.02),
+                  
+                          // Preferencias de Notificación
+                          Row(
+                            children: [
+                              Text(
+                                'Preferencias de Notificación:',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.025,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: screenWidth * 0.02),
-                            DropdownButton<String>(
-                              value: formatoSeleccionado,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  formatoSeleccionado = newValue;
-                                });
-                              },
-                              items: formatos.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              style: TextStyle(
-                                fontSize: screenHeight * 0.02,
-                                color: Colors.black,
+                              SizedBox(width: screenWidth * 0.02),
+                              DropdownButton<String>(
+                                value: notificacionSeleccionada,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    notificacionSeleccionada = newValue;
+                                  });
+                                },
+                                items: preferenciasNotificacion.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                style: TextStyle(
+                                  fontSize: screenHeight * 0.02,
+                                  color: Colors.black,
+                                ),
+                                icon: Icon(Icons.arrow_drop_down, size: screenHeight * 0.04),
+                                underline: Container(height: 0),
                               ),
-                              icon: Icon(Icons.arrow_drop_down, size: screenHeight * 0.04),
-                              underline: Container(height: 0),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Preferencias de Notificación
-                        Row(
-                          children: [
-                            Text(
-                              'Preferencias de Notificación:',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: screenHeight * 0.025,
+                            ],
+                          ),
+                           // Contraseña
+                          Row(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Contraseña:',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight * 0.025,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: screenWidth * 0.02),
-                            DropdownButton<String>(
-                              value: notificacionSeleccionada,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  notificacionSeleccionada = newValue;
-                                });
-                              },
-                              items: preferenciasNotificacion.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              style: TextStyle(
-                                fontSize: screenHeight * 0.02,
-                                color: Colors.black,
+                              SizedBox(width: screenWidth * 0.02),
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth*0.1,
+                                height: screenHeight * 0.06,
+                                decoration: BoxDecoration(  
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  color: Colors.grey[200], // Color de fondo del contenedor
+                                ),
+                                child: DropdownButton<String>(
+                                  value: contrasenaSeleccionada1,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      contrasenaSeleccionada1 = newValue;
+                                    });
+                                  },
+                                  items: opcionesContrasena.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: screenHeight * 0.02,
+                                    color: Colors.black,
+                                  ),
+                                  icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
+                                  borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
+                                  underline: Container(height: 0,),
+                                ),
                               ),
-                              icon: Icon(Icons.arrow_drop_down, size: screenHeight * 0.04),
-                              underline: Container(height: 0),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: screenHeight * 0.05,
-                        top: screenHeight * 0.05,
+                              SizedBox(width: screenWidth * 0.01),
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth*0.1,
+                                height: screenHeight * 0.06,
+                                decoration: BoxDecoration(  
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  color: Colors.grey[200], // Color de fondo del contenedor
+                                ),
+                                child: DropdownButton<String>(
+                                  value: contrasenaSeleccionada2,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      contrasenaSeleccionada2 = newValue;
+                                    });
+                                  },
+                                  items: opcionesContrasena.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: screenHeight * 0.02,
+                                    color: Colors.black,
+                                  ),
+                                  icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
+                                  borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
+                                  underline: Container(height: 0,),
+                                ),
+                              ),
+                              SizedBox(width: screenWidth * 0.01),
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth*0.1,
+                                height: screenHeight * 0.06,
+                                decoration: BoxDecoration(  
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  color: Colors.grey[200], // Color de fondo del contenedor
+                                ),
+                                child: DropdownButton<String>(
+                                  value: contrasenaSeleccionada3,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      contrasenaSeleccionada3 = newValue;
+                                    });
+                                  },
+                                  items: opcionesContrasena.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: screenHeight * 0.02,
+                                    color: Colors.black,
+                                  ),
+                                  icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
+                                  borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
+                                  underline: Container(height: 0,),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(screenWidth * 0.2, screenHeight * 0.1),
-                          maximumSize: Size(screenWidth * 0.2, screenHeight * 0.1),
-                          backgroundColor: Colors.red,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: screenHeight * 0.05,
+                          top: screenHeight * 0.05,
                         ),
-                        onPressed: () async {
-                          Map<String, dynamic> datosActualizados = {
-                            'nombre': nombre,
-                            'formato': formatoSeleccionado,
-                            'notificacion': notificacionSeleccionada,
-                            'contrasena': [
-                              contrasenaSeleccionada1,
-                              contrasenaSeleccionada2,
-                              contrasenaSeleccionada3
-                            ].join(", "),
-                          };
-
-                          bool resultado = await controladores.editarPerfilAlumno(
-                            widget.nickname,
-                            datosActualizados,
-                          );
-
-                          if (resultado) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Perfil actualizado con éxito.")),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(screenWidth * 0.2, screenHeight * 0.1),
+                            maximumSize: Size(screenWidth * 0.2, screenHeight * 0.1),
+                            backgroundColor: Colors.red,
+                          ),
+                          onPressed: () async {
+                            Map<String, dynamic> datosActualizados = {
+                              'nombre': nombre,
+                              'formato': formatoSeleccionado,
+                              'notificacion': notificacionSeleccionada,
+                              'contrasena': [
+                                contrasenaSeleccionada1,
+                                contrasenaSeleccionada2,
+                                contrasenaSeleccionada3
+                              ].join(", "),
+                            };
+                  
+                            bool resultado = await controladores.editarPerfilAlumno(
+                              widget.nickname,
+                              datosActualizados,
                             );
-                            Navigator.pop(context);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Error al actualizar el perfil.")),
-                            );
-                          }
-                        },
-                        child: Text(
-                          'Confirmar',
-                          style: TextStyle(
-                            fontSize: screenHeight * 0.03,
-                            color: Colors.white,
+                  
+                            if (resultado) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Perfil actualizado con éxito.")),
+                              );
+                              Navigator.pop(context);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Error al actualizar el perfil.")),
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Confirmar',
+                            style: TextStyle(
+                              fontSize: screenHeight * 0.03,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(width: screenWidth * 0.1),
                 Image.asset(foto, width: screenWidth * 0.15),
