@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: AdminMenus(),
         // home: const SplashScreen(),
-        // home: LoginAlumnos(),
+        home: LoginAlumnos(),
 
     // home: AdminCreadorTareas(),
       // home: AdminPerfil(),
@@ -40,7 +40,6 @@ class MyApp extends StatelessWidget {
       // home: AdminUsuarios(),
       // home: ProfeUsuarios(),
       // home: ChatAlumno(),
-
 
       routes: {
         '/adminUsuarios': (context) => AdminUsuarios(),

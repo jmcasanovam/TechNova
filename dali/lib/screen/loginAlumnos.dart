@@ -50,7 +50,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Flecha izquierda
-                        Semantics(
+                        currentPage > 0?Semantics(
                           label: "Botón izquierda",
                           child: IconButton(
                           icon: Image.asset(
@@ -59,10 +59,10 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                           ),
                           onPressed: () {
                             setState(() {
-                              if (currentPage > 0) currentPage--;
+                              currentPage--;
                             });
                           },
-                        ),),
+                        ),):SizedBox(width: screenWidth * 0.08),
             
                         // Grid de imágenes y nombres
                         Expanded(
@@ -144,7 +144,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                         ),
             
                         // Flecha derecha
-                        Semantics(
+                        (currentPage + 1) * 8 < estudiantesData.length?Semantics(
                           label: "Botón derecha",
                           child: IconButton(
                           icon: Image.asset(
@@ -153,10 +153,10 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                           ),
                           onPressed: () {
                             setState(() {
-                              if ((currentPage + 1) * 8 < estudiantesData.length) currentPage++;
+                              currentPage++;
                             });
                           },
-                        ),)
+                        ),):SizedBox(width: screenWidth*0.08)
                       ],
                     ),
                   ],
