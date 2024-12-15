@@ -6,6 +6,7 @@ import 'package:dali/screen/adminTareasPlantilla.dart';
 import 'package:dali/screen/adminUsuarios.dart';
 import 'package:dali/screen/adminMenus.dart';
 import 'package:dali/screen/chatAlumno.dart';
+import 'package:dali/screen/loginAlumnos.dart';
 import 'package:dali/screen/loginProfesor.dart';
 import 'package:dali/screen/profeAlumnos.dart';
 import 'package:dali/screen/profeMateriales.dart';
@@ -31,11 +32,13 @@ class MyApp extends StatelessWidget {
       ),
       // home: AdminMenus(),
         // home: const SplashScreen(),
+        // home: LoginAlumnos(),
+
     // home: AdminCreadorTareas(),
       // home: AdminPerfil(),
       // home: LoginProfesor(),
-      home: AdminUsuarios(),
-      // home: ProfeUsuarios(),
+      // home: AdminUsuarios(),
+      home: ProfeUsuarios(),
       // home: ChatAlumno(),
 
 

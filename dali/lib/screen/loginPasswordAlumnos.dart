@@ -217,15 +217,25 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
             ),
           ),
 
-          //Boton de cerrar sesion
-          Semantics(
-            label: 'Botón cerrar sesión',
+          // Boton de cerrar sesion
+          // Semantics(
+          //   label: 'Botón cerrar sesión',
+          //   child: Padding(
+          //     padding: EdgeInsets.only(
+          //         right: screenWidth * 0.05, top: screenHeight * 0.02),
+          //     child: const FittedBox(child: BotonCerrarSesion()),
+          //   ),
+          // )
+          Padding(
+            padding: EdgeInsets.only(bottom: screenHeight * 0.02, top: screenHeight * 0.02,),
             child: Padding(
-              padding: EdgeInsets.only(
-                  right: screenWidth * 0.05, top: screenHeight * 0.02),
-              child: const FittedBox(child: BotonCerrarSesion()),
+              padding: EdgeInsets.symmetric(horizontal: screenHeight*0.1),
+              child: SizedBox(
+                height: screenHeight*0.1,
+                child: BotonCerrarSesion()
+                ),
             ),
-          )
+          ),
         ],
       ),
     );

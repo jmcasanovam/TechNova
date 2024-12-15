@@ -65,8 +65,8 @@ class _LoginProfesorState extends State<LoginProfesor> {
                           fontSize: screenHeight * 0.03,
                         ),
                       ),
-                      SizedBox(
-                        width: screenWidth * 0.6,
+                      Expanded(
+                        // width: screenWidth * 0.6,
                         child: TextField(
                           controller: _nicknameController,
                           style: TextStyle(
@@ -105,8 +105,8 @@ class _LoginProfesorState extends State<LoginProfesor> {
                           fontSize: screenHeight * 0.03,
                         ),
                       ),
-                      SizedBox(
-                        width: screenWidth * 0.6,
+                      Expanded(
+                        // width: screenWidth * 0.6,
                         child: TextField(
                           controller: _passwordController,
                           style: TextStyle(
@@ -128,8 +128,8 @@ class _LoginProfesorState extends State<LoginProfesor> {
                               ),
                               suffixIcon: IconButton(
                                 icon: _oculto
-                                    ? Icon(Icons.visibility, color: Colors.white, size: screenWidth * 0.03)
-                                    : Icon(Icons.visibility_off, color: Colors.white, size: screenWidth * 0.03),
+                                    ? Icon(Icons.visibility, color: Colors.white, size: screenWidth * 0.02)
+                                    : Icon(Icons.visibility_off, color: Colors.white, size: screenWidth * 0.02),
                                 onPressed: () {
                                   setState(() {
                                     _oculto = !_oculto;

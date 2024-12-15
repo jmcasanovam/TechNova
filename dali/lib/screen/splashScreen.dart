@@ -30,18 +30,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold( 
       backgroundColor: const Color(0xFFFFFFF).withOpacity(1),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text("Dalí", style: TextStyle(fontSize: 64, color: Colors.white, fontFamily: 'Roboto')),
-            const SizedBox(height: 20),
-            Image.asset("images/logo_dali_rojo_con_nombre.png"), // El logo de la app
-            const SizedBox(height: 40),
-            const Text('Create by', style: TextStyle(fontSize: 24, color: Colors.black, fontFamily: 'Roboto')),
-            const Text(' TechNova.', style: TextStyle(fontSize: 32, color: Colors.black, fontFamily: 'Roboto')),
+            SizedBox(height: screenHeight*0.1 ),
+            Image.asset("images/logo_dali_rojo_con_nombre.png", width: screenWidth*0.3, height: screenHeight*0.5,), // El logo de la app
+            SizedBox(height: screenHeight*0.04),
+            Text('Create by', style: TextStyle(fontSize: screenHeight*0.04, color: Colors.black, fontFamily: 'Roboto')),
+            Text(' TechNova.', style: TextStyle(fontSize: screenHeight*0.05, color: Colors.black, fontFamily: 'Roboto')),
 
           ],
         ),

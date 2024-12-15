@@ -1,7 +1,6 @@
 import 'package:dali/widget/adminTitulo.dart';
 import 'package:dali/widget/barraMenuProfe.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 
 class ProfeMateriales extends StatefulWidget {
@@ -21,7 +20,6 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
       context: context,
       builder: (BuildContext context) {
         final screenHeight = MediaQuery.of(context).size.height;
-        final screenWidth = MediaQuery.of(context).size.width;
         return AlertDialog(
           title: Text("Añadir material", style: TextStyle(fontSize: screenHeight*0.03)),
           content: Column(

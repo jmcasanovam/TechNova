@@ -4,7 +4,6 @@ import 'package:dali/screen/adminCreadorPerfil2.dart';
 import 'package:dali/screen/adminEditarPerfil.dart';
 import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../widget/barraMenu.dart';
 
 class AdminUsuarios extends StatefulWidget {

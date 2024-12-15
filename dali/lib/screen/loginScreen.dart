@@ -103,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(right: screenWidth * (0.15 / 2)),
                     child: SizedBox(
-                      width: screenWidth * 0.21,
+                      width: screenWidth * 0.25,
                       height: screenHeight * 0.15,
                       child: TextButton(
                         onPressed: () {
