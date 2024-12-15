@@ -73,10 +73,10 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.02),
 
             // Filas para botones de abajo
-            Row(
+            /*Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Botón configuracion
+               // Botón configuracion
                 Semantics(
                   label: 'Botón Configuración',
                   child: Padding(
@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                           height: screenWidth * 0.07),
                     ),
                   ),
-                ),
+                ),*/
 
                 // Botón "Profesor"
                 Semantics(
@@ -113,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                           );
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset('images/profesor.png',
                                 height: screenWidth * 0.1),
@@ -138,9 +138,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ],
         ),
-      ),
     );
   }
 }
