@@ -67,6 +67,7 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                         // Grid de imágenes y nombres
                         Expanded(
                           child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
@@ -79,9 +80,10 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                             itemBuilder: (context, index) {
                               final itemIndex = currentPage * 8 + index;
                               final estudiante = estudiantesData[itemIndex];
-                              return Column(
-                                children: [
-                                  Semantics(label: "Botón Alumno $estudiante['nickname']",
+                              return Semantics(
+                                label: "Botón Alumno $estudiante['nickname']",
+                                child: SizedBox(
+                                  height: screenHeight*0.2,
                                   child: FilledButton(
                                     style: FilledButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -89,14 +91,6 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                                         side: BorderSide(color: Colors.black, width: screenWidth * 0.001),
                                       ),
                                       backgroundColor: Colors.transparent,
-                                      minimumSize: Size(
-                                        screenWidth * 0.7 / 4,
-                                        screenHeight * 0.6 / 2,
-                                      ),
-                                      maximumSize: Size(
-                                        screenWidth * 0.7 / 4,
-                                        screenHeight * 0.6 / 2,
-                                      ),
                                     ),
                                     onPressed: () {
                                     //   Navegar a la pantalla de contraseña
@@ -113,31 +107,31 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Image.asset(
-                                          estudiante['rutaImagenPerfil']!,
-                                          height: screenHeight * 0.6 / 2 * 0.8,
-                                          width: screenWidth * 0.7 / 4,
-                                          errorBuilder: (context, error, stackTrace) =>
-                                              Icon(Icons.error, color: Colors.red),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Image.asset(
+                                            estudiante['rutaImagenPerfil']!,
+                                            fit: BoxFit.contain,
+                                            errorBuilder: (context, error, stackTrace) =>
+                                                Icon(Icons.error, color: Colors.red),
+                                          ),
                                         ),
-                                        SizedBox(
-                                          height: screenHeight * 0.6 / 2 * 0.1,
-                                          child: FittedBox(
-                                            child: Text(
-                                              estudiante['nickname']!,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: screenHeight * 0.05,
-                                                fontFamily: 'OpenSans',
-                                              ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            estudiante['nickname']!,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: screenHeight * 0.02,
+                                              fontFamily: 'Roboto',
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),),
-                                ],
+                                  ),
+                                ),
                               );
                             },
                           ),
