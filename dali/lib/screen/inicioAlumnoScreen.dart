@@ -111,17 +111,18 @@ Future<void> _cargarTareas() async {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(widget._iconoPerfil,
+                    Semantics(label: "Foto de Perfil",
+                    child: Image.asset(widget._iconoPerfil,
                         width: screenWidth * 0.1,
                         height: screenHeight *
-                            0.2), // Icono de perfil
+                            0.2),), // Icono de perfil
                     Text('Agenda',
                         style: TextStyle(
                           fontSize: screenWidth * 0.08,
                           fontWeight: FontWeight.bold,
                         )),
 
-                    BotonMenu(username: widget._username),
+                    Semantics(label: "Botón para acceder al menú", child: BotonMenu(username: widget._username)),
                   ],
                 ),
                 SizedBox(height: screenHeight * 0.01),
@@ -134,7 +135,7 @@ Future<void> _cargarTareas() async {
                       onTap: () {
                         accederTarea(context);
                       },
-                      child: Container(
+                      child: Semantics(label: "Tareas para hoy", child: Container(
                         width: screenWidth * 0.9,
                         height: screenHeight * 0.7,
                         decoration: BoxDecoration(
@@ -163,7 +164,7 @@ Future<void> _cargarTareas() async {
                                       //Flecha para la izquierda
                                         SizedBox(
                                           width: screenWidth * 0.1,
-                                          child: IconButton(
+                                          child: Semantics(label: "Botón Izquierda", child: IconButton(
                                           icon: Image.asset(
                                             'images/flecha-izquierda.png',
                                             fit: BoxFit.cover,
@@ -172,11 +173,12 @@ Future<void> _cargarTareas() async {
                                           onPressed: () {
                                             tareaAnterior();
                                           },
-                                          ),
+                                          ),)
                                         ),
                                       Column(
                                         children: [
-                                          Container(
+                                          Semantics(label: "Botón acceso a tarea $_tareas.elementAt(_tareaActual).titulo",
+                                           child: Container(
                                             decoration: BoxDecoration(
                                               color: const Color.fromRGBO(
                                                   5, 153, 159, 1),
@@ -194,7 +196,7 @@ Future<void> _cargarTareas() async {
                                                     .cover, // Ensure the image fits the container
                                               ),
                                             ),
-                                          ),
+                                          ),),
                                           Text(
                                             _tareas.elementAt(_tareaActual).titulo,
                                             style: TextStyle(
@@ -208,7 +210,7 @@ Future<void> _cargarTareas() async {
                                       //Flecha para la derecha
                                       SizedBox(
                                           width: MediaQuery.of(context).size.width * 0.1,
-                                          child: IconButton(
+                                          child: Semantics(label: "Botón Derecha", child: IconButton(
                                           icon: Image.asset(
                                             'images/flecha-derecha.png',
                                             fit: BoxFit.cover,
@@ -217,7 +219,7 @@ Future<void> _cargarTareas() async {
                                           onPressed: () {
                                             tareaSiguiente();
                                           },
-                                          ),
+                                          ),)
                                         ),
                                     ],
                                   ),
@@ -226,7 +228,7 @@ Future<void> _cargarTareas() async {
                             ),
                           ],
                         ),
-                      ),
+                      ),)
                     ),
                   ],
                 )
