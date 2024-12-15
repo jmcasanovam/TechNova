@@ -71,8 +71,9 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                             shrinkWrap: true,
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
-                              mainAxisSpacing: screenHeight*0.02,
+                              mainAxisSpacing: screenHeight*0.03,
                               crossAxisSpacing: screenWidth * 0.02,
+                              mainAxisExtent: screenHeight * 0.35,
                             ),
                             itemCount: (currentPage + 1) * 8 <= estudiantesData.length
                                 ? 8
@@ -82,54 +83,52 @@ class _LoginAlumnosState extends State<LoginAlumnos> {
                               final estudiante = estudiantesData[itemIndex];
                               return Semantics(
                                 label: "Botón Alumno $estudiante['nickname']",
-                                child: SizedBox(
-                                  height: screenHeight*0.2,
-                                  child: FilledButton(
-                                    style: FilledButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                                        side: BorderSide(color: Colors.black, width: screenWidth * 0.001),
+                                child: FilledButton(
+                                  style: FilledButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                                      side: BorderSide(color: Colors.black, width: screenWidth * 0.001),
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                  onPressed: () {
+                                  //   Navegar a la pantalla de contraseña
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PasswordAlumnos(
+                                          image: estudiante['rutaImagenPerfil']!,
+                                          username: estudiante['nickname']!,
+                                        ),
                                       ),
-                                      backgroundColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {
-                                    //   Navegar a la pantalla de contraseña
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => PasswordAlumnos(
-                                            image: estudiante['rutaImagenPerfil']!,
-                                            username: estudiante['nickname']!,
+                                    );
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: screenHeight*0.015,),
+                                      Image.asset(
+                                        estudiante['rutaImagenPerfil']!,
+                                        // fit: BoxFit.contain,
+                                        width: screenWidth*0.3,
+                                        height: screenHeight*0.2,
+                                        errorBuilder: (context, error, stackTrace) =>
+                                            Icon(Icons.error, color: Colors.red),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          estudiante['nickname']!,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: screenHeight * 0.02,
+                                            fontFamily: 'Roboto',
                                           ),
+                                          maxLines: 5,
                                         ),
-                                      );
-                                    },
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          flex: 3,
-                                          child: Image.asset(
-                                            estudiante['rutaImagenPerfil']!,
-                                            fit: BoxFit.contain,
-                                            errorBuilder: (context, error, stackTrace) =>
-                                                Icon(Icons.error, color: Colors.red),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            estudiante['nickname']!,
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: screenHeight * 0.02,
-                                              fontFamily: 'Roboto',
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               );
