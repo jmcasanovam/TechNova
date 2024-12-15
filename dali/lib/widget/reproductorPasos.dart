@@ -22,46 +22,70 @@ class _ReproductorPasosState extends State<ReproductorPasos> {
   late VideoPlayerController _videoPlayerController;
   late AudioPlayer _audioPlayer;
   bool _isPlaying = false;
+  bool _isVideoInitialized = false;
+  bool _isAudioInitialized = false;
+  bool _isError = false;  // Para manejar el error de carga
 
   @override
   void initState() {
     super.initState();
 
     if (widget.tipoPaso == TipoPaso.video) {
-      _videoPlayerController = VideoPlayerController.network(widget.contenido)
-        ..initialize().then((_) {
-          setState(() {}); // Actualiza el estado cuando el video está listo
-        }).catchError((error) {
-          print("Error al inicializar el video: $error");
-        })
-        ..addListener(() {
-          if (_videoPlayerController.value.position == _videoPlayerController.value.duration) {
-            // El video ha terminado
-            setState(() {
-              _isPlaying = false;
-            });
-          }
-        });
-          
+      _initializeVideo();
     } else if (widget.tipoPaso == TipoPaso.audio) {
-      _audioPlayer = AudioPlayer();
-      _audioPlayer.setUrl(widget.contenido).catchError((error) {
-        print("Error al cargar el audio: $error");
+      _initializeAudio();
+    }
+  }
+
+  // Inicializar video
+  void _initializeVideo() {
+    _videoPlayerController = VideoPlayerController.network(widget.contenido)
+      ..initialize().then((_) {
+        setState(() {
+          _isVideoInitialized = true; // El video está listo para reproducirse
+        });
+      }).catchError((error) {
+        setState(() {
+          _isError = true;
+        });
+        print("Error al inicializar el video: $error");
       });
 
-      // Escuchar cambios en el estado de reproducción
-      _audioPlayer.playerStateStream.listen((playerState) {
+    _videoPlayerController.addListener(() {
+      if (_videoPlayerController.value.position == _videoPlayerController.value.duration) {
         setState(() {
-          _isPlaying = playerState.playing; // Actualizar el estado de _isPlaying
+          _isPlaying = false; // El video ha terminado
         });
-        // Si el audio ha terminado, cambiar el estado a pausa
-        if (playerState.processingState == ProcessingState.completed) {
-          setState(() {
-            _isPlaying = false;
-          });
-        }
+      }
+    });
+  }
+
+  // Inicializar audio
+  void _initializeAudio() async {
+    _audioPlayer = AudioPlayer();
+    try {
+      await _audioPlayer.setUrl(widget.contenido);
+      setState(() {
+        _isAudioInitialized = true; // El audio está listo para reproducirse
       });
+    } catch (error) {
+      setState(() {
+        _isError = true;
+      });
+      print("Error al cargar el audio: $error");
     }
+
+    _audioPlayer.playerStateStream.listen((playerState) {
+      setState(() {
+        _isPlaying = playerState.playing;
+      });
+
+      if (playerState.processingState == ProcessingState.completed) {
+        setState(() {
+          _isPlaying = false;
+        });
+      }
+    });
   }
 
   @override
@@ -105,11 +129,20 @@ class _ReproductorPasosState extends State<ReproductorPasos> {
   }
 
   Widget _buildContent(double screenWidth, double screenHeight) {
+    if (_isError) {
+      return Center(
+        child: Text(
+          "Error al cargar el contenido",
+          style: TextStyle(color: Colors.red, fontSize: screenWidth * 0.05),
+        ),
+      );
+    }
+
     switch (widget.tipoPaso) {
       case TipoPaso.texto:
         return Text(
           widget.contenido,
-          style: const TextStyle(fontSize: 18),
+          style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.02, fontFamily: 'Open Sans'),
         );
 
       case TipoPaso.imagen:
@@ -117,23 +150,24 @@ class _ReproductorPasosState extends State<ReproductorPasos> {
           widget.contenido,
           width: screenWidth * 0.8,
           height: screenHeight * 0.4,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         );
 
       case TipoPaso.video:
+        if (!_isVideoInitialized) {
+          return const Center(child: CircularProgressIndicator());
+        }
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _videoPlayerController.value.isInitialized
-                ? SizedBox(
-                    width: screenWidth * 0.8,
-                    height: screenHeight * 0.4,
-                    child: AspectRatio(
-                      aspectRatio: _videoPlayerController.value.aspectRatio,
-                      child: VideoPlayer(_videoPlayerController),
-                    ),
-                  )
-                : const CircularProgressIndicator(),
+            SizedBox(
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.25,
+              child: AspectRatio(
+                aspectRatio: _videoPlayerController.value.aspectRatio,
+                child: VideoPlayer(_videoPlayerController),
+              ),
+            ),
             IconButton(
               icon: Icon(
                 _videoPlayerController.value.isPlaying
@@ -141,12 +175,15 @@ class _ReproductorPasosState extends State<ReproductorPasos> {
                     : Icons.play_arrow,
               ),
               onPressed: _togglePlayPause,
-              iconSize: 48,
+              iconSize: screenHeight * 0.08,
             ),
           ],
         );
 
       case TipoPaso.audio:
+        if (!_isAudioInitialized) {
+          return const Center(child: CircularProgressIndicator());
+        }
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

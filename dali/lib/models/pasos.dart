@@ -23,14 +23,7 @@ class Pasos {
         _urlImagen = urlImagen,
         _urlPictograma = urlPictograma;
 
-  // Método para convertir el JSON en un objeto Pasos
-  // Pasos.fromJson(Map<String, dynamic> json)
-  //     : _idPasos = json['idPasos'],
-  //       _urlVideo = List<String>.from(json['urlVideo']),
-  //       _urlAudio = List<String>.from(json['urlAudio']),
-  //       _urlTexto = json['urlTexto'] ?? "", // Manejo de valores nulos
-  //       _urlImagen = List<String>.from(json['urlImagen']),
-  //       _urlPictograma = List<String>.from(json['urlPictograma']);
+
   Pasos.fromJson(Map<String, dynamic> json) {
     _idPasos = json['idPasos'] ?? int.tryParse(json['idPasos'].toString()) ?? 0;
 

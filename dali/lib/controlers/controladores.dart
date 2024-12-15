@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:dali/models/pasos.dart';
 import 'package:dali/models/tareaAsignada.dart';
+import 'package:dali/models/tareaAsignada2.dart';
 import 'package:dali/models/tareaPlantilla.dart';
 import 'package:dali/models/usuario.dart';
 import 'package:http/http.dart' as http;
 
 class Controladores {
-  // String _url_cabeza = "http://172.20.10.2:5000";
-  String _url_cabeza = "http://127.0.0.1:5000";
+  String _url_cabeza = "http://192.168.1.149:5000";
+  // String _url_cabeza = "http://127.0.0.1:5000";
 
   Future<int> login(String username, String password) async {
     final url = Uri.parse('$_url_cabeza/login');
@@ -884,5 +885,23 @@ class Controladores {
       return null;
     }
 
+  }
+
+  Future<TareaAsignada2?> getTareaAsignada(int idTareaAsignada) async {
+    try {
+      final url = Uri.parse('$_url_cabeza/get_tarea_asignada/?idTareaAsignada=$idTareaAsignada');
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> json = jsonDecode(response.body);
+        final tareaAsignada = TareaAsignada2.fromJson(json);
+        return tareaAsignada;
+      } else {
+        throw Exception('Error al cargar los datos');
+      }
+    } catch (e) {
+      return null;
+      
+    }
   }
 }

@@ -47,7 +47,7 @@ void initState() {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const PresentacionTarea()),
+        MaterialPageRoute(builder: (context) => PresentacionTarea()),
       );
     }
   }
