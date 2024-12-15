@@ -117,7 +117,8 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(3, (index) {
-                        return Container(
+                        return Semantics(label: "Casilla $index",
+                          child: Container(
                           margin: EdgeInsets.only(
                             left: screenWidth * 0.02,
                             right: screenWidth * 0.02,
@@ -137,7 +138,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                                   color: _colorIcono(enteredShapes[index]),
                                 )
                               : null,
-                        );
+                        ));
                       }),
                     ),
                   ),
