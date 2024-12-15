@@ -74,14 +74,14 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                      IconButton(
+                      Semantics(label: "Botón para volver atrás", child: IconButton(
                         icon: Image(
                           image: const AssetImage('images/back-arrow.png'),
                           width: MediaQuery.of(context).size.width * 0.04,
                           height: MediaQuery.of(context).size.width * 0.04,
                         ),
                         onPressed: () => volverAtras(context),
-                      ), // Icono de perfil
+                      ),), // Icono de perfil
                     /*Text(_tarea.nombre,
                         style: TextStyle(
                           fontSize: screenWidth * 0.08,
@@ -116,7 +116,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                         children: [
                           Column(
                             children: [
-                              hay_formato("img")?Container( //Botón modo fotos
+                              hay_formato("img")?Semantics(label:"Botón de acceso al formato imágenes", child: Container( //Botón modo fotos
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
@@ -140,11 +140,11 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                     });
                                   },
                                 ),
-                              ):Container(),
+                              )):Container(),
                               hay_formato("img")?SizedBox(
                                 height: screenHeight * 0.02,
                               ):SizedBox.shrink(),
-                              hay_formato("vid")?Container(//Botón modo vídeo
+                              hay_formato("vid")?Semantics(label: "Botón de acceso al formato vídeo", child: Container(//Botón modo vídeo
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
@@ -168,11 +168,11 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                     });                                  
                                   },
                                 ),
-                              ):Container(),
+                              )):Container(),
                               hay_formato("vid")?SizedBox(
                                 height: screenHeight * 0.02,
                               ):SizedBox.shrink(),
-                              hay_formato("pic")?Container(//Botón modo picto
+                              hay_formato("pic")?Semantics(label: "Botón de acceso al formato pictogramas", child: Container(//Botón modo picto
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
@@ -196,11 +196,11 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                     });
                                   },
                                 ),
-                              ):Container(),
+                              )):Container(),
                               hay_formato("pic")?SizedBox(
                                 height: screenHeight * 0.02,
                               ):SizedBox.shrink(),
-                              hay_formato("aud")?Container(//Botón modo audio
+                              hay_formato("aud")?Semantics(label: "Botón de acceso al modo audio", child: Container(//Botón modo audio
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
@@ -224,11 +224,11 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                     });
                                   },
                                 ),
-                              ):Container(),
+                              )):Container(),
                               hay_formato("aud")?SizedBox(
                                 height: screenHeight * 0.02,
                               ):SizedBox.shrink(),
-                              hay_formato("txt")?Container(//Botón modo texto
+                              hay_formato("txt")?Semantics(label: "Botón de acceso al modo texto", child: Container(//Botón modo texto
                                 width: screenWidth * 0.05,
                                 height: screenWidth * 0.05,
                                 decoration: BoxDecoration(
@@ -252,7 +252,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                     });
                                   },
                                 ),
-                              ):Container(),                                                
+                              )):Container(),                                                
                           ],
                           ),
                         ],
@@ -290,7 +290,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                         absorbing: paso_actual == 0,
                                         child: Opacity(
                                           opacity: paso_actual == 0 ? 0.0 : 1.0,
-                                          child: IconButton(
+                                          child: Semantics(label: "Botón Izquierda", child: IconButton(
                                             icon: Image.asset(
                                               'images/flecha-izquierda.png',
                                               fit: BoxFit.cover,
@@ -302,7 +302,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                                   paso_actual--;
                                               });
                                             },
-                                          ),
+                                          )),
                                         ),
                                       ),
                                     ),
@@ -352,7 +352,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                           absorbing: paso_actual > pasos_total,
                                           child: Opacity(
                                             opacity: paso_actual > pasos_total ? 0.0 : 1.0,
-                                            child: IconButton(
+                                            child: Semantics(label: "Botón Derecha", child: IconButton(
                                               icon: Image.asset(
                                               'images/flecha-derecha.png',
                                               fit: BoxFit.cover,
@@ -365,7 +365,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                                   paso_actual++;
                                               });
                                             },
-                                            ),
+                                            )),
                                           ),
                                         ),
                                     ),
@@ -376,7 +376,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                       ),
                       Column(
                         children: [
-                        Container(//Botón al chat
+                        Semantics(label: "Botón al chat", child: Container(//Botón al chat
                           width: screenWidth * 0.15,
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
@@ -412,9 +412,9 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                 ),
                               ],
                             ),
-                        ),
+                        )),
                         SizedBox(height: screenHeight*0.04),
-                        Container(//Botón terminar
+                        Semantics(label: "Botón para terminar", child: Container(//Botón terminar
                           width: screenWidth * 0.15,
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
@@ -497,7 +497,7 @@ class _PresentacionTareaState extends State<PresentacionTarea>{
                                 ),
                               ],
                             ),
-                        ),
+                        )),
                       ],
                       ),
                                       
