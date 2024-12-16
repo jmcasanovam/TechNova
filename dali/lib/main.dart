@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: AdminMenus(),
-        // home: const SplashScreen(),
-        home: LoginAlumnos(),
+        home: const SplashScreen(),
+        // home: LoginAlumnos(),
 
     // home: AdminCreadorTareas(),
       // home: AdminPerfil(),

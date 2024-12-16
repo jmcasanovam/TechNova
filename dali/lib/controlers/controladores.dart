@@ -7,8 +7,8 @@ import 'package:dali/models/usuario.dart';
 import 'package:http/http.dart' as http;
 
 class Controladores {
-  String _url_cabeza = "http://192.168.1.149:5000";
-  // String _url_cabeza = "http://127.0.0.1:5000";
+  // String _url_cabeza = "http://192.168.1.149:5000";
+  String _url_cabeza = "http://127.0.0.1:5000";
 
   Future<int> login(String username, String password) async {
     final url = Uri.parse('$_url_cabeza/login');
