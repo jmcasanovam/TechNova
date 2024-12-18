@@ -43,7 +43,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                   children: [
                     Column(
                       children: [
-                        //Cambiar de nomobre
+                        //Cambiar de nombre
                         Container(
                           width: screenWidth*0.35,
                           height: screenHeight*0.1,
