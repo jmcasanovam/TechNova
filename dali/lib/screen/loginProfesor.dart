@@ -61,15 +61,19 @@ class _LoginProfesorState extends State<LoginProfesor> {
                       Text(
                         'Nickname:',
                         style: TextStyle(
+                          fontFamily: 'Roboto', 
                           color: Colors.white,
                           fontSize: screenHeight * 0.03,
                         ),
                       ),
-                      Expanded(
-                        // width: screenWidth * 0.6,
+                      Container(
+                        alignment: Alignment.center,
+                        height: screenHeight*0.1,
+                        width: screenWidth*0.5,
                         child: TextField(
                           controller: _nicknameController,
                           style: TextStyle(
+                            fontFamily: 'Roboto', 
                             color: Colors.white,
                             fontSize: screenHeight * 0.03,
                           ),
@@ -82,6 +86,7 @@ class _LoginProfesorState extends State<LoginProfesor> {
                                 borderRadius: BorderRadius.circular(screenWidth * 0.01)),
                             hintText: 'Ingrese su nickname',
                             hintStyle: TextStyle(
+                              fontFamily: 'Roboto', 
                               color: Colors.white,
                               fontSize: screenHeight * 0.03,
                             ),
@@ -101,15 +106,19 @@ class _LoginProfesorState extends State<LoginProfesor> {
                       Text(
                         'Contraseña:',
                         style: TextStyle(
+                          fontFamily: 'Roboto', 
                           color: Colors.white,
                           fontSize: screenHeight * 0.03,
                         ),
                       ),
-                      Expanded(
-                        // width: screenWidth * 0.6,
+                      Container(
+                        alignment: Alignment.center,
+                        height: screenHeight*0.1,
+                        width: screenWidth*0.5,
                         child: TextField(
                           controller: _passwordController,
                           style: TextStyle(
+                            fontFamily: 'Roboto', 
                             color: Colors.white,
                             fontSize: screenHeight * 0.03,
                           ),
@@ -123,6 +132,7 @@ class _LoginProfesorState extends State<LoginProfesor> {
                                   borderRadius: BorderRadius.circular(screenWidth * 0.01)),
                               hintText: 'Ingrese su contraseña',
                               hintStyle: TextStyle(
+                                fontFamily: 'Roboto', 
                                 color: Colors.white,
                                 fontSize: screenHeight * 0.03,
                               ),
@@ -144,14 +154,18 @@ class _LoginProfesorState extends State<LoginProfesor> {
               ],
             ),
           ),
+          
           SizedBox(height: screenHeight * 0.05),
           // Botón de Confirmar
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.08,
-                vertical: screenHeight * 0.035,
-              ),
+              minimumSize: Size(screenWidth*0.2, screenHeight*0.1),
+              maximumSize: Size(screenWidth*0.2, screenHeight*0.1),
+
+              // padding: EdgeInsets.symmetric(
+              //   horizontal: screenWidth * 0.08,
+              //   vertical: screenHeight * 0.035,
+              // ),
               backgroundColor: Colors.red, // Color del botón
             ),
             onPressed: () async{
@@ -183,6 +197,7 @@ class _LoginProfesorState extends State<LoginProfesor> {
             child: Text(
               'Confirmar',
               style: TextStyle(
+                fontFamily: 'Roboto', 
                 fontSize: screenHeight * 0.03,
                 color: Colors.white,
               ),

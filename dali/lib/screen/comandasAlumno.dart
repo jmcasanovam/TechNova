@@ -106,6 +106,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                 Text(
                   'Pedir Comandas',
                   style: TextStyle(
+                    fontFamily: 'Roboto', 
                     fontSize: screenWidth * 0.08,
                     fontWeight: FontWeight.bold,
                   ),
@@ -121,6 +122,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                   Text(
                     '¡Selecciona el aula para la que pedir!',
                     style: TextStyle(
+                      fontFamily: 'Roboto', 
                       fontSize: screenWidth * 0.03,
                       fontWeight: FontWeight.bold,
                       color: const Color.fromRGBO(5, 153, 159, 1),
@@ -202,7 +204,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                           const Text(
                             "Completar",
                             style: const TextStyle(
-                            fontFamily: "Open Sans",
+                              fontFamily: 'Roboto', 
                             color: Colors.white,
                             fontSize: 25
                             ), 
@@ -245,7 +247,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
               )
             : Text(
                 aula.nombre,
-                style: TextStyle(fontFamily: "Open Sans", fontSize: screenHeight * 0.07),
+                style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.07),
               ),
         
       ),
@@ -278,7 +280,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
           Text(
             modo_picto ? "Números" : "Pictogramas",
             style: const TextStyle(
-              fontFamily: "Open Sans",
+              fontFamily: 'Roboto', 
               color: Colors.white,
               fontSize: 25,
             ),

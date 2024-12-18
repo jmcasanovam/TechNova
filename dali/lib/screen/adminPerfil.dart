@@ -1,6 +1,6 @@
 import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/adminAlumnoTareas.dart';
-import 'package:dali/screen/adminCreadorPerfil2.dart';
+import 'package:dali/screen/adminCreadorPerfil.dart';
 import 'package:dali/screen/adminEditarPerfil.dart';
 import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +56,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Nombre:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                                Text("Nombre:", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.025, color: Colors.white),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(screenWidth*0.01),
@@ -66,6 +66,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                   child: TextField(
                                     controller: TextEditingController(text: nombre),
                                     style: TextStyle(
+                                      fontFamily: 'Roboto', 
                                       color: Colors.black,
                                       fontSize: screenHeight * 0.02,
                                     ),
@@ -74,6 +75,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                       focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
                                       hintText: 'Ingrese su nombre',
                                       hintStyle: TextStyle(
+                                        fontFamily: 'Roboto', 
                                         color: Colors.black,
                                         fontSize: screenHeight * 0.020,
                                       ),
@@ -100,7 +102,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Nickname:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                                Text("Nickname:", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.025, color: Colors.white),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(screenWidth*0.01),
@@ -110,6 +112,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                   child: TextField(
                                     controller: TextEditingController(text: nickname),
                                     style: TextStyle(
+                                      fontFamily: 'Roboto', 
                                       color: Colors.black,
                                       fontSize: screenHeight * 0.02,
                                     ),
@@ -118,6 +121,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                       focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
                                       hintText: 'Ingrese su nickname',
                                       hintStyle: TextStyle(
+                                        fontFamily: 'Roboto', 
                                         color: Colors.black,
                                         fontSize: screenHeight * 0.020,
                                       ),
@@ -145,7 +149,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                       onPressed: () => {},
                       child: Text(
                         "Confirmar valores",
-                        style: TextStyle(fontSize: screenHeight * 0.03),
+                        style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.03),
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -173,7 +177,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                             return AlertDialog(
                               title: Text(
                                 'Cambiar contraseña',
-                                style: TextStyle(fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold),
                               ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -188,6 +192,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                       Text(
                                         'Contraseña actual:',
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.02,
                                         ),
@@ -199,6 +204,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                         child: TextField(
                                           obscureText: _oculto1,
                                           style: TextStyle(
+                                            fontFamily: 'Roboto', 
                                             color: Colors.black,
                                             fontSize: screenHeight * 0.015,
                                           ),
@@ -213,6 +219,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                             ),
                                             hintText: 'Ingrese su contraseña actual',
                                             hintStyle: TextStyle(
+                                              fontFamily: 'Roboto', 
                                               color: Colors.black,
                                               fontSize: screenHeight * 0.015,
                                             ),
@@ -244,6 +251,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                       Text(
                                         'Nueva contraseña:',
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.02,
                                         ),
@@ -255,6 +263,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                         child: TextField(
                                           obscureText: _oculto2,
                                           style: TextStyle(
+                                            fontFamily: 'Roboto', 
                                             color: Colors.black,
                                             fontSize: screenHeight * 0.015,
                                           ),
@@ -269,6 +278,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                             ),
                                             hintText: 'Ingrese su nueva contraseña',
                                             hintStyle: TextStyle(
+                                              fontFamily: 'Roboto', 
                                               color: Colors.black,
                                               fontSize: screenHeight * 0.015,
                                             ),
@@ -300,6 +310,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                       Text(
                                         'Confirmar contraseña:',
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.02,
                                         ),
@@ -311,6 +322,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                         child: TextField(
                                           obscureText: _oculto3,
                                           style: TextStyle(
+                                            fontFamily: 'Roboto', 
                                             color: Colors.black,
                                             fontSize: screenHeight * 0.015,
                                           ),
@@ -325,6 +337,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                             ),
                                             hintText: 'Confirme su contraseña',
                                             hintStyle: TextStyle(
+                                              fontFamily: 'Roboto', 
                                               color: Colors.black,
                                               fontSize: screenHeight * 0.015,
                                             ),
@@ -358,7 +371,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                                   },
                                   child: Text(
                                     'Confirmar',
-                                    style: TextStyle(fontSize: screenHeight * 0.02, color: Colors.white),
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02, color: Colors.white),
                                   ),
                                 ),
                               ],
@@ -370,7 +383,7 @@ class _AdminPerfilState extends State<AdminPerfil> {
                   },
                   child: Text(
                     "Cambiar contraseña",
-                    style: TextStyle(fontSize: screenHeight * 0.03),
+                    style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.03),
                     textAlign: TextAlign.center,
                   ),
                 )

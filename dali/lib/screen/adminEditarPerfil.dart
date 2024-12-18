@@ -1,5 +1,6 @@
 import 'package:dali/models/usuario.dart';
 import 'package:dali/widget/adminTitulo.dart';
+import 'package:dali/widget/botonExaminar.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert'; // Para serializar los datos
 import 'package:dali/controlers/controladores.dart';
@@ -28,6 +29,9 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
   List<String> preferenciasNotificacion = ['Default', 'Mensaje', 'Mensaje+Audio'];
   List<String> opcionesContrasena = ['Cuadrado', 'Triángulo', 'Círculo', 'Cruz'];
   String foto = 'images/panda.png';
+
+  String urlFoto = "";
+
 
   late Usuario? usuario;
 
@@ -87,6 +91,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                               Text(
                                 'Nombre:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
@@ -97,6 +102,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                                 child: TextField(
                                   controller: TextEditingController(text: nombre),
                                   style: TextStyle(
+                                    fontFamily: 'Roboto', 
                                     color: Colors.black,
                                     fontSize: screenHeight * 0.025,
                                   ),
@@ -117,30 +123,47 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                               Text(
                                 'Formato:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
                               ),
                               SizedBox(width: screenWidth * 0.02),
-                              DropdownButton<String>(
-                                value: formatoSeleccionado,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    formatoSeleccionado = newValue;
-                                  });
-                                },
-                                items: formatos.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                style: TextStyle(
-                                  fontSize: screenHeight * 0.02,
-                                  color: Colors.black,
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth * 0.15,
+                                height: screenHeight * 0.06,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  color: Colors.grey[200], // Color de fondo del contenedor
                                 ),
-                                icon: Icon(Icons.arrow_drop_down, size: screenHeight * 0.04),
-                                underline: Container(height: 0),
+                                child: DropdownButton<String>(
+                                  value: formatoSeleccionado,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      formatoSeleccionado = newValue;
+                                    });
+                                  },
+                                  items: formatos.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: screenHeight * 0.02,
+                                    color: Colors.black,
+                                  ),
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    size: screenHeight * 0.04,
+                                  ),
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  underline: Container(
+                                    height: 0,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -152,168 +175,198 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                               Text(
                                 'Preferencias de Notificación:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
                               ),
                               SizedBox(width: screenWidth * 0.02),
-                              DropdownButton<String>(
-                                value: notificacionSeleccionada,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    notificacionSeleccionada = newValue;
-                                  });
-                                },
-                                items: preferenciasNotificacion.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                style: TextStyle(
-                                  fontSize: screenHeight * 0.02,
-                                  color: Colors.black,
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth * 0.2,
+                                height: screenHeight * 0.06,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  color: Colors.grey[200], // Color de fondo del contenedor
                                 ),
-                                icon: Icon(Icons.arrow_drop_down, size: screenHeight * 0.04),
-                                underline: Container(height: 0),
+                                child: DropdownButton<String>(
+                                  value: notificacionSeleccionada,
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      notificacionSeleccionada = newValue;
+                                    });
+                                  },
+                                  items: preferenciasNotificacion
+                                      .map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: screenHeight * 0.02,
+                                    color: Colors.black,
+                                  ),
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    size: screenHeight * 0.04,
+                                  ),
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                  underline: Container(
+                                    height: 0,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                           SizedBox(height: screenHeight * 0.02),
                           // Contraseña
                           Row(
-                            // mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Contraseña:',
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Contraseña:',
+                              style: TextStyle(
+                                fontFamily: 'Roboto', 
+                                color: Colors.black,
+                                fontSize: screenHeight * 0.025,
+                              ),
+                            ),
+                            SizedBox(width: screenWidth * 0.02),
+                            Container(
+                              alignment: Alignment.center,
+                              width: screenWidth * 0.15,
+                              height: screenHeight * 0.06,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                color: Colors.grey[200], // Color de fondo del contenedor
+                              ),
+                              child: DropdownButton<String>(
+                                value: contrasenaSeleccionada1,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    contrasenaSeleccionada1 = newValue;
+                                  });
+                                },
+                                items: opcionesContrasena
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
                                 style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: screenHeight * 0.02,
                                   color: Colors.black,
-                                  fontSize: screenHeight * 0.025,
+                                ),
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: screenHeight * 0.04,
+                                ),
+                                borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                underline: Container(
+                                  height: 0,
                                 ),
                               ),
-                              SizedBox(width: screenWidth * 0.02),
-                              Container(
-                                alignment: Alignment.center,
-                                width: screenWidth*0.1,
-                                height: screenHeight * 0.06,
-                                decoration: BoxDecoration(  
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                                  color: Colors.grey[200], // Color de fondo del contenedor
+                            ),
+                            SizedBox(width: screenWidth * 0.01),
+                            Container(
+                              alignment: Alignment.center,
+                              width: screenWidth * 0.15,
+                              height: screenHeight * 0.06,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                color: Colors.grey[200], // Color de fondo del contenedor
+                              ),
+                              child: DropdownButton<String>(
+                                value: contrasenaSeleccionada2,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    contrasenaSeleccionada2 = newValue;
+                                  });
+                                },
+                                items: opcionesContrasena
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: screenHeight * 0.02,
+                                  color: Colors.black,
                                 ),
-                                child: DropdownButton<String>(
-                                  value: contrasenaSeleccionada1,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      contrasenaSeleccionada1 = newValue;
-                                    });
-                                  },
-                                  items: opcionesContrasena.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: screenHeight * 0.02,
-                                    color: Colors.black,
-                                  ),
-                                  icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
-                                  borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
-                                  underline: Container(height: 0,),
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: screenHeight * 0.04,
+                                ),
+                                borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                underline: Container(
+                                  height: 0,
                                 ),
                               ),
-                              SizedBox(width: screenWidth * 0.01),
-                              Container(
-                                alignment: Alignment.center,
-                                width: screenWidth*0.1,
-                                height: screenHeight * 0.06,
-                                decoration: BoxDecoration(  
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                                  color: Colors.grey[200], // Color de fondo del contenedor
+                            ),
+                            SizedBox(width: screenWidth * 0.01),
+                            Container(
+                              alignment: Alignment.center,
+                              width: screenWidth * 0.15,
+                              height: screenHeight * 0.06,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                color: Colors.grey[200], // Color de fondo del contenedor
+                              ),
+                              child: DropdownButton<String>(
+                                value: contrasenaSeleccionada3,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    contrasenaSeleccionada3 = newValue;
+                                  });
+                                },
+                                items: opcionesContrasena
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: screenHeight * 0.02,
+                                  color: Colors.black,
                                 ),
-                                child: DropdownButton<String>(
-                                  value: contrasenaSeleccionada2,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      contrasenaSeleccionada2 = newValue;
-                                    });
-                                  },
-                                  items: opcionesContrasena.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: screenHeight * 0.02,
-                                    color: Colors.black,
-                                  ),
-                                  icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
-                                  borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
-                                  underline: Container(height: 0,),
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: screenHeight * 0.04,
+                                ),
+                                borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                                underline: Container(
+                                  height: 0,
                                 ),
                               ),
-                              SizedBox(width: screenWidth * 0.01),
-                              Container(
-                                alignment: Alignment.center,
-                                width: screenWidth*0.1,
-                                height: screenHeight * 0.06,
-                                decoration: BoxDecoration(  
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                                  color: Colors.grey[200], // Color de fondo del contenedor
-                                ),
-                                child: DropdownButton<String>(
-                                  value: contrasenaSeleccionada3,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      contrasenaSeleccionada3 = newValue;
-                                    });
-                                  },
-                                  items: opcionesContrasena.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: screenHeight * 0.02,
-                                    color: Colors.black,
-                                  ),
-                                  icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
-                                  borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
-                                  underline: Container(height: 0,),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
                           SizedBox(height: screenHeight * 0.04),
+                          // Examinar foto
                           Row(
                             children: [
                               Text(
                                 'Foto Inicio Sesión:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
                               ),
                               SizedBox(width: screenWidth * 0.02),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                  maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
-                                  // backgroundColor: Colors.red, // Color del botón
-                                ),
-                                
-                                onPressed: () {
-                                  // Lógica para examinar foto
-                                },
-                                child: Text('Examinar foto', style: TextStyle(
-                                  fontSize: screenHeight * 0.02,
-                                ),),
-                              ),
+                              BotonExaminar(tipo: "Foto", color: Colors.red[300], letra: Colors.white, url: (String nuevaUrl) {
+                                    setState(() {
+                                      urlFoto = nuevaUrl; // Guardamos la URL devuelta
+                                    });
+                                  },)
                             ],
                           ),
                         ],
@@ -362,6 +415,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
                           child: Text(
                             'Confirmar',
                             style: TextStyle(
+                              fontFamily: 'Roboto', 
                               fontSize: screenHeight * 0.03,
                               color: Colors.white,
                             ),

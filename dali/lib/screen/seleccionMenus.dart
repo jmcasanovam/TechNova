@@ -56,6 +56,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                       ), // Icono de perfil
                     Text('Pedir Comandas',
                         style: TextStyle(
+                          fontFamily: 'Roboto', 
                           fontSize: screenWidth * 0.08,
                           fontWeight: FontWeight.bold,
                         )),
@@ -68,6 +69,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                   Column(children: [
                     Text("Pedir menús (" + aula.nombre + ")",
                         style: TextStyle(
+                          fontFamily: 'Roboto', 
                           fontSize: screenWidth * 0.03,
                           fontWeight: FontWeight.bold,
                           color: const Color.fromRGBO(5, 153, 159, 1),
@@ -98,7 +100,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                           Text(
                             aula.menus[menu_actual].nombre,
                             style: const TextStyle(
-                              fontFamily: "Open Sans",
+                              fontFamily: 'Roboto', 
                               fontSize: 30
                             )):
                           Image.asset(aula.menus[menu_actual].picto, width: screenWidth*0.06),
@@ -117,7 +119,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                   child: Text(
                                     (aula.menus[menu_actual].cantidad).toString(),
                                     style: const TextStyle(
-                                      fontFamily: "Open Sans",
+                                      fontFamily: 'Roboto', 
                                       fontSize: 30),))
                               ),
                               SizedBox(width: screenWidth*0.02),
@@ -136,7 +138,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                     Text(
                                       "-",
                                       style: TextStyle(
-                                        fontFamily: "Open Sans",
+                                        fontFamily: 'Roboto', 
                                         fontSize: screenHeight*0.07
                                       ),
                                     )
@@ -157,7 +159,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                     Text(
                                       "+",
                                       style: TextStyle(
-                                        fontFamily: "Open Sans",
+                                        fontFamily: 'Roboto', 
                                         fontSize: screenHeight*0.07
                                       ),
                                     )
@@ -260,7 +262,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                       const Text(
                         "Ver menú",
                         style: const TextStyle(
-                        fontFamily: "Open Sans",
+                          fontFamily: 'Roboto', 
                         color: Colors.white,
                         fontSize: 25
                         ),
@@ -300,7 +302,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                             Text(
                               modo_picto == false ?"Pictogramas":"Números",
                               style: const TextStyle(
-                              fontFamily: "Open Sans",
+                                fontFamily: 'Roboto', 
                               color: Colors.white,
                               fontSize: 25
                             ),
@@ -329,7 +331,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Column(children: [
-                                  const Text("¿Estás seguro de que quieres elegir estos menús?", style: TextStyle(fontFamily: "Open Sans", fontSize: 40),),
+                                  const Text("¿Estás seguro de que quieres elegir estos menús?", style: TextStyle(fontFamily: 'Roboto', fontSize: 40),),
                                   FilledButton(
                                     style: FilledButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -351,7 +353,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                         Text(
                                           "SÍ",
                                           style: TextStyle(
-                                            fontFamily: "Open Sans",
+                                            fontFamily: 'Roboto', 
                                             fontSize: screenHeight*0.05
                                           ),
                                         ),
@@ -375,7 +377,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                         Text(
                                           "NO",
                                           style: TextStyle(
-                                            fontFamily: "Open Sans",
+                                            fontFamily: 'Roboto', 
                                             fontSize: screenHeight*0.05
                                           ),
                                         ),
@@ -395,9 +397,9 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                       const Text(
                         "Completar",
                         style: const TextStyle(
-                        fontFamily: "Open Sans",
-                        color: Colors.white,
-                        fontSize: 25
+                          fontFamily: 'Roboto', 
+                          color: Colors.white,
+                          fontSize: 25
                         ), 
                       )
                       ],) ,

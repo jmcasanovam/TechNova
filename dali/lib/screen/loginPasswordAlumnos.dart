@@ -158,6 +158,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                           Text(
                             "BORRAR",
                             style: TextStyle(
+                              fontFamily: 'Roboto', 
                               fontSize: screenHeight * 0.03,
                               color: Colors.red,
                               fontWeight: FontWeight.bold,
@@ -207,7 +208,7 @@ class _PasswordAlumnosState extends State<PasswordAlumnos> {
                                   child: Text(
                                     "CONFIRMAR",
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white),
                                   ),
                                 ))),
                       ),

@@ -108,6 +108,7 @@ Future<void> _cargarTareas() async {
                             0.2),), // Icono de perfil
                     Text('Agenda',
                         style: TextStyle(
+                          fontFamily: 'Roboto', 
                           fontSize: screenHeight * 0.08,
                           fontWeight: FontWeight.bold,
                         )),
@@ -149,7 +150,7 @@ Future<void> _cargarTareas() async {
                               ),
                               width: screenWidth * 0.2,
                               height: screenHeight * 0.3,
-                              child: Text("No hay mas tareas!!", style: TextStyle(fontSize: screenHeight*0.04),),
+                              child: Text("No hay mas tareas!!", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.04),),
                             )
                           ),
                         ],
@@ -279,7 +280,7 @@ String _username = '';
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      width: MediaQuery.of(context).size.width * 0.07,
+      width: MediaQuery.of(context).size.width * 0.085,
       decoration: BoxDecoration(
         color: Colors.red,
         borderRadius: BorderRadius.circular(10), // Bordes redondeados
@@ -297,7 +298,7 @@ String _username = '';
           ),
            Text('MENÚ',
               style: TextStyle(
-                fontSize: screenHeight*0.04,
+                fontSize: screenHeight*0.035,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
                 color: Colors.white

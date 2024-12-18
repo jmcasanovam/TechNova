@@ -51,7 +51,7 @@ class AdminChatIndividual extends StatelessWidget {
                       ),
                       child: Text(
                         mensaje['texto'],
-                        style: TextStyle(color: Colors.white, fontSize: screenHeight*0.02),
+                        style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: screenHeight*0.02),
                       ),
                     ),
                   );
@@ -69,7 +69,7 @@ class AdminChatIndividual extends StatelessWidget {
                     color: Colors.transparent,
                     height: screenHeight*0.08,
                     child: TextField(
-                      style: TextStyle(fontSize: screenHeight*0.02),
+                      style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02),
                       decoration: InputDecoration(
                         hintText: "Escribe aquí...",
                         border: OutlineInputBorder(

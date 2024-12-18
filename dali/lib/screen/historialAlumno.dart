@@ -100,6 +100,7 @@ class _HistorialState extends State<Historial> {
                 ),
                 Text('Historial',
                     style: TextStyle(
+                      fontFamily: 'Roboto', 
                       fontSize: screenWidth * 0.08,
                       fontWeight: FontWeight.bold,
                     )),
@@ -169,6 +170,7 @@ class _HistorialState extends State<Historial> {
                                                 Text(
                                                   'Día: ${tareasAgrupadas.isNotEmpty ? DateFormat('dd/MM/yyyy').format(tareasAgrupadas[diaActual][0].fechaCompletada!) : ""}',
                                                   style: TextStyle(
+                                                    fontFamily: 'Roboto', 
                                                     color: Colors.white,
                                                     fontSize: screenWidth * 0.03,
                                                     fontWeight: FontWeight.bold,
@@ -195,6 +197,7 @@ class _HistorialState extends State<Historial> {
                                                             child: Text(
                                                               tarea.titulo,
                                                               style: TextStyle(
+                                                                fontFamily: 'Roboto', 
                                                                 color: Colors.white,
                                                                 fontSize: screenWidth * 0.03,
                                                               ),

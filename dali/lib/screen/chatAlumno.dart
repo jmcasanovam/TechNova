@@ -51,7 +51,7 @@ class ChatAlumno extends StatelessWidget {
                       ),
                       child: Text(
                         mensaje['texto'],
-                        style: TextStyle(color: Colors.white, fontSize: screenHeight*0.02),
+                        style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: screenHeight*0.02),
                       ),
                     ),
                   );
@@ -75,7 +75,7 @@ class ChatAlumno extends StatelessWidget {
                     height: screenHeight*0.2,
                     child: TextField(
                       maxLines: 4,
-                      style: TextStyle(fontSize: screenHeight*0.03),
+                      style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.03),
                       decoration: const InputDecoration(
                         hintText: "Escribe aquí...",
                         border: InputBorder.none,

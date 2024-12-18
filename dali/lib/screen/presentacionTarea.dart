@@ -167,6 +167,7 @@ class _PresentacionTareaState extends State<PresentacionTarea> {
                     child: Text(
                       _tareaAsingada!.tareaPlantilla.titulo,
                       style: TextStyle(
+                        fontFamily: 'Roboto', 
                         fontSize: screenWidth * 0.08,
                         fontWeight: FontWeight.bold,
                       ),
@@ -544,9 +545,9 @@ class _PresentacionTareaState extends State<PresentacionTarea> {
                                 Text(
                                   paso_actual > pasos_total ? "Final": "Paso " + (paso_actual + 1).toString(),
                                   style: TextStyle(
+                                    fontFamily: 'Roboto', 
                                     color: Colors.white,
                                     fontSize: screenWidth * 0.03,
-                                    fontFamily: 'Open Sans',
                                   ),
                                 ),
                                 SizedBox(
@@ -698,7 +699,7 @@ class _PresentacionTareaState extends State<PresentacionTarea> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: screenWidth * 0.02,
-                                fontFamily: 'Open Sans',
+                                fontFamily: 'Roboto', 
                               ),
                             ),
                           ],
@@ -785,8 +786,7 @@ class _PresentacionTareaState extends State<PresentacionTarea> {
                                                     Text(
                                                       "Continuar",
                                                       style: TextStyle(
-                                                          fontFamily:
-                                                              "Open Sans",
+                                                        fontFamily: 'Roboto', 
                                                           fontSize:
                                                               screenHeight *
                                                                   0.025),
@@ -817,7 +817,7 @@ class _PresentacionTareaState extends State<PresentacionTarea> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: screenWidth * 0.02,
-                                fontFamily: 'Open Sans',
+                                fontFamily: 'Roboto', 
                               ),
                             ),
                           ],

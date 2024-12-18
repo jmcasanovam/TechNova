@@ -1,6 +1,6 @@
 import 'package:dali/controlers/controladores.dart';
 import 'package:dali/screen/adminAlumnoTareas.dart';
-import 'package:dali/screen/adminCreadorPerfil2.dart';
+import 'package:dali/screen/adminCreadorPerfil.dart';
 import 'package:dali/screen/adminEditarPerfil.dart';
 import 'package:dali/widget/adminTitulo.dart';
 import 'package:flutter/material.dart';
@@ -107,8 +107,8 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                       ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size(screenWidth * 0.1, screenHeight * 0.06),
-                          maximumSize: Size(screenWidth * 0.1, screenHeight * 0.06),
+                          minimumSize: Size(screenWidth * 0.2, screenHeight * 0.08),
+                          maximumSize: Size(screenWidth * 0.2, screenHeight * 0.08),
                           backgroundColor: Colors.red,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(screenWidth * 0.01),

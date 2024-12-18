@@ -133,7 +133,7 @@ class _ReproductorPasosState extends State<ReproductorPasos> {
       return Center(
         child: Text(
           "Error al cargar el contenido",
-          style: TextStyle(color: Colors.red, fontSize: screenWidth * 0.05),
+          style: TextStyle(fontFamily: 'Roboto', color: Colors.red, fontSize: screenWidth * 0.05),
         ),
       );
     }
@@ -142,7 +142,7 @@ class _ReproductorPasosState extends State<ReproductorPasos> {
       case TipoPaso.texto:
         return Text(
           widget.contenido,
-          style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.02, fontFamily: 'Open Sans'),
+          style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.02, fontFamily: 'Roboto', ),
         );
 
       case TipoPaso.imagen:

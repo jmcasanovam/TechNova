@@ -72,31 +72,6 @@ class LoginScreen extends StatelessWidget {
 
             SizedBox(height: screenHeight * 0.02),
 
-            // Filas para botones de abajo
-            /*Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-               // Botón configuracion
-                Semantics(
-                  label: 'Botón Configuración',
-                  child: Padding(
-                    padding: EdgeInsets.only(left: screenWidth * (0.15 / 2)),
-                    child: FilledButton(
-                      style: FilledButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(screenWidth * 0.02)),
-                        backgroundColor: Colors.red,
-                        fixedSize: Size(screenWidth * 0.08, screenWidth * 0.08),
-                      ),
-                      onPressed: () {},
-                      child: Image.asset('images/ajustes.png',
-                          color: 
-                          Colors.white,
-                          height: screenWidth * 0.07),
-                    ),
-                  ),
-                ),*/
-
                 // Botón "Profesor"
                 Semantics(
                   label: 'Botón Profesor',

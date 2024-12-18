@@ -40,7 +40,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Center(child: CircularProgressIndicator());
       } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
+        return Center(child: Text('Error: ${snapshot.error}', style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.03),));
       } else if (snapshot.hasData) {
         List<Map<String, dynamic>> tareasData = snapshot.data!;
 
@@ -96,7 +96,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
           ],
         );
       } else {
-        return Center(child: Text('No hay datos disponibles.'));
+        return Center(child: Text('No hay datos disponibles.', style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.03),));
       }
     },
   ),
@@ -122,6 +122,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
       child: Text(
         "Asignar Tarea",
         style: TextStyle(
+          fontFamily: 'Roboto', 
           fontSize: screenHeight * 0.02,
           fontWeight: FontWeight.bold,
         ),
@@ -226,14 +227,14 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
         return AlertDialog(
           title: Text(
             'Detalles de Asignación',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: alto * 0.03),
+            style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: alto * 0.03),
           ),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Fecha de Asignación
-                Text('Fecha de Asignación:', style: TextStyle(fontSize: alto * 0.02)),
+                Text('Fecha de Asignación:', style: TextStyle(fontFamily: 'Roboto', fontSize: alto * 0.025)),
                 SizedBox(height: alto * 0.02),
                 ElevatedButton(
                   onPressed: () async {
@@ -253,12 +254,13 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                     fechaAsignacion == null
                         ? 'Seleccionar Fecha'
                         : '${fechaAsignacion!.day}/${fechaAsignacion!.month}/${fechaAsignacion!.year}',
+                        style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.02),
                   ),
                 ),
                 SizedBox(height: alto * 0.04),
 
                 // Fecha de Finalización
-                Text('Fecha de Expiración:', style: TextStyle(fontSize: alto * 0.02)),
+                Text('Fecha de Expiración:', style: TextStyle(fontFamily: 'Roboto', fontSize: alto * 0.025)),
                 SizedBox(height: alto * 0.02),
                 ElevatedButton(
                   onPressed: () async {
@@ -278,19 +280,20 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                     fechaFinalizacion == null
                         ? 'Seleccionar Fecha'
                         : '${fechaFinalizacion!.day}/${fechaFinalizacion!.month}/${fechaFinalizacion!.year}',
+                        style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.02),
                   ),
                 ),
                 SizedBox(height: alto * 0.04),
 
                 // Formato Principal
-                Text('Formato Principal:', style: TextStyle(fontSize: alto * 0.02)),
+                Text('Formato Principal:', style: TextStyle(fontFamily: 'Roboto', fontSize: alto * 0.025)),
                 SizedBox(height: alto * 0.02),
                 DropdownButton<String>(
                   value: formatoPrincipal,
                   items: opcionesFormato.map((String formato) {
                     return DropdownMenuItem<String>(
                       value: formato,
-                      child: Text(formato),
+                      child: Text(formato, style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.02),),
                     );
                   }).toList(),
                   onChanged: (String? nuevoFormato) {
@@ -303,12 +306,12 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                 SizedBox(height: alto * 0.04),
 
                 // Formatos Adicionales
-                Text('Formatos Adicionales:', style: TextStyle(fontSize: alto * 0.02)),
+                Text('Formatos Adicionales:', style: TextStyle(fontFamily: 'Roboto', fontSize: alto * 0.025)),
                 Column(
                   children: opcionesFormato.map((String formato) {
                     final bool isPrincipal = formato == formatoPrincipal;
                     return CheckboxListTile(
-                      title: Text(formato),
+                      title: Text(formato, style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.02),),
                       value: isPrincipal ? false : formatosAdicionales.contains(formato),
                       onChanged: isPrincipal
                           ? null
@@ -331,7 +334,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
             // Cancelar
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancelar'),
+              child: Text('Cancelar', style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.03),),
             ),
             // Confirmar
             ElevatedButton(
@@ -380,7 +383,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                   );
                 }
               },
-              child: Text('Confirmar'),
+              child: Text('Confirmar', style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.03),),
             ),
           ],
         );
@@ -403,6 +406,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
           : Text(
               content.toString(),
               style: TextStyle(
+                fontFamily: 'Roboto', 
                 fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
                 fontSize: screenHeight * 0.02,
               ),

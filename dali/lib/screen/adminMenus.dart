@@ -1,4 +1,5 @@
 import 'package:dali/widget/adminTitulo.dart';
+import 'package:dali/widget/botonExaminar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dali/controlers/controladores.dart';
@@ -26,6 +27,9 @@ class _AdminMenusState extends State<AdminMenus> {
   List<TextEditingController> controllers = [];
     final TextEditingController controladorNumMenus = TextEditingController();
     final Controladores controladores = Controladores();
+
+  List<String> urls =[];
+  List<String> pdfs =[];
 
 
   void volverAtras(BuildContext context) {
@@ -61,6 +65,9 @@ class _AdminMenusState extends State<AdminMenus> {
         controllers = List.generate(menus.length, (index) {
           return TextEditingController(text: menus[index].nombre);
         });
+        urls = List.generate(menus.length, (_) => '');
+        pdfs = List.generate(menus.length, (_) => '');
+
       });
     } catch (error) {
       print("Error al obtener la cantidad de menús: $error");
@@ -102,6 +109,7 @@ class _AdminMenusState extends State<AdminMenus> {
                               Text(
                                 'Número de menús disponibles:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
@@ -114,6 +122,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                   keyboardType: TextInputType.number,
                                   controller: controladorNumMenus,
                                   style: TextStyle(
+                                    fontFamily: 'Roboto', 
                                     color: Colors.black,
                                     fontSize: screenHeight * 0.025,
                                   ),
@@ -134,6 +143,9 @@ class _AdminMenusState extends State<AdminMenus> {
                                   }
 
                                   });
+                                  urls = List.generate(numero_menus, (_) => '');
+                                  pdfs = List.generate(menus.length, (_) => '');
+
 
                                   while(menus.length > numero_menus)
                                     menus.removeLast();
@@ -144,6 +156,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                 },
                                 
                                 child: Text('Actualizar Cantidad', style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   fontSize: screenHeight * 0.02,
                                   color: Colors.black
                                 ),),
@@ -166,6 +179,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                 child: Text(
                                   'Confirmar Cambios',
                                   style: TextStyle(
+                                    fontFamily: 'Roboto', 
                                     fontSize: screenHeight * 0.02,
                                     color: Colors.white
                                   ),
@@ -185,6 +199,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                       child: TextField(
                                         controller: controllers[i],
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.025,
                                         ),
@@ -192,37 +207,17 @@ class _AdminMenusState extends State<AdminMenus> {
                                       ),
                                     ),
                                   SizedBox(width: screenWidth*0.02),
-                                  TextButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
-                                      maximumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
-                                      backgroundColor: Colors.grey[200]
-                                    ),
-                                    onPressed: (){
-                                      // Lógica de examinar imagen
-                                    },
-
-                                    child: Text('Examinar imagen', style: TextStyle(
-                                      fontSize: screenHeight * 0.02,
-                                      color: Colors.black
-                                    ),),
-                                  ),
+                                  BotonExaminar(tipo: "Foto", color: Colors.grey[200], letra: Colors.black, url: (String nuevaUrl) {
+                                    setState(() {
+                                      urls[i] = nuevaUrl; // Guardamos la URL devuelta
+                                    });
+                                  },),
                                   SizedBox(width: screenWidth*0.01,),
-                                  TextButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
-                                      maximumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
-                                      backgroundColor: const Color.fromRGBO(179, 11, 0, 1),
-                                    ),
-                                    
-                                    onPressed: () {
-                                      // Lógica para examinar PDF
-                                    },
-                                    child: Text('Examinar PDF', style: TextStyle(
-                                      fontSize: screenHeight * 0.02,
-                                      color: Colors.white
-                                    ),),
-                                  ),
+                                  BotonExaminar(tipo: "PDF", color: const Color.fromRGBO(179, 11, 0, 1), letra: Colors.white, url: (String nuevaUrl) {
+                                    setState(() {
+                                      urls[i] = nuevaUrl; // Guardamos la URL devuelta
+                                    });
+                                  },),
                                 ],)
                             ],))),
 
@@ -233,6 +228,7 @@ class _AdminMenusState extends State<AdminMenus> {
                               Text(
                                 'Tarea asignada:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
@@ -241,6 +237,7 @@ class _AdminMenusState extends State<AdminMenus> {
                               Text(
                                 tarea_asignada?'SI':'NO',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
@@ -255,6 +252,7 @@ class _AdminMenusState extends State<AdminMenus> {
                               Text(
                                 'Comanda tomada:',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
@@ -263,6 +261,7 @@ class _AdminMenusState extends State<AdminMenus> {
                               Text(
                                 comanda_tomada?'SI':'NO',
                                 style: TextStyle(
+                                  fontFamily: 'Roboto', 
                                   color: Colors.black,
                                   fontSize: screenHeight * 0.025,
                                 ),
@@ -281,10 +280,10 @@ class _AdminMenusState extends State<AdminMenus> {
                                       builder: (BuildContext context){
                                         return AlertDialog(
                                           content: Container(height: screenHeight*0.6, child: Column(children: [
-                                            const Text("Menus asignados",
+                                             Text("Menus asignados",
                                               style: TextStyle(
-                                                fontFamily: 'Open Sans',
-                                                fontSize: 40,
+                                                fontFamily: 'Roboto', 
+                                                fontSize: screenHeight*0.03,
                                                 color: Colors.red
                                               )),
                                             Container(height: screenHeight*0.4, child: SingleChildScrollView(
@@ -297,6 +296,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                                       Image.asset(menu.picto, width: screenWidth*0.1, height: screenWidth*0.1,),
                                                       Text(menu.nombre + ": " + menu.get_cant().toString(),
                                                       style: const TextStyle(
+                                                        fontFamily: 'Roboto', 
                                                         fontSize: 20,
                                                       ),)]),
                                               ],
@@ -314,6 +314,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                               },
 
                                               child: Text('Volver', style: TextStyle(
+                                                fontFamily: 'Roboto', 
                                                 fontSize: screenHeight * 0.02,
                                               ),),
                                             ),
@@ -327,6 +328,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                 child: Text(
                                   'Consultar Comanda',
                                   style: TextStyle(
+                                    fontFamily: 'Roboto', 
                                     fontSize: screenWidth * 0.015,
                                     color: Colors.white,
                                   ),

@@ -51,7 +51,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Nombre:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                                Text("Nombre:", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.025, color: Colors.white),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(screenWidth*0.01),
@@ -61,6 +61,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                   child: TextField(
                                     controller: TextEditingController(text: nombre),
                                     style: TextStyle(
+                                      fontFamily: 'Roboto', 
                                       color: Colors.black,
                                       fontSize: screenHeight * 0.02,
                                     ),
@@ -69,6 +70,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                       focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
                                       hintText: 'Ingrese su nombre',
                                       hintStyle: TextStyle(
+                                        fontFamily: 'Roboto', 
                                         color: Colors.black,
                                         fontSize: screenHeight * 0.020,
                                       ),
@@ -96,7 +98,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Nickname:", style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white),),
+                                Text("Nickname:", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.025, color: Colors.white),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(screenWidth*0.01),
@@ -106,6 +108,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                   child: TextField(
                                     controller: TextEditingController(text: nickname),
                                     style: TextStyle(
+                                      fontFamily: 'Roboto', 
                                       color: Colors.black,
                                       fontSize: screenHeight * 0.02,
                                     ),
@@ -114,6 +117,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                       focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius:BorderRadius.circular(screenWidth * 0.01)),
                                       hintText: 'Ingrese su nickname',
                                       hintStyle: TextStyle(
+                                        fontFamily: 'Roboto', 
                                         color: Colors.black,
                                         fontSize: screenHeight * 0.020,
                                       ),
@@ -139,7 +143,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                       onPressed: () => {},
                       child: Text(
                         "Confirmar valores",
-                        style: TextStyle(fontSize: screenHeight * 0.03),
+                        style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.03),
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -169,7 +173,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                             return AlertDialog(
                               title: Text(
                                 'Cambiar contraseña',
-                                style: TextStyle(fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold),
                               ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -184,6 +188,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                       Text(
                                         'Contraseña actual:',
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.02,
                                         ),
@@ -195,6 +200,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                         child: TextField(
                                           obscureText: _oculto1,
                                           style: TextStyle(
+                                            fontFamily: 'Roboto', 
                                             color: Colors.black,
                                             fontSize: screenHeight * 0.015,
                                           ),
@@ -209,6 +215,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                             ),
                                             hintText: 'Ingrese su contraseña actual',
                                             hintStyle: TextStyle(
+                                              fontFamily: 'Roboto', 
                                               color: Colors.black,
                                               fontSize: screenHeight * 0.015,
                                             ),
@@ -240,6 +247,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                       Text(
                                         'Nueva contraseña:',
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.02,
                                         ),
@@ -251,6 +259,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                         child: TextField(
                                           obscureText: _oculto2,
                                           style: TextStyle(
+                                            fontFamily: 'Roboto', 
                                             color: Colors.black,
                                             fontSize: screenHeight * 0.015,
                                           ),
@@ -265,6 +274,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                             ),
                                             hintText: 'Ingrese su nueva contraseña',
                                             hintStyle: TextStyle(
+                                              fontFamily: 'Roboto', 
                                               color: Colors.black,
                                               fontSize: screenHeight * 0.015,
                                             ),
@@ -296,6 +306,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                       Text(
                                         'Confirmar contraseña:',
                                         style: TextStyle(
+                                          fontFamily: 'Roboto', 
                                           color: Colors.black,
                                           fontSize: screenHeight * 0.02,
                                         ),
@@ -307,6 +318,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                         child: TextField(
                                           obscureText: _oculto3,
                                           style: TextStyle(
+                                            fontFamily: 'Roboto', 
                                             color: Colors.black,
                                             fontSize: screenHeight * 0.015,
                                           ),
@@ -321,6 +333,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                             ),
                                             hintText: 'Confirme su contraseña',
                                             hintStyle: TextStyle(
+                                              fontFamily: 'Roboto', 
                                               color: Colors.black,
                                               fontSize: screenHeight * 0.015,
                                             ),
@@ -354,7 +367,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                                   },
                                   child: Text(
                                     'Confirmar',
-                                    style: TextStyle(fontSize: screenHeight * 0.02, color: Colors.white),
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02, color: Colors.white),
                                   ),
                                 ),
                               ],
@@ -366,7 +379,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
                   },
                   child: Text(
                     "Cambiar contraseña",
-                    style: TextStyle(fontSize: screenHeight * 0.03),
+                    style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.03),
                     textAlign: TextAlign.center,
                   ),
                 )

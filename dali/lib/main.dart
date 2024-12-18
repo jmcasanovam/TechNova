@@ -1,5 +1,6 @@
 import 'package:dali/screen/adminAsignarTareas.dart';
 import 'package:dali/screen/adminChats.dart';
+import 'package:dali/screen/adminCreadorPerfil.dart';
 import 'package:dali/screen/adminCreadorTareas.dart';
 import 'package:dali/screen/adminPerfil.dart';
 import 'package:dali/screen/adminTareasPlantilla.dart';
@@ -32,11 +33,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: AdminMenus(),
-        home: const SplashScreen(),
+        // home: const SplashScreen(),
         // home: LoginAlumnos(),
         // home: LoginScreen(),
 
+    // home: AdminCreadorPerfil(),
 
+    home: AdminCreadorPerfil(),
     // home: AdminCreadorTareas(),
       // home: AdminPerfil(),
       // home: LoginProfesor(),

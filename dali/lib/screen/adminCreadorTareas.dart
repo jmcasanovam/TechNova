@@ -106,7 +106,7 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
             style: TextStyle(fontSize: screenHeight*0.02),
             controller: textoController,
             maxLines: 4,
-            decoration: InputDecoration(hintText: 'Introduce la URL aquí', labelStyle: TextStyle(fontSize: screenHeight*0.02)),
+            decoration: InputDecoration(hintText: 'Introduce la URL aquí', labelStyle: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02)),
           ),
           actions: [
             TextButton(
@@ -122,7 +122,7 @@ class _AdminCreadorTareasState extends State<AdminCreadorTareas> {
                 });
                 Navigator.of(context).pop();
               },
-              child: Text('Confirmar', style: TextStyle(fontSize: screenHeight*0.02, color: Colors.white),),
+              child: Text('Confirmar', style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02, color: Colors.white),),
             ),
           ],
         );
@@ -139,12 +139,12 @@ void _mostrarDialogoTexto(int index) {
         final screenHeight = MediaQuery.of(context).size.height;
         final screenWidth = MediaQuery.of(context).size.width;
         return AlertDialog(
-          title: Text('Paso ${index + 1} - Texto', style: TextStyle(fontSize: screenHeight*0.02),),
+          title: Text('Paso ${index + 1} - Texto', style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02),),
           content: TextField(
             style: TextStyle(fontSize: screenHeight*0.02),
             controller: textoController,
             maxLines: 4,
-            decoration: InputDecoration(hintText: 'Introduce el texto aquí', labelStyle: TextStyle(fontSize: screenHeight*0.02)),
+            decoration: InputDecoration(hintText: 'Introduce el texto aquí', labelStyle: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02)),
           ),
           actions: [
             TextButton(
@@ -160,7 +160,7 @@ void _mostrarDialogoTexto(int index) {
                 });
                 Navigator.of(context).pop();
               },
-              child: Text('Confirmar', style: TextStyle(fontSize: screenHeight*0.02, color: Colors.white),),
+              child: Text('Confirmar', style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02, color: Colors.white),),
             ),
           ],
         );
@@ -182,7 +182,7 @@ void _mostrarDialogoTexto(int index) {
           children: [
             Text(
               titulo,
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: alto*0.025),
+              style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontWeight: FontWeight.bold, fontSize: alto*0.025),
             ),
             ...List.generate(numeroDePasos, (index) {
               return Padding(
@@ -202,7 +202,7 @@ void _mostrarDialogoTexto(int index) {
                     minimumSize: Size(ancho * 0.1, alto * 0.05),
                     maximumSize: Size(ancho * 0.1, alto * 0.05),
                   ),
-                  child: Text('Paso ${index + 1}', style: TextStyle(fontSize: alto*0.02),),
+                  child: Text('Paso ${index + 1}', style: TextStyle(fontFamily: 'Roboto', fontSize: alto*0.02),),
                 ),
               );
             }),
@@ -236,11 +236,11 @@ void _mostrarDialogoTexto(int index) {
                         Padding(
                           padding: EdgeInsets.only(bottom: screenHeight*0.03),
                           child: TextField(
-                            style: TextStyle(fontSize: screenHeight*0.02),
+                            style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.02),
                             onChanged: (value) {setState(() {
                               tituloTarea = value;
                             });},
-                            decoration: InputDecoration(labelText: 'Título',labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: screenHeight*0.025)),
+                            decoration: InputDecoration(labelText: 'Título',labelStyle: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: screenHeight*0.025)),
                           ),
                         ),
                         Row(
@@ -248,6 +248,7 @@ void _mostrarDialogoTexto(int index) {
                             Text(
                               'Numero de pasos:',
                               style: TextStyle(
+                                fontFamily: 'Roboto', 
                                 fontWeight: FontWeight.bold,
                                 fontSize: screenHeight * 0.025,
                               ),
@@ -298,7 +299,7 @@ void _mostrarDialogoTexto(int index) {
                       });
                     },
                     maxLines: 3,
-                    decoration: InputDecoration(labelText: 'Descripción', labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: screenHeight*0.025)),
+                    decoration: InputDecoration(labelText: 'Descripción', labelStyle: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: screenHeight*0.025)),
                   ),
                 ),
               ],
@@ -343,7 +344,7 @@ void _mostrarDialogoTexto(int index) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al crear la tarea')));
                 }
               } : null,
-              child: Text('CREAR', style: TextStyle(fontSize: screenHeight*0.025, color: Colors.white, fontWeight: FontWeight.bold),),
+              child: Text('CREAR', style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.025, color: Colors.white, fontWeight: FontWeight.bold),),
             ),
           ),
         ],

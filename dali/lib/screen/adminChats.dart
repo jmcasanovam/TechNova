@@ -71,19 +71,19 @@ class _AdminChatsState extends State<AdminChats> {
                                 children: [
                                   Text(
                                     chat['nombre'],
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: screenHeight*0.025),
+                                    style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: screenHeight*0.025),
                                   ),
                                   SizedBox(width: screenWidth*0.005),
                                   Text(
                                     chat['nickname'],
-                                    style: TextStyle(color: Colors.grey, fontSize: screenHeight*0.02),
+                                    style: TextStyle(fontFamily: 'Roboto', color: Colors.grey, fontSize: screenHeight*0.02),
                                   ),
                                 ],
                               ),
                               SizedBox(height: screenHeight*0.006),
                               Text(
                                 chat['tarea'],
-                                style: TextStyle(color: Colors.grey[700], fontSize: screenHeight*0.02),
+                                style: TextStyle(fontFamily: 'Roboto', color: Colors.grey[700], fontSize: screenHeight*0.02),
                               ),
                             ],
                           ),
@@ -99,7 +99,7 @@ class _AdminChatsState extends State<AdminChats> {
                             ),
                             child: Text(
                               chat['mensajesSinLeer'].toString(),
-                              style: TextStyle(color: Colors.white, fontSize: screenHeight*0.02),
+                              style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: screenHeight*0.02),
                             ),
                           ),
                       ],

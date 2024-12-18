@@ -46,11 +46,11 @@ class AdminAlumnoTareas extends StatelessWidget {
                 }
                 if (snapshot.hasError) {
                   print("Error: ${snapshot.error}");
-                  return Center(child: Text("Error al cargar las tareas"));
+                  return Center(child: Text("Error al cargar las tareas", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.03),));
                 }
 
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text("No hay tareas disponibles"));
+                  return Center(child: Text("No hay tareas disponibles", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.03),));
                 }
 
                 List<Map<String, dynamic>> tareasData = snapshot.data!;
@@ -103,7 +103,7 @@ class AdminAlumnoTareas extends StatelessWidget {
                                         _mostrarFoto(context, false, "") : 
                                         _mostrarFoto(context, true, tarea["fotoResultado"]);
                                     },
-                                    child: Text("Ver Foto", style: TextStyle(fontSize: screenHeight * 0.02)),
+                                    child: Text("Ver Foto", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02)),
                                   ),
                                   context,
                                 ),
@@ -135,6 +135,7 @@ class AdminAlumnoTareas extends StatelessWidget {
           : Text(
               content.toString(),
               style: TextStyle(
+                fontFamily: 'Roboto', 
                 fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
                 fontSize: screenHeight * 0.02,
               ),
@@ -158,12 +159,12 @@ class AdminAlumnoTareas extends StatelessWidget {
                 Image.asset('images/no.png', width: screenWidth * 0.3, height: screenHeight * 0.4) :
                 Image.network(fotoUrl, width: screenWidth * 0.3, height: screenHeight * 0.4),
               SizedBox(height: screenHeight * 0.04),
-              Text("Foto de la tarea", style: TextStyle(fontSize: screenHeight * 0.02)),
+              Text("Foto de la tarea", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02)),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text("Cerrar", style: TextStyle(fontSize: screenHeight * 0.03)),
+                child: Text("Cerrar", style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.03)),
               ),
             ],
           ),

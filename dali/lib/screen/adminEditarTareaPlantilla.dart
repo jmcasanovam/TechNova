@@ -102,15 +102,15 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
         return AlertDialog(
           title: Text(
             'Paso ${index + 1} - Texto',
-            style: TextStyle(fontSize: screenHeight * 0.02),
+            style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02),
           ),
           content: TextField(
-            style: TextStyle(fontSize: screenHeight * 0.02),
+            style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02),
             controller: textoController,
             maxLines: 4,
             decoration: InputDecoration(
                 hintText: 'Introduce el texto aquí',
-                labelStyle: TextStyle(fontSize: screenHeight * 0.02)),
+                labelStyle: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02)),
           ),
           actions: [
             TextButton(
@@ -127,8 +127,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
               },
               child: Text(
                 'Confirmar',
-                style: TextStyle(
-                    fontSize: screenHeight * 0.02, color: Colors.white),
+                style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02, color: Colors.white),
               ),
             ),
           ],
@@ -148,15 +147,15 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
         return AlertDialog(
           title: Text(
             'Paso ${index + 1} - $tipo',
-            style: TextStyle(fontSize: screenHeight * 0.02),
+            style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02),
           ),
           content: TextField(
-            style: TextStyle(fontSize: screenHeight * 0.02),
+            style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02),
             controller: textoController,
             maxLines: 4,
             decoration: InputDecoration(
                 hintText: 'Introduce la URL aquí',
-                labelStyle: TextStyle(fontSize: screenHeight * 0.02)),
+                labelStyle: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02)),
           ),
           actions: [
             TextButton(
@@ -173,8 +172,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
               },
               child: Text(
                 'Confirmar',
-                style: TextStyle(
-                    fontSize: screenHeight * 0.02, color: Colors.white),
+                style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight * 0.02, color: Colors.white),
               ),
             ),
           ],
@@ -230,7 +228,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
       return Center(
         child: Text(
         'Error: lista desincronizada',
-        style: TextStyle(fontSize: alto * 0.03, color: Colors.red),
+        style: TextStyle(fontFamily: 'Roboto', fontSize: alto * 0.03, color: Colors.red),
       ),
       );
     }
@@ -253,9 +251,10 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
             Text(
               titulo,
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: alto * 0.025),
+                fontFamily: 'Roboto', 
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: alto * 0.025),
             ),
             ...List.generate(numeroDePasos, (index) {
               return Padding(
@@ -277,7 +276,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
                   ),
                   child: Text(
                     'Paso ${index + 1}',
-                    style: TextStyle(fontSize: alto * 0.02),
+                    style: TextStyle(fontFamily: 'Roboto', fontSize: alto * 0.02),
                   ),
                 ),
               );
@@ -327,8 +326,9 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
                             decoration: InputDecoration(
                                 labelText: 'Título',
                                 labelStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: screenHeight * 0.025)),
+                                  fontFamily: 'Roboto', 
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: screenHeight * 0.025)),
                           ),
                         ),
                         Row(
@@ -336,6 +336,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
                             Text(
                               'Numero de pasos:',
                               style: TextStyle(
+                                fontFamily: 'Roboto', 
                                 fontWeight: FontWeight.bold,
                                 fontSize: screenHeight * 0.025,
                               ),
@@ -399,6 +400,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
                     decoration: InputDecoration(
                         labelText: 'Descripción',
                         labelStyle: TextStyle(
+                          fontFamily: 'Roboto', 
                             fontWeight: FontWeight.bold,
                             fontSize: screenHeight * 0.025)),
                   ),
@@ -472,6 +474,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
               child: Text(
                 'EDITAR TAREA',
                 style: TextStyle(
+                  fontFamily: 'Roboto', 
                     fontSize: screenHeight * 0.025,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
