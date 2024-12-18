@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BarraMenu extends StatelessWidget {
   final int selectedIndex;
   
-  BarraMenu({required this.selectedIndex,});
+  BarraMenu({required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {

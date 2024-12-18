@@ -688,9 +688,10 @@ class Controladores {
       // Convertir la respuesta en objetos TareaAsignada
       return tareasData.map((tarea) {
         return TareaAsignada(
-          tarea['nombre'] ?? 'Tarea sin nombre',
-          tarea['miniatura'] ?? 'sin miniatura',
-          tarea['formato'] ?? 'desconocido',
+          tarea['idTareaPlantilla'] ?? 0,
+          tarea['titulo'] ?? 'Tarea sin nombre',
+          tarea['descripcion'] ?? 'sin miniatura',
+          tarea['miniatura'] ?? 'desconocido',
         );
       }).toList();
     } else {
@@ -920,4 +921,63 @@ class Controladores {
       return 400;
     }
   }
+
+Future<bool> editarPerfilAdmin(
+    String nickname, Map<String, dynamic> datosActualizados) async {
+  final url = Uri.parse('$_url_cabeza/editar_perfil_admin'); // URL de tu API
+
+  try {
+    // Agregar el nickname al cuerpo de los datos
+    datosActualizados['nickname'] = nickname;
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(datosActualizados), // Enviamos los datos actualizados
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Perfil del administrador actualizado con éxito: $data');
+      return true; // Actualización exitosa
+    } else {
+      final error = jsonDecode(response.body);
+      print('Error: ${error['error']}');
+      return false; // Error al actualizar
+    }
+  } catch (e) {
+    print('Error al realizar la solicitud: $e');
+    return false; // Error en la solicitud
+  }
+}
+
+Future<bool> editarPerfilEducador(
+    String nickname, Map<String, dynamic> datosActualizados) async {
+  final url = Uri.parse('$_url_cabeza/editar_perfil_educador'); // URL de tu API
+
+  try {
+    // Agregar el nickname al cuerpo de los datos
+    datosActualizados['nickname'] = nickname;
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(datosActualizados), // Enviamos los datos actualizados
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print('Perfil del educador actualizado con éxito: $data');
+      return true; // Actualización exitosa
+    } else {
+      final error = jsonDecode(response.body);
+      print('Error: ${error['error']}');
+      return false; // Error al actualizar
+    }
+  } catch (e) {
+    print('Error al realizar la solicitud: $e');
+    return false; // Error en la solicitud
+  }
+}
+
 }

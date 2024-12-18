@@ -8,8 +8,8 @@ import 'package:dali/widget/reproductorPasos.dart';
 import 'package:flutter/material.dart';
 
 class PresentacionTarea extends StatefulWidget {
-  int idTareaAsignada = 37;
-  PresentacionTarea({super.key});
+  int idTareaAsignada ;
+  PresentacionTarea({super.key, required this.idTareaAsignada});
 
   @override
   _PresentacionTareaState createState() => _PresentacionTareaState();

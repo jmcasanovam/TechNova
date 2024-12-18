@@ -363,7 +363,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
                     fechaFinalizacion!.toIso8601String(),
                     "", // fotoResultado
                     "", // valoración
-                    "", // miniatura
+                    "images/microondas.png" // miniatura
                   );
 
                   Navigator.of(context).pop();

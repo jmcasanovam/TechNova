@@ -8,12 +8,15 @@ import 'package:flutter/widgets.dart';
 import '../widget/barraMenu.dart';
 
 class AdminPerfil extends StatefulWidget {
+  const AdminPerfil({Key? key}) : super(key: key);
   @override
+  
   _AdminPerfilState createState() => _AdminPerfilState();
 }
 
 class _AdminPerfilState extends State<AdminPerfil> {
 
+final Controladores controladores = Controladores();
   String nombre = "juan";
   String nickname = "juan123";
   String nombreNuevo = "juan";

@@ -237,7 +237,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
 
         ],
       ),
-      bottomNavigationBar: BarraMenuProfe(selectedIndex: 1),
+      bottomNavigationBar: BarraMenuProfe(selectedIndex: 1,),
     );
   }
 }

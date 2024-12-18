@@ -47,7 +47,7 @@ void initState() {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PresentacionTarea()),
+        MaterialPageRoute(builder: (context) => PresentacionTarea(idTareaAsignada: _tareas.elementAt(_tareaActual).idTareaAsignada)),
       );
     }
   }

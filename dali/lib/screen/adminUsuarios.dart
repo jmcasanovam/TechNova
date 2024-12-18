@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../widget/barraMenu.dart';
 
 class AdminUsuarios extends StatefulWidget {
+   AdminUsuarios({super.key});
   @override
   _AdminUsuariosState createState() => _AdminUsuariosState();
 }

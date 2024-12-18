@@ -17,8 +17,10 @@ class TareaAsignada {
   
 
   TareaAsignada(
-  [ this.titulo = "",
-    this.miniatura = "d",
+  [ this.idTareaAsignada = 0,
+    this.titulo = "",
+    this.descripcion = "d",
+    this.miniatura = "images/miniatura.png",
     this.formato = "dd",
     idPasos = 0,]
    
