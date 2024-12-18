@@ -95,14 +95,14 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
+                Semantics(label: "Botón de retorno", child: IconButton(
                   icon: Image.asset(
                     'images/back-arrow.png',
                     width: screenWidth * 0.04,
                     height: screenWidth * 0.04,
                   ),
                   onPressed: () => volverAtras(context),
-                ),
+                )),
                 Text(
                   'Pedir Comandas',
                   style: TextStyle(
@@ -134,7 +134,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                     children: [
                       SizedBox(
                         width: screenWidth * 0.1,
-                        child: IconButton(
+                        child: Semantics(label: "Botón izquierda", child: IconButton(
                           icon: Image.asset('images/flecha-izquierda.png'),
                           iconSize: screenWidth * 0.1,
                           onPressed: () {
@@ -147,7 +147,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                             });
                           },
                         ),
-                      ),
+                      )),
                       Column(
                         children: [
                           Row(
@@ -161,7 +161,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                       ),
                       SizedBox(
                         width: screenWidth * 0.1,
-                        child: IconButton(
+                        child: Semantics(label: "Botón derecha", child: IconButton(
                           icon: Image.asset('images/flecha-derecha.png'),
                           iconSize: screenWidth * 0.1,
                           onPressed: () {
@@ -173,7 +173,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                               }
                             });
                           },
-                        ),
+                        )),
                       ),
                     ],
                   ),
@@ -184,7 +184,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                     children:[
                       _crearBotonModoPicto(screenWidth, screenHeight),
                       SizedBox(width: screenWidth*0.5),
-                      FilledButton( //Botón terminar
+                      Semantics(label: !estanAulasTerminadas()?"Botón para terminar desactivado":"Botón para terminar activado", child: FilledButton( //Botón terminar
                         style: FilledButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -210,7 +210,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
                             ), 
                           )
                           ],) ,
-                        ),
+                        )),
                   ]))
                 ],
               ),
@@ -224,7 +224,7 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
   Widget _crearBotonAula(Aula aula, double screenWidth, double screenHeight) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.0125),
-      child: FilledButton(
+      child: Semantics(label: "Botón para pedir comandas del aula $aula.nombre", child: FilledButton(
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(screenWidth * 0.02),
@@ -251,11 +251,11 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
               ),
         
       ),
-    );
+    ));
   }
 
   Widget _crearBotonModoPicto(double screenWidth, double screenHeight) {
-    return Container(
+    return Semantics(label: modo_picto?"Botón para pasar a modo números":"Botón para pasar a modo picto", child: Container(
       width: screenWidth * 0.17,
       height: screenHeight * 0.22,
       decoration: BoxDecoration(
@@ -287,6 +287,6 @@ class _ComandasAlumnoState extends State<ComandasAlumno> {
           ),
         ],
       ),
-    );
+    ));
   }
 }
