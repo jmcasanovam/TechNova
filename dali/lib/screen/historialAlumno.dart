@@ -70,13 +70,6 @@ class _HistorialState extends State<Historial> {
 
   @override
   Widget build(BuildContext context) {
-    if (tareasAgrupadas.isEmpty) {
-      return Scaffold(
-        body: Center(
-          child: Text('No hay tareas disponibles para este usuario.'),
-        ),
-      );
-    }
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -109,7 +102,9 @@ class _HistorialState extends State<Historial> {
             ),
             SizedBox(height: screenHeight * 0.01),
             // Segunda fila: Botones de opciones
-            Row(
+            tareasAgrupadas.isEmpty?Center(
+          child: Text('No hay tareas disponibles para este usuario.'),)
+          :Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Contenedor de tarea
@@ -244,7 +239,7 @@ class _HistorialState extends State<Historial> {
                   ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
