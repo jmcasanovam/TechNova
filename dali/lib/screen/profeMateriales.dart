@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 
 class ProfeMateriales extends StatefulWidget {
+  final String profe;
+
+  const ProfeMateriales({super.key, required this.profe});
   @override
   _ProfeMaterialesState createState() => _ProfeMaterialesState();
 }
@@ -237,7 +240,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
 
         ],
       ),
-      bottomNavigationBar: BarraMenuProfe(selectedIndex: 1,),
+      bottomNavigationBar: BarraMenuProfe(selectedIndex: 1, profe: widget.profe,),
     );
   }
 }

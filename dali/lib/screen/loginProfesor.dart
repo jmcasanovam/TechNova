@@ -183,12 +183,12 @@ class _LoginProfesorState extends State<LoginProfesor> {
               if(datos['tipo'] == 'admin'){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AdminUsuarios()),
+                  MaterialPageRoute(builder: (context) => AdminUsuarios(admin: nickname,)),
                 );
               }else{
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProfeMateriales()),
+                  MaterialPageRoute(builder: (context) => ProfeMateriales(profe: nickname,)),
                 );
               }
 

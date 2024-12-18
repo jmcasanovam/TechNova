@@ -47,19 +47,7 @@ class MyApp extends StatelessWidget {
       // home: AdminMenus(),
       // home: ProfeUsuarios(),
       // home: ChatAlumno(),
-      routes: {
-        '/adminUsuarios': (context) => AdminUsuarios(),
-        '/adminCreadorTareas': (context) => AdminTareasPlantilla(),
-        '/adminAsignarTarea': (context) => AdminAsignarTareas(),
-        '/adminMenus' : (context) => AdminMenus(),
-        '/adminPerfil' : (context) => AdminPerfil(),
-        '/profeUsuarios': (context) => ProfeUsuarios(),
-        '/profeMateriales': (context) => ProfeMateriales(),
-        '/profePerfil': (context) => ProfePerfil(),
-        '/adminChats':  (context) => AdminChats(),
-
-
-      },
+      
       debugShowCheckedModeBanner: false,
     );
   }

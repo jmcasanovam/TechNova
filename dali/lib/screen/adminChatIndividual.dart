@@ -3,9 +3,10 @@ import '../widget/adminTitulo.dart';
 import '../widget/barraMenu.dart';
 
 class AdminChatIndividual extends StatelessWidget {
+  final String admin;
   final Map<String, dynamic> chat;
 
-  AdminChatIndividual({required this.chat});
+  AdminChatIndividual({required this.chat, required this.admin});
 
   final List<Map<String, dynamic>> mensajes = [
     {'texto': 'Hola, ¿cómo estás?', 'esMio': true},
@@ -91,7 +92,7 @@ class AdminChatIndividual extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 4),
+      bottomNavigationBar: BarraMenu(selectedIndex: 4, admin: admin),
     );
   }
 }

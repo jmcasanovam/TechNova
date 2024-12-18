@@ -13,8 +13,9 @@ import '../widget/barraMenu.dart';
 
 class AdminAlumnoTareas extends StatelessWidget {
   final String nickname;
+  final String admin;
 
-  AdminAlumnoTareas({required this.nickname});
+  AdminAlumnoTareas({required this.nickname, required this.admin});
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,7 @@ class AdminAlumnoTareas extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 0),
+      bottomNavigationBar: BarraMenu(selectedIndex: 0, admin: admin),
     );
   }
 

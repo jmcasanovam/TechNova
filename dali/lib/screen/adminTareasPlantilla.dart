@@ -7,6 +7,11 @@ import '../widget/barraMenu.dart';
 import 'package:dali/controlers/controladores.dart';
 
 class AdminTareasPlantilla extends StatefulWidget {
+  final String admin;
+
+  const AdminTareasPlantilla({super.key, required this.admin});
+
+
   @override
   _AdminTareasPlantillaState createState() => _AdminTareasPlantillaState();
 }
@@ -232,7 +237,7 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                           final shouldReload = await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminCreadorTareas()),
+                                builder: (context) => AdminCreadorTareas(admin: widget.admin,)),
                           );
 
                           if (shouldReload == true) {
@@ -307,6 +312,7 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       AdminEditarTareaPlantilla(
+                                                        admin: widget.admin,
                                                           idTareaPlantilla:
                                                               (tareas[index][
                                                                       'idTareaPlantilla'])
@@ -365,7 +371,7 @@ class _AdminTareasPlantillaState extends State<AdminTareasPlantilla> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 1),
+      bottomNavigationBar: BarraMenu(selectedIndex: 1, admin: widget.admin),
     );
   }
 }

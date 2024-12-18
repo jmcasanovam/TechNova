@@ -1,9 +1,16 @@
+import 'package:dali/screen/adminAsignarTareas.dart';
+import 'package:dali/screen/adminChats.dart';
+import 'package:dali/screen/adminCreadorTareas.dart';
+import 'package:dali/screen/adminMenus.dart';
+import 'package:dali/screen/adminPerfil.dart';
+import 'package:dali/screen/adminUsuarios.dart';
 import 'package:flutter/material.dart';
 
 class BarraMenu extends StatelessWidget {
   final int selectedIndex;
+  final String admin;
   
-  BarraMenu({required this.selectedIndex});
+  BarraMenu({required this.selectedIndex, required this.admin});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,10 @@ class BarraMenu extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, _getEnlace(index));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => _getPantalla(index, admin)),
+                );
               },
             ),
           );
@@ -101,23 +111,23 @@ class BarraMenu extends StatelessWidget {
     }
   }
 
-  String _getEnlace(int index) {
+  Widget _getPantalla(int index, String admin) {
     switch (index) {
       case 0:
-        return '/adminUsuarios';
+        return AdminUsuarios(admin: admin);
       case 1:
-        return '/adminCreadorTareas';
+        return AdminCreadorTareas(admin: admin);
       case 2:
-        return '/adminAsignarTarea';
+        return AdminAsignarTareas(admin: admin);
       case 3:
-        return '/adminMenus';
+        return AdminMenus(admin: admin);
       case 4:
-        return '/adminChats';
+        return AdminChats(admin: admin);
       case 5:
-        return '/adminPerfil';
+        return AdminPerfil(admin: admin);
       default:
-        return '';
+        return Container(); // Pantalla vacía como fallback
     }
   }
-
+  
 }

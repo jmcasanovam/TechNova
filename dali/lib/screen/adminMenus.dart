@@ -10,8 +10,9 @@ import 'package:dali/models/menu.dart';
 
 
 class AdminMenus extends StatefulWidget {
+  final String admin;
 
-  AdminMenus();
+  const AdminMenus({super.key, required this.admin});
 
   @override
   _AdminMenusState createState() => _AdminMenusState();
@@ -345,7 +346,7 @@ class _AdminMenusState extends State<AdminMenus> {
             
         )]
         ),
-        bottomNavigationBar: BarraMenu(selectedIndex: 3),
+        bottomNavigationBar: BarraMenu(selectedIndex: 3, admin: widget.admin),
       );
     }
 

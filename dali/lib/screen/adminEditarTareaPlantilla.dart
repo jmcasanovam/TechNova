@@ -7,8 +7,9 @@ import '../widget/barraMenu.dart';
 
 class AdminEditarTareaPlantilla extends StatefulWidget {
   final String idTareaPlantilla;
+  final String admin;
 
-  AdminEditarTareaPlantilla({required this.idTareaPlantilla});
+  AdminEditarTareaPlantilla({required this.idTareaPlantilla, required this.admin});
 
   @override
   _AdminEditarTareaPlantillaState createState() =>
@@ -483,7 +484,7 @@ class _AdminEditarTareaPlantillaState extends State<AdminEditarTareaPlantilla> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 1),
+      bottomNavigationBar: BarraMenu(selectedIndex: 1, admin: widget.admin),
     );
   }
 }

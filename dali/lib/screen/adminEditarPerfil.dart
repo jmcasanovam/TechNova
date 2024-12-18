@@ -9,8 +9,9 @@ import '../widget/barraMenu.dart';
 
 class AdminEditarPerfil extends StatefulWidget {
   final String nickname;
+  final String admin;
 
-  AdminEditarPerfil({required this.nickname});
+  AdminEditarPerfil({required this.nickname, required this.admin});
 
   @override
   _AdminEditarPerfilState createState() => _AdminEditarPerfilState();
@@ -432,7 +433,7 @@ class _AdminEditarPerfilState extends State<AdminEditarPerfil> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 0),
+      bottomNavigationBar: BarraMenu(selectedIndex: 0, admin: widget.admin),
     );
   }
 }

@@ -7,6 +7,10 @@ import 'package:flutter/widgets.dart';
 
 
 class ProfeUsuarios extends StatefulWidget {
+  final String profe;
+
+  const ProfeUsuarios({super.key, required this.profe});
+
   @override
   _ProfeUsuariosState createState() => _ProfeUsuariosState();
 }
@@ -154,6 +158,7 @@ class _ProfeUsuariosState extends State<ProfeUsuarios> {
                                           MaterialPageRoute(
                                             builder: (context) => AdminAlumnoTareas(
                                               nickname: estudiantes[index]['nickname'],
+                                              admin: widget.profe,
                                             ),
                                           ),
                                         );
@@ -187,7 +192,7 @@ class _ProfeUsuariosState extends State<ProfeUsuarios> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenuProfe(selectedIndex: 0),
+      bottomNavigationBar: BarraMenuProfe(selectedIndex: 0, profe: widget.profe,),
     );
   }
 }

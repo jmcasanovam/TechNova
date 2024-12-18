@@ -4,6 +4,10 @@ import '../widget/barraMenu.dart';
 import 'adminChatIndividual.dart';
 
 class AdminChats extends StatefulWidget {
+  final String admin;
+
+  const AdminChats({super.key, required this.admin});
+
   @override
   _AdminChatsState createState() => _AdminChatsState();
 }
@@ -45,7 +49,7 @@ class _AdminChatsState extends State<AdminChats> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AdminChatIndividual(chat: chat),
+                        builder: (context) => AdminChatIndividual(chat: chat, admin: widget.admin,),
                       ),
                     );
                   },
@@ -111,7 +115,7 @@ class _AdminChatsState extends State<AdminChats> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 4),
+      bottomNavigationBar: BarraMenu(selectedIndex: 4, admin: widget.admin),
     );
   }
 }

@@ -8,15 +8,15 @@ import 'package:flutter/widgets.dart';
 import '../widget/barraMenu.dart';
 
 class AdminPerfil extends StatefulWidget {
-  const AdminPerfil({Key? key}) : super(key: key);
+  final String admin;
+
+  const AdminPerfil({super.key, required this.admin});
   @override
-  
   _AdminPerfilState createState() => _AdminPerfilState();
 }
 
 class _AdminPerfilState extends State<AdminPerfil> {
 
-final Controladores controladores = Controladores();
   String nombre = "juan";
   String nickname = "juan123";
   String nombreNuevo = "juan";
@@ -46,7 +46,7 @@ final Controladores controladores = Controladores();
                   children: [
                     Column(
                       children: [
-                        //Cambiar de nombre
+                        //Cambiar de nomobre
                         Container(
                           width: screenWidth*0.35,
                           height: screenHeight*0.1,
@@ -396,7 +396,7 @@ final Controladores controladores = Controladores();
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 5),
+      bottomNavigationBar: BarraMenu(selectedIndex: 5, admin: widget.admin),
     );
   }
 }

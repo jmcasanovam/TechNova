@@ -3,6 +3,9 @@ import 'package:dali/widget/barraMenuProfe.dart';
 import 'package:flutter/material.dart';
 
 class ProfePerfil extends StatefulWidget {
+  final String profe;
+
+  const ProfePerfil({super.key, required this.profe});
   @override
   _ProfePerfilState createState() => _ProfePerfilState();
 }
@@ -389,7 +392,7 @@ class _ProfePerfilState extends State<ProfePerfil> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenuProfe(selectedIndex: 2),
+      bottomNavigationBar: BarraMenuProfe(selectedIndex: 2, profe: widget.profe,),
     );
   }
 }

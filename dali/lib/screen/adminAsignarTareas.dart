@@ -5,6 +5,11 @@ import 'package:dali/controlers/controladores.dart';
 import '../widget/barraMenu.dart';
 
 class AdminAsignarTareas extends StatefulWidget {
+  final String admin;
+
+  const AdminAsignarTareas({super.key, required this.admin});
+
+
   @override
   _AdminAsignarTareasState createState() => _AdminAsignarTareasState();
 }
@@ -207,7 +212,7 @@ class _AdminAsignarTareasState extends State<AdminAsignarTareas> {
       ),
 
       // Barra de navegación personalizada
-      bottomNavigationBar: BarraMenu(selectedIndex: 2),
+      bottomNavigationBar: BarraMenu(selectedIndex: 2, admin: widget.admin,),
     );
   }
   void _mostrarDialogoAsignarTarea(BuildContext context) {

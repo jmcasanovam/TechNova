@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import '../widget/barraMenu.dart';
 
 class AdminCreadorTareas extends StatefulWidget {
+  final String admin;
+
+  const AdminCreadorTareas({super.key, required this.admin});
+
   @override
   _AdminCreadorTareasState createState() => _AdminCreadorTareasState();
 }
@@ -349,7 +353,7 @@ void _mostrarDialogoTexto(int index) {
           ),
         ],
       ),
-        bottomNavigationBar: BarraMenu(selectedIndex: 1),
+        bottomNavigationBar: BarraMenu(selectedIndex: 1, admin: widget.admin),
 
     );
   }

@@ -8,6 +8,10 @@ import 'package:dali/controlers/controladores.dart';
 import '../widget/barraMenu.dart';
 
 class AdminCreadorPerfil extends StatefulWidget {
+  final String admin;
+
+  const AdminCreadorPerfil({super.key, required this.admin});
+
   @override
   _AdminCreadorPerfilState createState() => _AdminCreadorPerfilState();
 }
@@ -362,7 +366,7 @@ class _AdminCreadorPerfilState extends State<AdminCreadorPerfil> {
           ),
         ),
       ]),
-      bottomNavigationBar: BarraMenu(selectedIndex: 0),
+      bottomNavigationBar: BarraMenu(selectedIndex: 0, admin: widget.admin),
     );
   }
 

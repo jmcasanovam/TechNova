@@ -1,9 +1,13 @@
+import 'package:dali/screen/profeAlumnos.dart';
+import 'package:dali/screen/profeMateriales.dart';
+import 'package:dali/screen/profePerfil.dart';
 import 'package:flutter/material.dart';
 
 class BarraMenuProfe extends StatelessWidget {
+  final String profe;
   final int selectedIndex;
   
-  BarraMenuProfe({required this.selectedIndex,});
+  BarraMenuProfe({required this.selectedIndex, required this.profe});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +58,10 @@ class BarraMenuProfe extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, _getEnlace(index));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => _getPantalla(index, profe)),
+                );
               },
             ),
           );
@@ -89,16 +96,17 @@ class BarraMenuProfe extends StatelessWidget {
     }
   }
 
-  String _getEnlace(int index) {
+  Widget _getPantalla(int index, String profe) {
     switch (index) {
       case 0:
-        return '/profeUsuarios';
+        return ProfeUsuarios(profe : profe);
       case 1:
-        return '/profeMateriales';
+        return ProfeMateriales(profe : profe);
       case 2:
-        return '/profePerfil';
+        return ProfePerfil(profe : profe);
+      
       default:
-        return '';
+        return Container(); // Pantalla vacía como fallback
     }
   }
 
