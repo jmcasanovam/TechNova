@@ -50,46 +50,27 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                       //
                       const BotonCerrarSesion(),
                     ]),
-                Center(
-                    child: Column(
-                  children: [
-                    // if (!_tareaComedor)
-                    // Padding(
-                    //   padding: EdgeInsets.only(top: screenWidth * 0.1),
-                    //   child: _crearBoton(context, 'Historial', 'images/historial.png', () {
-                    //   setState(() {
-                    //     _tareaComedor = !_tareaComedor;
-                    //   });
-                    //   }),
-                    // )
-                    // else ...[
-                    // _crearBoton(context, 'Historial', 'images/historial.png', () {
-                    //   setState(() {
-                    //   _tareaComedor = !_tareaComedor;
-                    //   });
-                    // }),
-                    // SizedBox(height: screenWidth * 0.01),
-                    // _crearBoton(context, 'Comedor', 'images/comedor.png', () {
-
-                    // }),
-                    // ],
-                    _crearBoton(context, 'Historial', 'images/historial.png', () {
-  if (widget._username.isNotEmpty) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Historial(username: widget._username),
-      ),
-    );
-  } else {
-    // Mostrar un mensaje de error si el username está vacío o es nulo
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('El nombre de usuario es inválido')),
-    );
-  }
-}),
-                  ],
-                ))
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: Colors.transparent,
+                    child: _crearBoton(context, 'Historial', 'images/historial.png', () {
+                      if (widget._username.isNotEmpty) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Historial(username: widget._username),
+                          ),
+                        );
+                      } else {
+                        // Mostrar un mensaje de error si el username está vacío o es nulo
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('El nombre de usuario es inválido')),
+                        );
+                      }
+                    }),
+                  ),
+                )
               ],
             )));
   }
@@ -97,30 +78,33 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
   Widget _crearBoton(BuildContext context, String texto, String iconoRuta,
       VoidCallback onPressed) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
 
     return GestureDetector(
       onTap: onPressed,
       child: Container(
           width: screenWidth * 0.18,
+          height: screenHeight*0.35,
           padding: EdgeInsets.all(screenWidth * 0.02),
           decoration: BoxDecoration(
             color: Colors.red,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(screenHeight*0.04),
           ),
           child: Column(
             children: [
               Image.asset(
                 iconoRuta,
                 width: screenWidth * 0.1,
-                height: screenWidth * 0.1,
-                fit: BoxFit.cover,
+                height: screenHeight * 0.15,
+                // fit: BoxFit.cover,
               ),
               // SizedBox(height: screenWidth * 0.02),
               Text(
                 texto,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: screenWidth * 0.03,
+                  fontSize: screenHeight * 0.03,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
                 ),

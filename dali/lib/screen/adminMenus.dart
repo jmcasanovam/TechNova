@@ -107,22 +107,23 @@ class _AdminMenusState extends State<AdminMenus> {
                                 ),
                               ),
                               SizedBox(width: screenWidth * 0.02),
-                              SizedBox(height: screenHeight * 0.02),
-                                  SizedBox(
-                                    width: screenWidth * 0.02,
-                                    child: TextField(
-                                      keyboardType: TextInputType.number,
-                                      controller: controladorNumMenus,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: screenHeight * 0.025,
-                                      ),
-                                    ),
+                              // SizedBox(height: screenHeight * 0.02),
+                              SizedBox(
+                                width: screenWidth * 0.02,
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: controladorNumMenus,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: screenHeight * 0.025,
                                   ),
-                              ElevatedButton(
+                                ),
+                              ),
+                              TextButton(
                                 style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                  maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                  minimumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                  maximumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                  backgroundColor: Colors.grey[300]
                                 ),
                                 
                                 onPressed: () {
@@ -141,15 +142,17 @@ class _AdminMenusState extends State<AdminMenus> {
                                     return TextEditingController(text: menus[index].nombre);
                                   });
                                 },
+                                
                                 child: Text('Actualizar Cantidad', style: TextStyle(
                                   fontSize: screenHeight * 0.02,
+                                  color: Colors.black
                                 ),),
                               ),
                               SizedBox(width: screenWidth * 0.02),
-                              ElevatedButton(
+                              TextButton(
                                 style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                  maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                  minimumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                  maximumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
                                   backgroundColor: Colors.red,
                                 ),
                                 onPressed: menus.length > 0 ?() {
@@ -188,11 +191,12 @@ class _AdminMenusState extends State<AdminMenus> {
                                       onChanged: (text){ confirmable = true;},
                                       ),
                                     ),
-                                  SizedBox(width: screenWidth*0.01),
-                                  ElevatedButton(
+                                  SizedBox(width: screenWidth*0.02),
+                                  TextButton(
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                      maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                      minimumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                      maximumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                      backgroundColor: Colors.grey[200]
                                     ),
                                     onPressed: (){
                                       // Lógica de examinar imagen
@@ -200,28 +204,15 @@ class _AdminMenusState extends State<AdminMenus> {
 
                                     child: Text('Examinar imagen', style: TextStyle(
                                       fontSize: screenHeight * 0.02,
+                                      color: Colors.black
                                     ),),
                                   ),
-                                  /*ElevatedButton(
+                                  SizedBox(width: screenWidth*0.01,),
+                                  TextButton(
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                      maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
-                                    ),
-                                    onPressed: (){
-                                      setState(() {
-                                        menus[i].set_nombre(controllers[i].text);
-                                      });
-                                    },
-
-                                    child: Text('Actualizar Nombre', style: TextStyle(
-                                      fontSize: screenHeight * 0.02,
-                                    ),),
-                                    
-                                  ),*/
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(screenWidth * 0.1, screenHeight * 0.05),
-                                      maximumSize: Size(screenWidth * 0.13, screenHeight * 0.05),
+                                      minimumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                      maximumSize: Size(screenWidth * 0.15, screenHeight * 0.07),
+                                      backgroundColor: const Color.fromRGBO(179, 11, 0, 1),
                                     ),
                                     
                                     onPressed: () {
@@ -229,6 +220,7 @@ class _AdminMenusState extends State<AdminMenus> {
                                     },
                                     child: Text('Examinar PDF', style: TextStyle(
                                       fontSize: screenHeight * 0.02,
+                                      color: Colors.white
                                     ),),
                                   ),
                                 ],)

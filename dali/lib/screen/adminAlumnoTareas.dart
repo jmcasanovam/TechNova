@@ -99,7 +99,9 @@ class AdminAlumnoTareas extends StatelessWidget {
                                       minimumSize: Size(screenWidth * 0.02, screenHeight * 0.05),
                                     ),
                                     onPressed: () {
-                                      _mostrarFoto(context, tarea["fotoResultado"]);
+                                      tarea["fotoResultado"]==null?
+                                        _mostrarFoto(context, false, "") : 
+                                        _mostrarFoto(context, true, tarea["fotoResultado"]);
                                     },
                                     child: Text("Ver Foto", style: TextStyle(fontSize: screenHeight * 0.02)),
                                   ),
@@ -142,7 +144,7 @@ class AdminAlumnoTareas extends StatelessWidget {
     );
   }
 
-  void _mostrarFoto(BuildContext context, String fotoUrl) {
+  void _mostrarFoto(BuildContext context, bool existe, String fotoUrl) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     showDialog(
@@ -152,7 +154,9 @@ class AdminAlumnoTareas extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.network(fotoUrl, width: screenWidth * 0.3, height: screenHeight * 0.4),
+              !existe? 
+                Image.asset('images/no.png', width: screenWidth * 0.3, height: screenHeight * 0.4) :
+                Image.network(fotoUrl, width: screenWidth * 0.3, height: screenHeight * 0.4),
               SizedBox(height: screenHeight * 0.04),
               Text("Foto de la tarea", style: TextStyle(fontSize: screenHeight * 0.02)),
               ElevatedButton(

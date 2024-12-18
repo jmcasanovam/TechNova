@@ -89,16 +89,6 @@ Future<void> _cargarTareas() async {
 
   @override
   Widget build(BuildContext context) {
-    if (_tareas.isEmpty) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Inicio Alumno'),
-      ),
-      body: Center(
-        child: CircularProgressIndicator(), // Indicador de carga
-      ),
-    );
-  }
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -118,7 +108,7 @@ Future<void> _cargarTareas() async {
                             0.2),), // Icono de perfil
                     Text('Agenda',
                         style: TextStyle(
-                          fontSize: screenWidth * 0.08,
+                          fontSize: screenHeight * 0.08,
                           fontWeight: FontWeight.bold,
                         )),
 
@@ -127,111 +117,144 @@ Future<void> _cargarTareas() async {
                 ),
                 SizedBox(height: screenHeight * 0.01),
                 //Segunda fila: Botones de opciones
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    //Botón de Tarea
-                    GestureDetector(
-                      onTap: () {
-                        accederTarea(context);
-                      },
-                      child: Semantics(label: "Tareas para hoy", child: Container(
-                        width: screenWidth * 0.9,
-                        height: screenHeight * 0.7,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(176, 211, 255, 1),
-                          borderRadius: BorderRadius.circular(screenWidth * 0.07),
-                        ),
-                        child: Column(
-                          children: [
-                            Text("Hoy",
-                                style: TextStyle(
-                                    fontSize: screenWidth * 0.05,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto')),
-                            SizedBox(height: screenWidth* 0.01),
-                            SizedBox(
-                              width: screenWidth * 0.9,
-                              height: screenHeight * 0.5,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      //Flecha para la izquierda
-                                        SizedBox(
-                                          width: screenWidth * 0.1,
-                                          child: Semantics(label: "Botón Izquierda", child: IconButton(
-                                          icon: Image.asset(
-                                            'images/flecha-izquierda.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                          iconSize: screenWidth * 0.1,
-                                          onPressed: () {
-                                            tareaAnterior();
-                                          },
-                                          ),)
-                                        ),
-                                      Column(
-                                        children: [
-                                          Semantics(label: "Botón acceso a tarea $_tareas.elementAt(_tareaActual).titulo",
-                                           child: Container(
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(
-                                                  5, 153, 159, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(screenWidth * 0.02),
-                                            ),
-                                            width: screenWidth * 0.2,
-                                            height: screenHeight * 0.3,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(screenWidth * 0.07),
-                                              child: Image.asset(
-                                                _tareas.elementAt(_tareaActual).miniatura,
-                                                fit: BoxFit
-                                                    .cover, // Ensure the image fits the container
-                                              ),
-                                            ),
-                                          ),),
-                                          Text(
-                                            _tareas.elementAt(_tareaActual).titulo,
-                                            style: TextStyle(
-                                              fontSize: screenWidth * 0.05,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Roboto',
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      //Flecha para la derecha
-                                      SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.1,
-                                          child: Semantics(label: "Botón Derecha", child: IconButton(
-                                          icon: Image.asset(
-                                            'images/flecha-derecha.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                          iconSize: MediaQuery.of(context).size.width * 0.1,
-                                          onPressed: () {
-                                            tareaSiguiente();
-                                          },
-                                          ),)
-                                        ),
-                                    ],
-                                  ),
-                                ],
+                
+
+                _tareas.isEmpty
+                ? Semantics(label: "Tareas para hoy", child: Container(
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.5,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(176, 211, 255, 1),
+                        borderRadius: BorderRadius.circular(screenWidth * 0.07),
+                      ),
+                      child: Column(
+                        children: [
+                          Text("Hoy",
+                              style: TextStyle(
+                                  fontSize: screenWidth * 0.05,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Roboto')),
+                          SizedBox(height: screenWidth* 0.01),
+                          SizedBox(
+                            width: screenWidth * 0.7,
+                            height: screenHeight * 0.3,
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: const Color.fromRGBO(
+                                    5, 153, 159, 1),
+                                borderRadius:
+                                    BorderRadius.circular(screenWidth * 0.02),
                               ),
+                              width: screenWidth * 0.2,
+                              height: screenHeight * 0.3,
+                              child: Text("No hay mas tareas!!", style: TextStyle(fontSize: screenHeight*0.04),),
+                            )
+                          ),
+                        ],
+                      ),
+                    )
+                ,)
+                :GestureDetector(
+                    onTap: () {
+                      accederTarea(context);
+                    },
+                    child: Semantics(label: "Tareas para hoy", child: Container(
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.7,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(176, 211, 255, 1),
+                        borderRadius: BorderRadius.circular(screenWidth * 0.07),
+                      ),
+                      child: Column(
+                        children: [
+                          Text("Hoy",
+                              style: TextStyle(
+                                  fontSize: screenWidth * 0.05,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Roboto')),
+                          SizedBox(height: screenWidth* 0.01),
+                          SizedBox(
+                            width: screenWidth * 0.9,
+                            height: screenHeight * 0.5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    //Flecha para la izquierda
+                                      SizedBox(
+                                        width: screenWidth * 0.1,
+                                        child: Semantics(label: "Botón Izquierda", child: IconButton(
+                                        icon: Image.asset(
+                                          'images/flecha-izquierda.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                        iconSize: screenWidth * 0.1,
+                                        onPressed: () {
+                                          tareaAnterior();
+                                        },
+                                        ),)
+                                      ),
+                                    Column(
+                                      children: [
+                                        Semantics(label: "Botón acceso a tarea $_tareas.elementAt(_tareaActual).titulo",
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                5, 153, 159, 1),
+                                            borderRadius:
+                                                BorderRadius.circular(screenWidth * 0.02),
+                                          ),
+                                          width: screenWidth * 0.2,
+                                          height: screenHeight * 0.3,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(screenWidth * 0.07),
+                                            child: Image.asset(
+                                              _tareas.elementAt(_tareaActual).miniatura,
+                                              width: screenWidth*0.16,
+                                              height: screenHeight * 0.2,
+                                            ),
+                                          ),
+                                        ),),
+                                        Text(
+                                          _tareas.elementAt(_tareaActual).titulo,
+                                          style: TextStyle(
+                                            fontSize: screenWidth * 0.05,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Roboto',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    //Flecha para la derecha
+                                    SizedBox(
+                                        width: MediaQuery.of(context).size.width * 0.1,
+                                        child: Semantics(label: "Botón Derecha", child: IconButton(
+                                        icon: Image.asset(
+                                          'images/flecha-derecha.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                        iconSize: MediaQuery.of(context).size.width * 0.1,
+                                        onPressed: () {
+                                          tareaSiguiente();
+                                        },
+                                        ),)
+                                      ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),)
-                    ),
-                  ],
-                )
+                          ),
+                        ],
+                      ),
+                    ),)
+                  )
               ],
             )));
   }
@@ -253,6 +276,8 @@ String _username = '';
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Container(
       width: MediaQuery.of(context).size.width * 0.07,
       decoration: BoxDecoration(
@@ -270,9 +295,9 @@ String _username = '';
             ),
             onPressed: () => abrirMenu(context),
           ),
-          const Text('MENÚ',
+           Text('MENÚ',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: screenHeight*0.04,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
                 color: Colors.white

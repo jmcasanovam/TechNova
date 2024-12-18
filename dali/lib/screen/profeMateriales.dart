@@ -21,20 +21,20 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
       builder: (BuildContext context) {
         final screenHeight = MediaQuery.of(context).size.height;
         return AlertDialog(
-          title: Text("Añadir material", style: TextStyle(fontSize: screenHeight*0.03)),
+          title: Text("Añadir material", style: TextStyle(fontSize: screenHeight*0.03, fontFamily: 'Roboto',)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 style: TextStyle(fontSize: screenHeight * 0.02),
-                decoration: InputDecoration(labelText: "Nombre del material", labelStyle: TextStyle(fontSize: screenHeight*0.02)),
+                decoration: InputDecoration(labelText: "Nombre del material", labelStyle: TextStyle(fontSize: screenHeight*0.02, fontFamily: 'Roboto',)),
                 onChanged: (value) {
                   nombre = value;
                 },
               ),
               TextField(
-                style: TextStyle(fontSize: screenHeight * 0.015),
-                decoration: InputDecoration(labelText: "Cantidad", labelStyle: TextStyle(fontSize: screenHeight*0.02)),
+                style: TextStyle(fontSize: screenHeight * 0.015, fontFamily: 'Roboto',),
+                decoration: InputDecoration(labelText: "Cantidad", labelStyle: TextStyle(fontSize: screenHeight*0.02, fontFamily: 'Roboto',)),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   cantidad = int.tryParse(value) ?? 1;
@@ -44,7 +44,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
           ),
           actions: [
             TextButton(
-              child: Text("Cancelar ", style: TextStyle(fontSize: screenHeight*0.015),),
+              child: Text("Cancelar ", style: TextStyle(fontSize: screenHeight*0.015, fontFamily: 'Roboto',),),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -53,7 +53,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red
               ),
-              child: Text("Añadir", style: TextStyle(fontSize: screenHeight*0.015, color: Colors.white),),
+              child: Text("Añadir", style: TextStyle(fontSize: screenHeight*0.015, color: Colors.white, fontFamily: 'Roboto',),),
               onPressed: () {
                 if(nombre!=""){
                   setState(() {
@@ -66,7 +66,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                 }
                 else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Introduce el nombre del material", style: TextStyle(fontSize: screenHeight*0.025),)),
+                    SnackBar(content: Text("Introduce el nombre del material", style: TextStyle(fontSize: screenHeight*0.025, fontFamily: 'Roboto',),)),
                   );
                 }
               },
@@ -99,6 +99,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                     style: TextStyle(
                       fontSize: screenHeight * 0.03,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
@@ -127,14 +128,14 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                                         child: Container(
                                           padding: EdgeInsets.only(left: screenWidth*0.05, right: screenWidth*0.1),
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            color: Colors.red,
                                             borderRadius: BorderRadius.circular(screenWidth*0.01),
                                           ),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(material['nombre']),
-                                              Text("x${material['cantidad']}"),
+                                              Text(material['nombre'], style: TextStyle(fontSize: screenHeight*0.03, fontFamily: 'Roboto', color: Colors.white,),),
+                                              Text("x${material['cantidad']}", style: TextStyle(fontSize: screenHeight*0.03, fontFamily: 'Roboto', color: Colors.white),),
                                             ],
                                           ),
                                         ),
@@ -165,7 +166,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                         children: [
                           Text(
                             "Aula",
-                            style: TextStyle(fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),
                           ),
                           Container(
                             alignment: Alignment.center,
@@ -173,7 +174,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                             height: screenHeight * 0.06,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                              color: Colors.grey[200],
+                              color: Colors.red,
                             ),
                             child: DropdownButton<int>(
                               value: aula,
@@ -186,17 +187,17 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                                 10,
                                 (index) => DropdownMenuItem<int>(
                                   value: index + 1,
-                                  child: Text("${index + 1}"),
+                                  child: Text("${index + 1}", style: TextStyle(fontSize: screenHeight*0.02, fontFamily: 'Roboto',),),
                                 ),
                               ),
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: screenHeight * 0.02,
-                                color: Colors.black,
+                                color: Colors.white
                               ),
-                              focusColor: Colors.grey[200],
-                              dropdownColor: Colors.grey[200],
-                              icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04,), 
+                              focusColor: Colors.red,
+                              dropdownColor: Colors.red,
+                              icon: Icon(Icons.arrow_drop_down, size: screenHeight*0.04, color: Colors.white,), 
                               borderRadius:  BorderRadius.circular(screenWidth * 0.01), 
                               underline: Container(height: 0,),
                             ),
@@ -212,7 +213,7 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                       style: ElevatedButton.styleFrom(
                         maximumSize: Size(screenWidth*0.4, screenHeight*0.07),
                         minimumSize: Size(screenWidth*0.4, screenHeight*0.07),
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.red[700],
                       ),
                       onPressed: () {
                         // Acción para pedir material
@@ -222,6 +223,8 @@ class _ProfeMaterialesState extends State<ProfeMateriales> {
                         style: TextStyle(
                           fontSize: screenHeight * 0.025,
                           color: Colors.white,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                     ),
