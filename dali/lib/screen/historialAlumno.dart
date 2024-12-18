@@ -83,14 +83,14 @@ class _HistorialState extends State<Historial> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
+                Semantics(label: "Botón de retorno", child:IconButton(
                   icon: Image(
                     image: const AssetImage('images/back-arrow.png'),
                     width: screenWidth * 0.04,
                     height: screenWidth * 0.04,
                   ),
                   onPressed: () => Navigator.of(context).pop(),
-                ),
+                )),
                 Text('Historial',
                     style: TextStyle(
                       fontFamily: 'Roboto', 
@@ -102,9 +102,9 @@ class _HistorialState extends State<Historial> {
             ),
             SizedBox(height: screenHeight * 0.01),
             // Segunda fila: Botones de opciones
-            tareasAgrupadas.isEmpty?Center(
-          child: Text('No hay tareas disponibles para este usuario.'),)
-          :Row(
+            tareasAgrupadas.isEmpty?const Center(
+              child: Text('No hay tareas disponibles para este usuario.'),)
+              :Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Contenedor de tarea
@@ -132,7 +132,7 @@ class _HistorialState extends State<Historial> {
                                     width: screenWidth * 0.1,
                                     child: (diaActual == 0 || tareasAgrupadas.isEmpty)
                                         ? null
-                                        : IconButton(
+                                        : Semantics(label: "Botón Izquierda", child: IconButton(
                                             icon: Image.asset(
                                               'images/flecha-izquierda.png',
                                               fit: BoxFit.cover,
@@ -145,7 +145,7 @@ class _HistorialState extends State<Historial> {
                                                 }
                                               });
                                             },
-                                          ),
+                                          )),
                                   ),
                                   Column(
                                     children: [
@@ -214,7 +214,7 @@ class _HistorialState extends State<Historial> {
                                     width: screenWidth * 0.1,
                                     child: (diaActual == tareasAgrupadas.length - 1 || tareasAgrupadas.isEmpty)
                                         ? null
-                                        : IconButton(
+                                        : Semantics(label: "Botón Derecha", child: IconButton(
                                             icon: Image.asset(
                                               'images/flecha-derecha.png',
                                               fit: BoxFit.cover,
@@ -227,7 +227,7 @@ class _HistorialState extends State<Historial> {
                                                 }
                                               });
                                             },
-                                          ),
+                                          )),
                                   ),
                                 ],
                               ),
