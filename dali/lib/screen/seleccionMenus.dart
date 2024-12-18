@@ -46,14 +46,14 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                      IconButton(
+                      Semantics(label:"Botón de retorno", child: IconButton(
                         icon: Image(
                           image: const AssetImage('images/back-arrow.png'),
                           width: MediaQuery.of(context).size.width * 0.04,
                           height: MediaQuery.of(context).size.width * 0.04,
                         ),
                         onPressed: () => volverAtras(context),
-                      ), // Icono de perfil
+                      )), // Icono de perfil
                     Text('Pedir Comandas',
                         style: TextStyle(
                           fontFamily: 'Roboto', 
@@ -81,7 +81,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                           children: [
                           SizedBox(
                             width: screenWidth * 0.1,
-                            child: IconButton(
+                            child: Semantics(label: "Botón izquierda", child: IconButton(
                               icon: Image.asset(
                                 'images/flecha-izquierda.png',
                               ),
@@ -94,7 +94,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                     menu_actual = aula.menus.length - 1;
                                 });
                               },
-                            ),
+                            )),
                           ),
                           modo_picto == false ?
                           Text(
@@ -123,7 +123,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                       fontSize: 30),))
                               ),
                               SizedBox(width: screenWidth*0.02),
-                                FilledButton(
+                                Semantics(label: "Aumentar cantidad de menú $aula.menus[menu_actual].nombre", child: FilledButton(
                                   style: FilledButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(screenWidth * 0.01)),
@@ -142,9 +142,9 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                         fontSize: screenHeight*0.07
                                       ),
                                     )
-                                  ),
+                                  )),
                                 SizedBox(width: screenWidth*0.02,),
-                                FilledButton(
+                                Semantics(label: "Disminuir cantidad de menú $aula.menus[menu_actual].nombre", child: FilledButton(
                                   style: FilledButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(screenWidth * 0.01)),
@@ -163,7 +163,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                         fontSize: screenHeight*0.07
                                       ),
                                     )
-                                ),
+                                )),
                             ],
                           ):
                           Column(children: [
@@ -171,7 +171,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                             int numero = index + 1;
                             return Row(
                               children: [
-                                FilledButton(
+                                Semantics(label: "Botón para cambiar cantidad de menús a $numero", child: FilledButton(
                                   style: FilledButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(screenWidth * 0.02),
@@ -188,7 +188,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                     });
                                   },
                                   child: Image.asset('images/$numero.png'),
-                                ),
+                                )),
                                 SizedBox(width: screenWidth*0.02)
                               ],
                             );
@@ -198,7 +198,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                             int numero = index + 6;
                             return Row(
                               children: [
-                                FilledButton(
+                                Semantics(label: "Botón para cambiar cantidad de menús a $numero", child: FilledButton(
                                   style: FilledButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(screenWidth * 0.02),
@@ -215,14 +215,14 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                     });
                                   },
                                   child: Image.asset('images/$numero.png'),
-                                ),
+                                )),
                                 SizedBox(width: screenWidth*0.02)
                               ],
                             );
                           })),                          ],),
                           SizedBox(
                             width: screenWidth * 0.1,
-                            child: IconButton(
+                            child: Semantics(label: "Botón derecha", child: IconButton(
                               icon: Image.asset(
                                 'images/flecha-derecha.png',
                               ),
@@ -236,7 +236,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                 });
                               },
                             ),
-                          ),
+                          )),
                           ],
                           ),
                           SizedBox(height: screenHeight*0.01,)
@@ -245,7 +245,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                   )
                   ],),
                   SizedBox(width: screenWidth*0.02,),
-                  FilledButton( //Botón ver pdf
+                  Semantics(label: "Botón para acceder al menú", child: FilledButton( //Botón ver pdf
                     style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(screenWidth * 0.02),
@@ -268,7 +268,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                         ),
                       )
                       ],) ,
-                    ),
+                    )),
                 ]
                 ),
                 SizedBox(height: screenHeight*0.1),
@@ -276,7 +276,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                     Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:[
-                    Container(//Botón modo pictogramas
+                    Semantics(label: modo_picto?"Botón para pasar a modo números":"Botón para pasar a modo picto", child: Container(//Botón modo pictogramas
                       width: screenWidth * 0.17,
                       height: screenHeight * 0.22,
                       decoration: BoxDecoration(
@@ -309,9 +309,9 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                           )
                         ],
                     ),
-                ),
+                )),
                 SizedBox(width: screenWidth*0.5),
-                FilledButton( //Botón terminar
+                Semantics(label: "Botón para terminar comanda del aula", child: FilledButton( //Botón terminar
                     style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -332,7 +332,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                 children: [
                                   Column(children: [
                                   const Text("¿Estás seguro de que quieres elegir estos menús?", style: TextStyle(fontFamily: 'Roboto', fontSize: 40),),
-                                  FilledButton(
+                                  Semantics(label: "Botón para confirmar", child: FilledButton(
                                     style: FilledButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(screenWidth * 0.01)),
@@ -358,9 +358,9 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                           ),
                                         ),
                                       ]),
-                                  ),
+                                  )),
                                   SizedBox(height: screenHeight*0.03),
-                                  FilledButton(
+                                  Semantics(label: "Botón para confirmar", child: FilledButton(
                                     style: FilledButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(screenWidth * 0.01)),
@@ -382,7 +382,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                                           ),
                                         ),
                                       ]),
-                                  ),
+                                  )),
                                   ])],
                               ),
                             );
@@ -403,7 +403,7 @@ class _SeleccionMenusState extends State<SeleccionMenus> {
                         ), 
                       )
                       ],) ,
-                    ),
+                    )),
                   ]))
 
               ]
