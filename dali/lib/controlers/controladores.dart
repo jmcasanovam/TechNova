@@ -904,4 +904,20 @@ class Controladores {
       
     }
   }
+
+  //Marco como completada una tarea asignada
+  Future<int> marcarTareaCompletada(int idTareaAsignada) async {
+    final url = Uri.parse('$_url_cabeza/completar_tarea');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'idTareaAsignada': idTareaAsignada}),
+    );
+
+    if (response.statusCode == 200) {
+      return 200;
+    } else {
+      return 400;
+    }
+  }
 }

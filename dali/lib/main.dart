@@ -33,13 +33,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: AdminMenus(),
-         home: const SplashScreen(),
+        home: const SplashScreen(),
         // home: LoginAlumnos(),
         // home: LoginScreen(),
 
     // home: AdminCreadorPerfil(),
 
-    //home: AdminCreadorPerfil(),
+    // home: AdminCreadorPerfil(),
     // home: AdminCreadorTareas(),
       // home: AdminPerfil(),
       // home: LoginProfesor(),

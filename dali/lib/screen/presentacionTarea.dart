@@ -732,10 +732,9 @@ class _PresentacionTareaState extends State<PresentacionTarea> {
                                     color: Colors.white,
                                     width: screenWidth * 0.1,
                                   ),
-                                  onPressed: /*paso_actual >= pasos_total
-                                          ? () {}//null  // Desactiva el botón si la condición se cumple
-                                          :*/
+                                  onPressed: 
                                       () {
+                                        Controladores().marcarTareaCompletada(widget.idTareaAsignada);
                                     setState(() {
                                       confettiController.play();
                                       showDialog(
