@@ -73,7 +73,7 @@ class ChatAlumno extends StatelessWidget {
                     padding: EdgeInsets.only(top: screenHeight*0.02, bottom:  screenHeight*0.02, left: screenWidth*0.02, right: screenWidth*0.02),
                     alignment: Alignment.center,
                     height: screenHeight*0.2,
-                    child: TextField(
+                    child: Semantics(label: "Campo de escritura de mensajes", child:TextField(
                       maxLines: 4,
                       style: TextStyle(fontFamily: 'Roboto', fontSize: screenHeight*0.03),
                       decoration: const InputDecoration(
@@ -83,16 +83,16 @@ class ChatAlumno extends StatelessWidget {
                         //   borderRadius: BorderRadius.circular(screenWidth*0.02),
                         // ),
                       ),
-                    ),
+                    )),
                   ),
                 ),
                 SizedBox(width: screenWidth*0.01),
-                IconButton(
+                Semantics(label:"Botón para enviar el mensaje", child:IconButton(
                   icon: Icon(Icons.send, color: Colors.teal, size: screenWidth*0.05,),
                   onPressed: () {
                     // Lógica para enviar mensaje
                   },
-                ),
+                )),
               ],
             ),
           ),
