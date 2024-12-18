@@ -30,14 +30,14 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
+                      Semantics(label: "Botón de retorno", child:IconButton(
                         icon: Image(
                           image: const AssetImage('images/back-arrow.png'),
                           width: MediaQuery.of(context).size.width * 0.04,
                           height: MediaQuery.of(context).size.width * 0.04,
                         ),
                         onPressed: () => volverAtras(context),
-                      ),
+                      )),
                       Text(
                         'Menú',
                         style: TextStyle(
@@ -54,7 +54,7 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     color: Colors.transparent,
-                    child: _crearBoton(context, 'Historial', 'images/historial.png', () {
+                    child: Semantics(label: "Botón de acceso al historial", child:_crearBoton(context, 'Historial', 'images/historial.png', () {
                       if (widget._username.isNotEmpty) {
                         Navigator.push(
                           context,
@@ -68,7 +68,7 @@ class _MenuAlumnoScreenState extends State<MenuAlumnoScreen> {
                           SnackBar(content: Text('El nombre de usuario es inválido')),
                         );
                       }
-                    }),
+                    })),
                   ),
                 )
               ],
