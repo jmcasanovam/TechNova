@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import '../widget/barraMenu.dart';
 
 class AdminUsuarios extends StatefulWidget {
-   AdminUsuarios({super.key});
+  final String admin;
+
+  const AdminUsuarios({super.key, required this.admin});
+
   @override
   _AdminUsuariosState createState() => _AdminUsuariosState();
 }
@@ -119,7 +122,7 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AdminCreadorPerfil(),
+                              builder: (context) => AdminCreadorPerfil(admin: widget.admin),
                             ),
                           );
                         },
@@ -180,7 +183,7 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => AdminAlumnoTareas(
+                                            builder: (context) => AdminAlumnoTareas(admin: widget.admin,
                                               nickname: estudiantes[index]['nickname'],
                                             ),
                                           ),
@@ -205,7 +208,7 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => AdminEditarPerfil(
+                                            builder: (context) => AdminEditarPerfil(admin: widget.admin,
                                               nickname: estudiantes[index]['nickname'],
                                             ),
                                           ),
@@ -239,7 +242,7 @@ class _AdminUsuariosState extends State<AdminUsuarios> {
           ),
         ],
       ),
-      bottomNavigationBar: BarraMenu(selectedIndex: 0),
+      bottomNavigationBar: BarraMenu(selectedIndex: 0, admin: widget.admin),
     );
   }
 }
